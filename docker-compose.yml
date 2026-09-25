@@ -1,0 +1,56 @@
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: rootsecret
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-prootsecret"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  wordpress:
+    image: wordpress:6.8-php8.2-apache
+    ports:
+      - "8090:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/sovassa:/var/www/html/wp-content/themes/sovassa
+    depends_on:
+      db:
+        condition: service_healthy
+
+  wpcli:
+    image: wordpress:cli
+    user: "0:0"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WP_ADMIN_PASSWORD: sovassa-local
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/sovassa:/var/www/html/wp-content/themes/sovassa
+      - ./bin/wp-init.sh:/wp-init.sh:ro
+    depends_on:
+      wordpress:
+        condition: service_started
+    entrypoint: ["sh", "/wp-init.sh"]
+    restart: "no"
+
+volumes:
+  db_data:
+  wp_data:
