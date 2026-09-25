@@ -5,8 +5,8 @@
  * @package Sovassa
  */
 
-define('SOVASSA_VERSION', '1.3.1');
-define('SOVASSA_SEED_VERSION', '2');
+define('SOVASSA_VERSION', '1.3.7');
+define('SOVASSA_SEED_VERSION', '3');
 
 require get_template_directory() . '/inc/config.php';
 require get_template_directory() . '/inc/content.php';
@@ -59,6 +59,16 @@ function sovassa_enqueue_assets() {
 		array(),
 		SOVASSA_VERSION,
 		true
+	);
+	wp_enqueue_script(
+		'dmca-badge',
+		'https://images.dmca.com/Badges/DMCABadgeHelper.min.js',
+		array(),
+		null,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
 	);
 }
 add_action('wp_enqueue_scripts', 'sovassa_enqueue_assets');

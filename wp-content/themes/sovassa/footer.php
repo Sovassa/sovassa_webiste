@@ -28,7 +28,7 @@ $quiet  = is_page('thank-you');
 	<div class="container site-footer__grid">
 		<div class="site-footer__brand">
 			<a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
-				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Sovassa Technologies" width="220" height="220">
+				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Sovassa Technologies" width="126" height="96">
 			</a>
 			<p>Sovassa Technologies helps companies build digital products and market them as one connected effort.</p>
 			<p class="footer-note"><?php echo esc_html($config['tagline']); ?></p>
@@ -71,10 +71,18 @@ $quiet  = is_page('thank-you');
 			</ul>
 		</div>
 	</div>
+	<div class="container site-footer__trust">
+		<a class="dmca-badge" href="https://www.dmca.com/Protection/Status.aspx?ID=174838c6-23a6-4eeb-9552-041177438471" title="DMCA.com Protection Status" target="_blank" rel="noopener noreferrer">
+			<img src="https://images.dmca.com/Badges/dmca-badge-w250-2x1-02.png?ID=174838c6-23a6-4eeb-9552-041177438471" alt="DMCA.com Protection Status" width="160" height="80">
+		</a>
+	</div>
 	<div class="container site-footer__base">
 		<p>&copy; <?php echo esc_html(gmdate('Y')); ?> Sovassa Technologies. All rights reserved.</p>
 		<nav aria-label="Legal">
-			<a href="<?php echo esc_url(home_url('/privacy/')); ?>">Privacy</a>
+			<a href="<?php echo esc_url(home_url('/privacy/')); ?>">Privacy Policy</a>
+			<a href="<?php echo esc_url(home_url('/terms/')); ?>">Terms &amp; Conditions</a>
+			<a href="<?php echo esc_url(home_url('/cookies/')); ?>">Cookie Policy</a>
+			<a href="<?php echo esc_url(home_url('/copyright/')); ?>">Copyright / DMCA</a>
 			<a href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Free consultation</a>
 		</nav>
 	</div>

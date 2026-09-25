@@ -28,7 +28,7 @@ sovassa_page_hero($page);
 	<div class="container split">
 		<div>
 			<?php sovassa_section_head('The brief', 'Enough detail for a useful reply.', 'Budget is optional. A clear objective matters more.'); ?>
-			<p class="note">What you send stays in a private enquiry. We use it to respond, as described in the privacy note.</p>
+			<p class="note">What you send stays in a private enquiry. We use it to respond, as described in the privacy policy.</p>
 			<p>Prefer the shorter form? <a href="<?php echo esc_url(home_url('/contact/')); ?>">Send a message</a> instead. <?php echo esc_html($config['contact_note']); ?></p>
 		</div>
 		<form class="form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">

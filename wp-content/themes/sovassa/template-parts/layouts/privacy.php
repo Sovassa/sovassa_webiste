@@ -1,6 +1,6 @@
 <?php
 /**
- * Privacy note.
+ * Legal and policy pages.
  *
  * @package Sovassa
  *

@@ -278,7 +278,7 @@ function sovassa_consent_field() {
 	?>
 	<label class="check">
 		<input type="checkbox" name="consent" value="1" required>
-		<span>I agree that Sovassa Technologies can use these details to respond to this enquiry. Read the <a href="<?php echo esc_url(home_url('/privacy/')); ?>">privacy note</a>.</span>
+		<span>I agree that Sovassa Technologies can use these details to respond to this enquiry. Read the <a href="<?php echo esc_url(home_url('/privacy/')); ?>">privacy policy</a>.</span>
 	</label>
 	<?php
 }

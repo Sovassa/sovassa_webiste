@@ -27,7 +27,7 @@ $config = sovassa_config();
 	<header class="site-header">
 		<div class="site-header__inner">
 			<a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
-				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Sovassa Technologies" width="280" height="280">
+				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Sovassa Technologies" width="83" height="64">
 			</a>
 			<nav id="site-menu" class="primary-nav" aria-label="Primary">
 				<div class="nav-drop">
