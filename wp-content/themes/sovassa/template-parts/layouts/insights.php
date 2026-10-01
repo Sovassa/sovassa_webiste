@@ -15,8 +15,13 @@ sovassa_page_hero($page);
 	<div class="container">
 		<div class="filters">
 			<a class="chip" href="<?php echo esc_url(home_url('/insights/')); ?>">All</a>
-			<?php foreach ($page['categories'] as $category) : ?>
-				<a class="chip" href="<?php echo esc_url(home_url('/category/' . sanitize_title($category) . '/')); ?>"><?php echo esc_html($category); ?></a>
+			<?php foreach ($page['categories'] as $category) :
+				$term = get_term_by('name', $category, 'category');
+				if (!$term || is_wp_error($term) || (int) $term->count < 1) {
+					continue;
+				}
+				?>
+				<a class="chip" href="<?php echo esc_url(get_category_link($term)); ?>"><?php echo esc_html($category); ?></a>
 			<?php endforeach; ?>
 		</div>
 		<?php if ($query->have_posts()) : ?>

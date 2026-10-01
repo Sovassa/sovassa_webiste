@@ -11,6 +11,13 @@ $page   = $args['page'];
 $config = sovassa_config();
 sovassa_page_hero($page);
 ?>
+<section class="section section--tight">
+	<div class="container">
+		<div class="feature-frame">
+			<?php sovassa_page_still('contact', 'Two interface panels joined by a single path.'); ?>
+		</div>
+	</div>
+</section>
 <section class="section">
 	<div class="container">
 		<?php sovassa_section_head('After you submit', 'What happens next.', 'We read the brief before we suggest a meeting.'); ?>
@@ -25,8 +32,8 @@ sovassa_page_hero($page);
 	</div>
 </section>
 <section class="section section--tint" id="quote">
-	<div class="container split">
-		<div>
+	<div class="container split split--contact">
+		<div class="contact-panel">
 			<?php sovassa_section_head('The brief', 'Enough detail for a useful reply.', 'Budget is optional. A clear objective matters more.'); ?>
 			<p class="note">What you send stays in a private enquiry. We use it to respond, as described in the privacy policy.</p>
 			<p>Prefer the shorter form? <a href="<?php echo esc_url(home_url('/contact/')); ?>">Send a message</a> instead. <?php echo esc_html($config['contact_note']); ?></p>

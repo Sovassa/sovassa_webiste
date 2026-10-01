@@ -203,6 +203,30 @@ function sovassa_notify_enquiry($title, $lines, $email, $name) {
 }
 
 /**
+ * Use SMTP when the host provides login details. Without them, mail stays on the server's own mail program.
+ *
+ * @param PHPMailer\PHPMailer\PHPMailer $phpmailer Mailer instance.
+ */
+function sovassa_phpmailer_smtp($phpmailer) {
+	$host = getenv('SOVASSA_SMTP_HOST');
+	if (!is_string($host) || '' === $host) {
+		return;
+	}
+	$user = getenv('SOVASSA_SMTP_USER');
+	$pass = getenv('SOVASSA_SMTP_PASS');
+	$port = getenv('SOVASSA_SMTP_PORT');
+	$secure = getenv('SOVASSA_SMTP_SECURE');
+	$phpmailer->isSMTP();
+	$phpmailer->Host       = $host;
+	$phpmailer->Port       = is_string($port) && '' !== $port ? (int) $port : 587;
+	$phpmailer->SMTPAuth   = is_string($user) && '' !== $user;
+	$phpmailer->Username   = is_string($user) ? $user : '';
+	$phpmailer->Password   = is_string($pass) ? $pass : '';
+	$phpmailer->SMTPSecure = is_string($secure) && '' !== $secure ? $secure : 'tls';
+}
+add_action('phpmailer_init', 'sovassa_phpmailer_smtp');
+
+/**
  * Send the visitor back to the form with an error code.
  *
  * @param string $code Error code.

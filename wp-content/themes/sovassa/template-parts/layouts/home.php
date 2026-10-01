@@ -8,50 +8,35 @@
  */
 
 $page = $args['page'];
-$build = array('web-development', 'mobile-app-development', 'ai-automation', 'ui-ux-design');
-$market = array('seo', 'digital-marketing', 'social-media-marketing', 'google-ads', 'content-marketing');
 $work = sovassa_page('work');
 $tech = sovassa_page('technologies');
+$tech_names = array();
+foreach ($tech['groups'] as $group) {
+	foreach ($group['items'] as $name) {
+		$tech_names[] = $name;
+	}
+}
 ?>
-<section class="hero">
-	<div class="container hero__grid">
-		<div>
+<section class="hero hero--film">
+	<div class="hero__film" aria-hidden="true">
+		<?php sovassa_brand_video('together', 'Product interfaces forming, then marketing and growth moving on the same path.'); ?>
+	</div>
+	<div class="container">
+		<div class="hero__copy">
 			<?php sovassa_eyebrow($page['eyebrow']); ?>
 			<h1>
 				<?php echo esc_html($page['title']); ?>
-				<span class="hero__rotate" data-rotate="<?php echo esc_attr(implode('|', $page['rotate'])); ?>"><?php echo esc_html($page['rotate'][0]); ?></span>
+				<span class="hero__rotate" data-rotate="<?php echo esc_attr(implode('|', $page['rotate'])); ?>">
+					<span class="hero__rotate-word"><?php echo esc_html($page['rotate'][0]); ?></span>
+				</span>
 			</h1>
 			<p class="lede"><?php echo esc_html($page['intro']); ?></p>
 			<?php sovassa_default_actions(); ?>
-		</div>
-		<div class="hero-panel">
-			<article>
-				<h2>Build</h2>
-				<div class="chips">
-					<?php foreach ($build as $slug) : ?>
-						<?php $item = sovassa_page($slug); ?>
-						<a class="chip" href="<?php echo esc_url(sovassa_url($slug)); ?>"><?php echo esc_html($item['nav_label']); ?></a>
-					<?php endforeach; ?>
-				</div>
-			</article>
-			<article>
-				<h2>Market</h2>
-				<div class="chips">
-					<?php foreach ($market as $slug) : ?>
-						<?php $item = sovassa_page($slug); ?>
-						<a class="chip" href="<?php echo esc_url(sovassa_url($slug)); ?>"><?php echo esc_html($item['nav_label']); ?></a>
-					<?php endforeach; ?>
-				</div>
-			</article>
-			<article>
-				<h2>Grow</h2>
-				<div class="chips">
-					<a class="chip" href="<?php echo esc_url(home_url('/solutions/')); ?>">Solutions</a>
-					<a class="chip" href="<?php echo esc_url(home_url('/industries/')); ?>">Industries</a>
-					<a class="chip" href="<?php echo esc_url(home_url('/work/')); ?>">Our work</a>
-					<a class="chip" href="<?php echo esc_url(home_url('/technologies/')); ?>">Technologies</a>
-				</div>
-			</article>
+			<div class="hero-pills">
+				<a href="<?php echo esc_url(home_url('/services/#build')); ?>">Build</a>
+				<a href="<?php echo esc_url(home_url('/services/#market')); ?>">Market</a>
+				<a href="<?php echo esc_url(home_url('/solutions/')); ?>">Grow</a>
+			</div>
 		</div>
 	</div>
 	<div class="container">
@@ -64,25 +49,28 @@ $tech = sovassa_page('technologies');
 			<?php endforeach; ?>
 		</div>
 	</div>
-	<div class="container">
-		<img class="hero-visual" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home-visual.webp'); ?>" alt="A website layout, a phone screen, and a rising chart in navy and teal." width="1600" height="900">
-	</div>
 </section>
 
 <section class="section">
-	<div class="container split">
+	<div class="container split split--together">
 		<div>
 			<?php sovassa_section_head('Why Sovassa', 'Delivery that keeps product and marketing in the same plan.', 'The model is simple on purpose. Build the thing, market it, and improve what the numbers and the team both notice.'); ?>
 			<p class="note">Client metrics will be added only when they come from a completed engagement. This site will not invent them.</p>
+			<ul class="checklist">
+				<?php foreach ($page['why'] as $item) : ?>
+					<li>
+						<strong><?php echo esc_html($item['title']); ?></strong>
+						<?php echo esc_html($item['text']); ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 		</div>
-		<ul class="checklist">
-			<?php foreach ($page['why'] as $item) : ?>
-				<li>
-					<strong><?php echo esc_html($item['title']); ?></strong>
-					<?php echo esc_html($item['text']); ?>
-				</li>
-			<?php endforeach; ?>
-		</ul>
+		<figure class="together-still">
+			<picture>
+				<source type="image/webp" srcset="<?php echo esc_url(get_template_directory_uri() . '/assets/images/together.webp?ver=' . SOVASSA_VERSION); ?>">
+				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/together.jpg?ver=' . SOVASSA_VERSION); ?>" alt="Abstract product interfaces flowing into a marketing and growth path." width="1024" height="575">
+			</picture>
+		</figure>
 	</div>
 </section>
 
@@ -104,21 +92,26 @@ $tech = sovassa_page('technologies');
 <section class="section">
 	<div class="container">
 		<?php sovassa_section_head('Services', 'Three groups. One team when the work needs more than one.', 'Pick a service if you already know the brief. Open Solutions if you know the outcome and want a recommended mix.'); ?>
-		<a class="tint-row tint-row--build" href="<?php echo esc_url(home_url('/services/#build')); ?>">
-			<div class="tint-row__label"><span class="icon-badge"><?php sovassa_icon('code'); ?></span><h2>Build</h2></div>
-			<p>Websites, mobile products, applied AI, and the interface design that holds them together.</p>
-			<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/pillar-build.webp'); ?>" alt="" width="960" height="640" loading="lazy">
-		</a>
-		<a class="tint-row tint-row--market" href="<?php echo esc_url(home_url('/services/#market')); ?>">
-			<div class="tint-row__label"><span class="icon-badge icon-badge--teal"><?php sovassa_icon('megaphone'); ?></span><h2>Market</h2></div>
-			<p>SEO, integrated marketing, social, paid search, and content that the website can carry.</p>
-			<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/pillar-market.webp'); ?>" alt="" width="960" height="640" loading="lazy">
-		</a>
-		<a class="tint-row tint-row--grow" href="<?php echo esc_url(home_url('/solutions/')); ?>">
-			<div class="tint-row__label"><span class="icon-badge icon-badge--mint"><?php sovassa_icon('growth'); ?></span><h2>Grow</h2></div>
-			<p>Packaged outcomes for pipeline, launch, automation, and the months after go-live.</p>
-			<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/pillar-grow.webp'); ?>" alt="" width="960" height="640" loading="lazy">
-		</a>
+		<div class="bento">
+			<a class="bento__card bento__card--build" href="<?php echo esc_url(home_url('/services/#build')); ?>">
+				<span class="icon-badge"><?php sovassa_icon('code'); ?></span>
+				<p class="link-card__kicker">Build</p>
+				<h2>Websites, mobile products, applied AI, and the interface design that holds them together.</h2>
+				<span class="text-link">Explore build <?php sovassa_icon('arrow'); ?></span>
+			</a>
+			<a class="bento__card bento__card--market" href="<?php echo esc_url(home_url('/services/#market')); ?>">
+				<span class="icon-badge icon-badge--teal"><?php sovassa_icon('megaphone'); ?></span>
+				<p class="link-card__kicker">Market</p>
+				<h2>SEO, integrated marketing, social, paid search, and content that the website can carry.</h2>
+				<span class="text-link">Explore market <?php sovassa_icon('arrow'); ?></span>
+			</a>
+			<a class="bento__card bento__card--grow" href="<?php echo esc_url(home_url('/solutions/')); ?>">
+				<span class="icon-badge icon-badge--mint"><?php sovassa_icon('growth'); ?></span>
+				<p class="link-card__kicker">Grow</p>
+				<h2>Packaged outcomes for pipeline, launch, automation, and the months after go-live.</h2>
+				<span class="text-link">Explore grow <?php sovassa_icon('arrow'); ?></span>
+			</a>
+		</div>
 	</div>
 </section>
 
@@ -138,16 +131,9 @@ $tech = sovassa_page('technologies');
 	</div>
 </section>
 
-<section class="section section--navy">
-	<div class="container container--narrow">
-		<?php sovassa_section_head('Results', 'Numbers only when they are real.', 'This site will not publish client logos, percentages, or testimonials until they come from a completed engagement the client is willing to share.'); ?>
-		<p><a class="text-link" href="<?php echo esc_url(home_url('/work/')); ?>">See the kinds of work we take on <?php sovassa_icon('arrow'); ?></a></p>
-	</div>
-</section>
-
 <section class="section">
 	<div class="container">
-		<?php sovassa_section_head('Industries', 'A connected set of capabilities, adjusted to the market.', 'We start with six industries we can describe honestly. The list can grow when the work does.'); ?>
+		<?php sovassa_section_head('Industries', 'A connected set of capabilities, adjusted to the market.', 'Each market here is one we can describe honestly. The list can grow when the work does.'); ?>
 		<div data-switcher>
 			<div class="switcher__nav" hidden>
 				<?php foreach (sovassa_page('industries')['items'] as $item) : ?>
@@ -169,57 +155,18 @@ $tech = sovassa_page('technologies');
 <section class="section section--tint">
 	<div class="container">
 		<?php sovassa_section_head('Technology', 'A working ecosystem, not a wall of logos.', 'The tools below are ones we will actually propose. Partnerships are not implied.'); ?>
-		<div data-switcher data-switch-mode="hide">
-			<div class="switcher__nav" hidden>
-				<?php foreach ($tech['groups'] as $group) : ?>
-					<button type="button" data-switch="<?php echo esc_attr(sanitize_title($group['title'])); ?>"><?php echo esc_html($group['title']); ?></button>
-				<?php endforeach; ?>
-			</div>
-			<div class="stack">
-				<?php foreach ($tech['groups'] as $group) : ?>
-					<?php foreach (array_slice($group['items'], 0, 2) as $item) : ?>
-						<a class="chip" data-switch-item="<?php echo esc_attr(sanitize_title($group['title'])); ?>" href="<?php echo esc_url(home_url('/technologies/')); ?>"><?php echo esc_html($item); ?></a>
-					<?php endforeach; ?>
-				<?php endforeach; ?>
-			</div>
-		</div>
+		<?php sovassa_marquee($tech_names, home_url('/technologies/')); ?>
 	</div>
 </section>
 
-<?php sovassa_process($page['delivery'], 'How we work', 'From the first conversation to a system you can grow.', 'Every engagement follows the same spine, whether the output is a website, a campaign, or both.', 'process'); ?>
+<?php sovassa_process($page['delivery'], 'How we work', 'From the first conversation to a system you can grow.', 'Every engagement follows the same spine, whether the output is a website, a campaign, or both.', '', '', 'about'); ?>
 
-<section class="section section--tint">
-	<div class="container">
-		<?php sovassa_section_head('Marketing process', 'Research, strategy, execution, then a report someone will read.', 'Marketing work uses a fifth step so optimization is not left as a slogan.'); ?>
-		<ol class="steps steps--5">
-			<?php foreach ($page['marketing'] as $index => $step) : ?>
-				<li class="step">
-					<span class="step__index"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
-					<h3><?php echo esc_html($step['title']); ?></h3>
-					<p><?php echo esc_html($step['text']); ?></p>
-				</li>
-			<?php endforeach; ?>
-		</ol>
-	</div>
-</section>
+<?php sovassa_process($page['marketing'], 'Marketing process', 'Research, strategy, execution, then a report someone will read.', 'Marketing work uses a fifth step so optimization is not left as a slogan.', '', 'section--tint'); ?>
 
-<section class="section">
+<section class="section section--navy section--results">
 	<div class="container container--narrow">
-		<?php sovassa_section_head('Testimonials', 'Client words, when a client wants them public.', 'Quotes will be added here only from a completed engagement, with the person’s name and company. None are published yet.'); ?>
-	</div>
-</section>
-
-<section class="section">
-	<div class="container">
-		<?php sovassa_section_head('Team', 'The people behind the work will be introduced properly.', 'Profiles, photos, and names will be added when teammates are ready to be public. Roles are not a substitute for that.'); ?>
-		<div class="card-grid card-grid--3">
-			<?php foreach (array('Strategy and delivery', 'Design and engineering', 'Marketing') as $role) : ?>
-				<article class="role-card">
-					<h3><?php echo esc_html($role); ?></h3>
-					<p>A named owner in this area will be listed here. Until then, the consultation still reaches a person, not a queue.</p>
-				</article>
-			<?php endforeach; ?>
-		</div>
+		<?php sovassa_section_head('Proof', 'Names and numbers, when they are real.', 'Client results, quotes, and team profiles will be published only from a completed engagement someone is willing to share. None are public yet.'); ?>
+		<p><a class="text-link" href="<?php echo esc_url(home_url('/work/')); ?>">See the kinds of work we take on <?php sovassa_icon('arrow'); ?></a></p>
 	</div>
 </section>
 

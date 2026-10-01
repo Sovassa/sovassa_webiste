@@ -25,6 +25,11 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+      SOVASSA_SMTP_HOST: ${SOVASSA_SMTP_HOST:-}
+      SOVASSA_SMTP_PORT: ${SOVASSA_SMTP_PORT:-587}
+      SOVASSA_SMTP_USER: ${SOVASSA_SMTP_USER:-}
+      SOVASSA_SMTP_PASS: ${SOVASSA_SMTP_PASS:-}
+      SOVASSA_SMTP_SECURE: ${SOVASSA_SMTP_SECURE:-tls}
     volumes:
       - wp_data:/var/www/html
       - ./wp-content/themes/sovassa:/var/www/html/wp-content/themes/sovassa

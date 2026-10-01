@@ -8,27 +8,29 @@
  */
 
 $page = $args['page'];
-sovassa_page_hero($page);
+sovassa_page_hero($page, 'about', 'Discover, Strategize, Build, and Grow in order.');
 ?>
 <section class="section">
-	<div class="container">
-		<?php sovassa_brand_video('process', 'Discover, Strategize, Build, and Grow in order.'); ?>
-	</div>
-</section>
-<section class="section">
-	<div class="container split">
+	<div class="container split split--together">
 		<div>
 			<?php sovassa_section_head('Our story', 'Built for a familiar gap.', ''); ?>
 			<?php foreach ($page['story'] as $paragraph) : ?>
 				<p><?php echo esc_html($paragraph); ?></p>
 			<?php endforeach; ?>
 		</div>
-		<div class="plain-card">
+		<?php sovassa_page_still('about', 'A product interface connecting into a marketing and growth path.'); ?>
+	</div>
+</section>
+<section class="section section--tight">
+	<div class="container card-grid card-grid--2">
+		<article class="plain-card">
 			<h3>Vision</h3>
 			<p><?php echo esc_html($page['vision']); ?></p>
+		</article>
+		<article class="plain-card">
 			<h3>Mission</h3>
 			<p><?php echo esc_html($page['mission']); ?></p>
-		</div>
+		</article>
 	</div>
 </section>
 <section class="section section--tint">

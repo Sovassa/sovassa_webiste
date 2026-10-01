@@ -13,24 +13,22 @@ $service_videos = array(
 	'web-development'    => array('file' => 'web-development', 'label' => 'A page layout appearing in a browser, then in a narrower screen.'),
 	'mobile-app-development' => array('file' => 'mobile-apps', 'label' => 'A phone screen, then a second screen.'),
 	'digital-marketing'  => array('file' => 'digital-marketing', 'label' => 'A chart line drawing upward, without figures.'),
+	'ai-automation'      => array('file' => 'ai-automation', 'label' => 'A repeated handoff becoming a workflow with a human review gate.'),
 );
-sovassa_page_hero($page);
-if (isset($service_videos[$slug])) :
-	?>
-<section class="section section--tight">
-	<div class="container">
-		<?php sovassa_brand_video($service_videos[$slug]['file'], $service_videos[$slug]['label']); ?>
-	</div>
-</section>
-<?php endif; ?>
+$film = isset($service_videos[$slug]) ? $service_videos[$slug] : null;
+sovassa_page_hero($page, $film ? $film['file'] : '', $film ? $film['label'] : '');
+?>
 <section class="section">
 	<div class="container">
 		<?php sovassa_section_head('The problem', $page['challenges_intro'], ''); ?>
-		<div class="card-grid card-grid--2">
-			<?php foreach ($page['challenges'] as $item) : ?>
-				<article class="plain-card">
-					<h3><?php echo esc_html($item['title']); ?></h3>
-					<p><?php echo esc_html($item['text']); ?></p>
+		<div class="alt-rows">
+			<?php foreach ($page['challenges'] as $index => $item) : ?>
+				<article class="alt-row<?php echo $index % 2 ? ' alt-row--flip' : ''; ?>">
+					<span class="alt-row__index"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
+					<div>
+						<h3><?php echo esc_html($item['title']); ?></h3>
+						<p><?php echo esc_html($item['text']); ?></p>
+					</div>
 				</article>
 			<?php endforeach; ?>
 		</div>
@@ -39,11 +37,14 @@ if (isset($service_videos[$slug])) :
 <section class="section section--tint">
 	<div class="container">
 		<?php sovassa_section_head('What we deliver', 'The pieces this service is accountable for.', ''); ?>
-		<div class="card-grid card-grid--2">
-			<?php foreach ($page['delivers'] as $item) : ?>
-				<article class="plain-card">
-					<h3><?php echo esc_html($item['title']); ?></h3>
-					<p><?php echo esc_html($item['text']); ?></p>
+		<div class="alt-rows">
+			<?php foreach ($page['delivers'] as $index => $item) : ?>
+				<article class="alt-row<?php echo $index % 2 ? ' alt-row--flip' : ''; ?>">
+					<span class="alt-row__index"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
+					<div>
+						<h3><?php echo esc_html($item['title']); ?></h3>
+						<p><?php echo esc_html($item['text']); ?></p>
+					</div>
 				</article>
 			<?php endforeach; ?>
 		</div>

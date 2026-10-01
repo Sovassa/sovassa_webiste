@@ -5,29 +5,23 @@
  * @package Sovassa
  */
 
-$config = sovassa_config();
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>document.documentElement.classList.add("js");</script>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<div class="grain" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="site-top">
-	<div class="utility-bar">
-		<div class="utility-bar__inner">
-			<a href="<?php echo esc_url('tel:' . $config['phone']); ?>"><?php sovassa_icon('phone'); ?> <?php echo esc_html($config['phone_display']); ?></a>
-			<a href="<?php echo esc_url('mailto:' . $config['email']); ?>"><?php echo esc_html($config['email']); ?></a>
-			<span><?php echo esc_html($config['office']); ?></span>
-		</div>
-	</div>
 	<header class="site-header">
 		<div class="site-header__inner">
 			<a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
-				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="Sovassa Technologies" width="83" height="64">
+				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-horizontal.png?ver=' . SOVASSA_VERSION); ?>" alt="Sovassa Technologies" width="960" height="213">
 			</a>
 			<nav id="site-menu" class="primary-nav" aria-label="Primary">
 				<div class="nav-drop">
@@ -175,8 +169,6 @@ $config = sovassa_config();
 				</div>
 			</nav>
 			<div class="header-actions">
-				<a class="btn btn--ghost btn--sm" href="<?php echo esc_url(home_url('/contact/')); ?>">Contact Us</a>
-				<a class="btn btn--primary btn--sm" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Get a Free Consultation</a>
 				<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
 					<span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
 					<span class="menu-toggle__label">Menu</span>

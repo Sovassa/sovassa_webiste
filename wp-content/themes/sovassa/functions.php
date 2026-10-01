@@ -5,7 +5,7 @@
  * @package Sovassa
  */
 
-define('SOVASSA_VERSION', '1.3.7');
+define('SOVASSA_VERSION', '1.8.15');
 define('SOVASSA_SEED_VERSION', '3');
 
 require get_template_directory() . '/inc/config.php';
@@ -42,15 +42,9 @@ add_action('after_setup_theme', 'sovassa_setup_theme');
  */
 function sovassa_enqueue_assets() {
 	wp_enqueue_style(
-		'sovassa-fonts',
-		'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
-		array(),
-		null
-	);
-	wp_enqueue_style(
 		'sovassa-main',
 		get_template_directory_uri() . '/assets/css/main.css',
-		array('sovassa-fonts'),
+		array(),
 		SOVASSA_VERSION
 	);
 	wp_enqueue_script(
@@ -72,25 +66,6 @@ function sovassa_enqueue_assets() {
 	);
 }
 add_action('wp_enqueue_scripts', 'sovassa_enqueue_assets');
-
-/**
- * Preconnect to the font host.
- *
- * @param array<int, string|array<string, string>> $urls
- * @param string                                   $relation_type
- * @return array<int, string|array<string, string>>
- */
-function sovassa_resource_hints($urls, $relation_type) {
-	if ('preconnect' === $relation_type) {
-		$urls[] = 'https://fonts.googleapis.com';
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => 'anonymous',
-		);
-	}
-	return $urls;
-}
-add_filter('wp_resource_hints', 'sovassa_resource_hints', 10, 2);
 
 /**
  * Favicon.
@@ -120,3 +95,32 @@ function sovassa_body_classes($classes) {
 	return $classes;
 }
 add_filter('body_class', 'sovassa_body_classes');
+
+/**
+ * Remember the cookie choice for six months. Analytics stays off unless the visitor accepts it.
+ */
+function sovassa_handle_cookie() {
+	$nonce = isset($_POST['sovassa_cookie_nonce']) ? sanitize_text_field(wp_unslash($_POST['sovassa_cookie_nonce'])) : '';
+	if (!wp_verify_nonce($nonce, 'sovassa_cookie')) {
+		wp_safe_redirect(home_url('/'));
+		exit;
+	}
+	$choice = (isset($_POST['choice']) && 'all' === $_POST['choice']) ? 'all' : 'essential';
+	setcookie(
+		'sovassa_cookie',
+		$choice,
+		array(
+			'expires'  => time() + (180 * DAY_IN_SECONDS),
+			'path'     => COOKIEPATH ? COOKIEPATH : '/',
+			'domain'   => COOKIE_DOMAIN,
+			'secure'   => is_ssl(),
+			'httponly' => false,
+			'samesite' => 'Lax',
+		)
+	);
+	$back = wp_get_referer();
+	wp_safe_redirect($back ? $back : home_url('/'));
+	exit;
+}
+add_action('admin_post_nopriv_sovassa_cookie', 'sovassa_handle_cookie');
+add_action('admin_post_sovassa_cookie', 'sovassa_handle_cookie');

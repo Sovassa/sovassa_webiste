@@ -13,28 +13,25 @@ $groups = array(
 	'market' => array('label' => 'Market', 'id' => 'market', 'class' => 'tint-row--market', 'icon' => 'megaphone', 'slugs' => array('seo', 'digital-marketing', 'social-media-marketing', 'google-ads', 'content-marketing'), 'title' => 'Channels that can explain the same offer.', 'text' => 'Search, social, paid, and content are planned against the pages that receive them.'),
 	'grow'   => array('label' => 'Grow', 'id' => 'grow', 'class' => 'tint-row--grow', 'icon' => 'growth', 'slugs' => array('solutions', 'industries'), 'title' => 'Outcomes that borrow from both sides.', 'text' => 'When the brief is a business result, we recommend a mix instead of a single service.'),
 );
-sovassa_page_hero($page);
+sovassa_page_hero($page, 'services', 'Build, Market, and Grow meeting as one path.');
 ?>
 <section class="section">
 	<div class="container">
-		<?php foreach ($groups as $group) : ?>
-			<div class="tint-row <?php echo esc_attr($group['class']); ?>" id="<?php echo esc_attr($group['id']); ?>">
-				<div class="tint-row__label">
-					<span class="icon-badge"><?php sovassa_icon($group['icon']); ?></span>
-					<h2><?php echo esc_html($group['label']); ?></h2>
-				</div>
-				<div class="chips">
-					<?php foreach ($group['slugs'] as $slug) : ?>
-						<?php $item = sovassa_page($slug); ?>
-						<a class="chip" href="<?php echo esc_url(sovassa_url($slug)); ?>"><?php echo esc_html($item['nav_label']); ?></a>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		<?php endforeach; ?>
+		<div class="bento">
+			<?php foreach ($groups as $group) : ?>
+				<a class="bento__card bento__card--<?php echo esc_attr($group['id']); ?>" href="#<?php echo esc_attr($group['id']); ?>">
+					<span class="icon-badge<?php echo 'market' === $group['id'] ? ' icon-badge--teal' : ('grow' === $group['id'] ? ' icon-badge--mint' : ''); ?>"><?php sovassa_icon($group['icon']); ?></span>
+					<p class="link-card__kicker"><?php echo esc_html($group['label']); ?></p>
+					<h2><?php echo esc_html($group['title']); ?></h2>
+					<p><?php echo esc_html($group['text']); ?></p>
+					<span class="text-link">Explore <?php sovassa_icon('arrow'); ?></span>
+				</a>
+			<?php endforeach; ?>
+		</div>
 	</div>
 </section>
 <?php foreach ($groups as $group) : ?>
-	<section class="section section--tint">
+	<section class="section section--tint" id="<?php echo esc_attr($group['id']); ?>">
 		<div class="container">
 			<?php sovassa_section_head($group['label'], $group['title'], $group['text']); ?>
 			<div class="card-grid card-grid--3">
@@ -50,16 +47,19 @@ sovassa_page_hero($page);
 	</section>
 <?php endforeach; ?>
 <section class="section">
-	<div class="container">
-		<?php sovassa_section_head('How the services meet', 'One customer journey, even when several people touch it.', ''); ?>
-		<div class="card-grid card-grid--3">
-			<?php foreach ($page['together'] as $item) : ?>
-				<article class="plain-card">
-					<h3><?php echo esc_html($item['title']); ?></h3>
-					<p><?php echo esc_html($item['text']); ?></p>
-				</article>
-			<?php endforeach; ?>
+	<div class="container split split--together">
+		<div>
+			<?php sovassa_section_head('How the services meet', 'One customer journey, even when several people touch it.', ''); ?>
+			<ul class="checklist">
+				<?php foreach ($page['together'] as $item) : ?>
+					<li>
+						<strong><?php echo esc_html($item['title']); ?></strong>
+						<?php echo esc_html($item['text']); ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 		</div>
+		<?php sovassa_page_still('services', 'Product interfaces and marketing channels meeting in a growth loop.'); ?>
 	</div>
 </section>
 <section class="section section--tint">

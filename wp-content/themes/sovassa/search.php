@@ -9,7 +9,10 @@ get_header();
 ?>
 <section class="page-hero">
 	<div class="container">
-		<?php sovassa_section_head('Search', 'Results for “' . get_search_query() . '”', '', 'h1'); ?>
+		<?php
+		$query = get_search_query();
+		sovassa_section_head('Search', '' !== $query ? 'Results for “' . $query . '”' : 'Search the site', 'Pages and insights.', 'h1');
+		?>
 	</div>
 </section>
 <section class="section">

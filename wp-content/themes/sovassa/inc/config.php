@@ -20,6 +20,11 @@ function sovassa_config() {
 		'phone_display' => '+91 7002862687',
 		'email'         => 'admin@sovassa.com',
 		'office'        => 'Zirakpur, India',
-		'contact_note'  => 'Call or email us, or send the form and we will reply to the address you share. The office is in Zirakpur, India.',
+		'contact_note'  => 'Call, WhatsApp, or email us, or send the form and we will reply to the address you share. The office is in Zirakpur, India.',
+		'analytics_id'  => '',
+		'social'        => array(
+			'Instagram' => 'https://www.instagram.com/sovassa_technologies/',
+			'Facebook'  => 'https://www.facebook.com/sovassa.technologies',
+		),
 	);
 }

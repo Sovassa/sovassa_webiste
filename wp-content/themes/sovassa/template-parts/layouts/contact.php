@@ -11,15 +11,23 @@ $page   = $args['page'];
 $config = sovassa_config();
 sovassa_page_hero($page);
 ?>
+<section class="section section--tight">
+	<div class="container">
+		<div class="feature-frame">
+			<?php sovassa_page_still('contact', 'Two interface panels joined by a single path.'); ?>
+		</div>
+	</div>
+</section>
 <section class="section" id="enquiry">
-	<div class="container split">
-		<div>
+	<div class="container split split--contact">
+		<div class="contact-panel">
 			<?php sovassa_section_head('Business details', 'Where to reach us.', $config['contact_note']); ?>
 			<ul class="checklist">
 				<li><strong>Phone</strong> <a href="<?php echo esc_url('tel:' . $config['phone']); ?>"><?php echo esc_html($config['phone_display']); ?></a></li>
+				<li><strong>WhatsApp</strong> <a href="<?php echo esc_url(sovassa_whatsapp_url()); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($config['phone_display']); ?></a></li>
 				<li><strong>Email</strong> <a href="<?php echo esc_url('mailto:' . $config['email']); ?>"><?php echo esc_html($config['email']); ?></a></li>
 				<li><strong>Office</strong> <?php echo esc_html($config['office']); ?></li>
-				<li><strong>Channels</strong> Phone, email, and this form are the ways we reply. Social profiles will be linked here when the company accounts are live.</li>
+				<li><strong>Channels</strong> Phone, WhatsApp, email, and this form are the ways we reply. Social profiles will be linked here when the company accounts are live.</li>
 			</ul>
 		</div>
 		<form class="form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">

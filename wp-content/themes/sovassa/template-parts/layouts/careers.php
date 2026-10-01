@@ -8,7 +8,7 @@
  */
 
 $page = $args['page'];
-sovassa_page_hero($page);
+sovassa_page_hero($page, 'careers', 'Separate work panels joining into one piece of work.');
 ?>
 <section class="section">
 	<div class="container card-grid card-grid--3">
@@ -34,9 +34,12 @@ sovassa_page_hero($page);
 	</div>
 </section>
 <section class="section">
-	<div class="container">
-		<?php sovassa_section_head('Open roles', 'None are listed yet.', 'There is no active vacancy on this page. A general introduction is welcome if your work fits the teams above.'); ?>
-		<p class="note">We will replace this note with specific roles, locations, and closing dates when a hire is actually open.</p>
+	<div class="container split split--together">
+		<div>
+			<?php sovassa_section_head('Open roles', 'None are listed yet.', 'There is no active vacancy on this page. A general introduction is welcome if your work fits the teams above.'); ?>
+			<p class="note">We will replace this note with specific roles, locations, and closing dates when a hire is actually open.</p>
+		</div>
+		<?php sovassa_page_still('careers', 'Glowing interface panels linked into one piece of work.'); ?>
 	</div>
 </section>
 <section class="section section--tint">

@@ -145,6 +145,9 @@ function sovassa_organization_schema() {
 		'logo'      => get_template_directory_uri() . '/assets/images/logo.png',
 		'email'     => $config['email'],
 		'telephone' => $config['phone'],
+		'sameAs'    => array(
+			'https://www.instagram.com/sovassa_technologies/',
+		),
 		'address'   => array(
 			'@type'           => 'PostalAddress',
 			'addressLocality' => 'Zirakpur',
@@ -243,3 +246,32 @@ function sovassa_current_url() {
 	global $wp;
 	return home_url(add_query_arg(array(), $wp->request));
 }
+
+/**
+ * Load analytics only after the visitor accepts, and only when a measurement ID is set.
+ */
+function sovassa_analytics_script() {
+	$id = sovassa_config()['analytics_id'];
+	if (!is_string($id) || !preg_match('/^G-[A-Z0-9]+$/', $id)) {
+		return;
+	}
+	$id = esc_js($id);
+	echo "<script>
+	window.sovassaLoadAnalytics = function () {
+		if (document.getElementById('sovassa-ga')) return;
+		var script = document.createElement('script');
+		script.id = 'sovassa-ga';
+		script.async = true;
+		script.src = 'https://www.googletagmanager.com/gtag/js?id=" . $id . "';
+		document.head.appendChild(script);
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){window.dataLayer.push(arguments);}
+		window.gtag = gtag;
+		gtag('js', new Date());
+		gtag('config', '" . $id . "', { anonymize_ip: true });
+	};
+	if (document.cookie.indexOf('sovassa_cookie=all') !== -1) window.sovassaLoadAnalytics();
+	document.addEventListener('sovassa-consent', window.sovassaLoadAnalytics);
+	</script>\n";
+}
+add_action('wp_footer', 'sovassa_analytics_script', 20);

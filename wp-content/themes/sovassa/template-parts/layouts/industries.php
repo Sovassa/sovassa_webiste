@@ -8,7 +8,7 @@
  */
 
 $page = $args['page'];
-sovassa_page_hero($page);
+sovassa_page_hero($page, 'industries', 'One product interface surrounded by different markets.');
 ?>
 <section class="section">
 	<div class="container" data-switcher>
@@ -30,9 +30,12 @@ sovassa_page_hero($page);
 	</div>
 </section>
 <section class="section section--tint">
-	<div class="container">
-		<?php sovassa_section_head('Proof', 'Industry stories will be specific when the work is.', 'Until a client engagement in one of these markets is ready to share, the work page describes the shape of a project rather than a result.'); ?>
-		<a class="btn btn--ghost" href="<?php echo esc_url(home_url('/work/')); ?>">See engagement types</a>
+	<div class="container split split--together">
+		<div>
+			<?php sovassa_section_head('Proof', 'Industry stories will be specific when the work is.', 'Until a client engagement in one of these markets is ready to share, the work page describes the shape of a project rather than a result.'); ?>
+			<a class="btn btn--ghost" href="<?php echo esc_url(home_url('/work/')); ?>">See engagement types</a>
+		</div>
+		<?php sovassa_page_still('industries', 'A product interface surrounded by market clusters for commerce, care, learning, and finance.'); ?>
 	</div>
 </section>
 <?php sovassa_faq($page['faq']); ?>

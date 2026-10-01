@@ -28,9 +28,33 @@ function sovassa_icon($name) {
 		'pen'     => '<path d="M4 20h4L19 9l-4-4L4 16v4Zm11-13 4 4"/>',
 		'users'   => '<path d="M8 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM16.5 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM3.5 19c.4-2.2 2.2-3.5 4.5-3.5s4.1 1.3 4.5 3.5M14 15.6c1.6-.2 3 .6 3.8 2.4"/>',
 		'shield'  => '<path d="M12 3.5 19 6.5v5.2c0 4.2-2.8 7.2-7 8.8-4.2-1.6-7-4.6-7-8.8V6.5L12 3.5Z"/>',
+		'up'      => '<path d="M12 19V5M6 11l6-6 6 6"/>',
 	);
+	if ('instagram' === $name) {
+		echo '<svg class="icon icon--brand" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><defs><radialGradient id="sovassa-ig" cx="30%" cy="115%" r="140%"><stop offset="0%" stop-color="#feda75"/><stop offset="18%" stop-color="#fa7e1e"/><stop offset="42%" stop-color="#d62976"/><stop offset="70%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></radialGradient></defs><rect width="24" height="24" rx="6" fill="url(#sovassa-ig)"/><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="4" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="3.15" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="16.45" cy="7.55" r="0.9" fill="#fff" stroke="none"/></svg>';
+		return;
+	}
+	if ('facebook' === $name) {
+		echo '<svg class="icon icon--brand" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#1877F2"/><path fill="#fff" stroke="none" d="M15.4 12.7h-1.8V19h-2.5v-6.3H9.6v-2.3h1.5V9.1c0-1.5.8-2.4 2.4-2.4.7 0 1.3.1 1.3.1v1.7h-.8c-.8 0-1 .4-1 1v1.3h1.8l-.4 2.3Z"/></svg>';
+		return;
+	}
+	if ('whatsapp' === $name) {
+		echo '<svg class="icon icon--whatsapp" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="#25D366" d="M16 2.7C8.6 2.7 2.7 8.6 2.7 16c0 2.3.6 4.5 1.8 6.5L2.4 29.6l7.2-1.9A13.2 13.2 0 0 0 16 29.3c7.4 0 13.3-5.9 13.3-13.3C29.3 8.6 23.4 2.7 16 2.7z"/><path fill="#fff" d="M23.1 18.7c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.9-1.6.1-.2 0-.4-.1-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>';
+		return;
+	}
 	$path = isset($icons[$name]) ? $icons[$name] : $icons['spark'];
 	echo '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' . $path . '</svg>';
+}
+
+/**
+ * WhatsApp chat link for the public phone number.
+ *
+ * @return string
+ */
+function sovassa_whatsapp_url() {
+	$digits = preg_replace('/\D+/', '', sovassa_config()['phone']);
+	$text   = rawurlencode('Hello Sovassa Technologies, I would like to talk about a project.');
+	return 'https://wa.me/' . $digits . '?text=' . $text;
 }
 
 /**
@@ -105,9 +129,18 @@ function sovassa_default_actions($secondary_label = 'Explore Our Services', $sec
 /**
  * Inner page hero.
  *
- * @param array<string, mixed> $page Page definition.
+ * @param array<string, mixed> $page        Page definition.
+ * @param string               $video       Optional film slug shown behind the text.
+ * @param string               $video_label Accessible name for that film.
  */
-function sovassa_page_hero($page) {
+function sovassa_page_hero($page, $video = '', $video_label = '') {
+	$film = '';
+	if ($video) {
+		$dir = get_template_directory() . '/assets/videos/';
+		if (is_readable($dir . $video . '.mp4') || is_readable($dir . $video . '.webm')) {
+			$film = $video;
+		}
+	}
 	$primary = isset($page['primary_cta']) ? $page['primary_cta'] : array(
 		'label' => 'Get a Free Consultation',
 		'url'   => 'get-a-quote',
@@ -117,7 +150,14 @@ function sovassa_page_hero($page) {
 		'url'   => 'services',
 	);
 	?>
-	<section class="page-hero">
+	<section class="page-hero<?php echo $film ? ' page-hero--film' : ''; ?>">
+		<?php if ($film) : ?>
+			<div class="page-hero__film" aria-hidden="true">
+				<?php sovassa_brand_video($film, $video_label ? $video_label : $page['title']); ?>
+			</div>
+		<?php else : ?>
+			<div class="hero-orbs" aria-hidden="true"><span></span><span></span></div>
+		<?php endif; ?>
 		<div class="container">
 			<?php sovassa_breadcrumbs(); ?>
 			<?php sovassa_section_head($page['eyebrow'], $page['title'], $page['intro'], 'h1'); ?>
@@ -150,42 +190,122 @@ function sovassa_breadcrumbs() {
 }
 
 /**
- * Numbered process list.
+ * Lazy brand video.
  *
- * @param array<int, array<string, string>> $steps Steps.
- * @param string                             $label Eyebrow.
- * @param string                             $title Heading.
- * @param string                             $lede  Intro.
+ * @param string $name  File slug in assets/videos.
+ * @param string $label Accessible name.
  */
 function sovassa_brand_video($name, $label) {
+	$dir    = get_template_directory() . '/assets/videos/';
 	$base   = get_template_directory_uri() . '/assets/videos/' . $name;
 	$ver    = '?ver=' . SOVASSA_VERSION;
+	$has_mp4  = is_readable($dir . $name . '.mp4');
+	$has_webm = is_readable($dir . $name . '.webm');
+	if (!$has_mp4 && !$has_webm) {
+		return;
+	}
 	$poster = $base . '-poster.webp' . $ver;
 	?>
 	<video class="brand-video" muted loop playsinline preload="none" poster="<?php echo esc_url($poster); ?>" aria-label="<?php echo esc_attr($label); ?>">
-		<source data-src="<?php echo esc_url($base . '.webm' . $ver); ?>" type="video/webm">
-		<source data-src="<?php echo esc_url($base . '.mp4' . $ver); ?>" type="video/mp4">
+		<?php if ($has_webm) : ?>
+			<source data-src="<?php echo esc_url($base . '.webm' . $ver); ?>" type="video/webm">
+		<?php endif; ?>
+		<?php if ($has_mp4) : ?>
+			<source data-src="<?php echo esc_url($base . '.mp4' . $ver); ?>" type="video/mp4">
+		<?php endif; ?>
 	</video>
 	<?php
 }
 
-function sovassa_process($steps, $label, $title, $lede = '', $video = '') {
+/**
+ * Landscape still used beside story copy.
+ *
+ * @param string $name File slug in assets/images (jpg/webp).
+ * @param string $alt  Accessible description.
+ */
+function sovassa_page_still($name, $alt) {
+	$dir  = get_template_directory() . '/assets/images/';
+	$base = get_template_directory_uri() . '/assets/images/' . $name;
+	$ver  = '?ver=' . SOVASSA_VERSION;
+	$has_webp = is_readable($dir . $name . '.webp');
+	$has_jpg  = is_readable($dir . $name . '.jpg');
+	$has_png  = is_readable($dir . $name . '.png');
+	if (!$has_webp && !$has_jpg && !$has_png) {
+		return;
+	}
+	$fallback = $has_jpg ? $base . '.jpg' . $ver : ($has_png ? $base . '.png' . $ver : $base . '.webp' . $ver);
 	?>
-	<section class="section">
+	<figure class="split-still split-still--<?php echo esc_attr($name); ?>">
+		<picture>
+			<?php if ($has_webp) : ?>
+				<source type="image/webp" srcset="<?php echo esc_url($base . '.webp' . $ver); ?>">
+			<?php endif; ?>
+			<img src="<?php echo esc_url($fallback); ?>" alt="<?php echo esc_attr($alt); ?>" width="1024" height="575" loading="lazy">
+		</picture>
+	</figure>
+	<?php
+}
+
+/**
+ * Slow row of labels. The track is duplicated so the loop is seamless.
+ *
+ * @param array<int, string> $labels Visible names.
+ * @param string             $url    Destination for each label.
+ */
+function sovassa_marquee($labels, $url) {
+	$labels = array_values(array_filter($labels));
+	if (!$labels) {
+		return;
+	}
+	?>
+	<div class="marquee">
+		<div class="marquee__track">
+			<?php for ($copy = 0; $copy < 2; $copy++) : ?>
+				<?php foreach ($labels as $label) : ?>
+					<a class="chip" href="<?php echo esc_url($url); ?>"<?php echo $copy ? ' aria-hidden="true" tabindex="-1"' : ''; ?>><?php echo esc_html($label); ?></a>
+				<?php endforeach; ?>
+			<?php endfor; ?>
+		</div>
+	</div>
+	<?php
+}
+
+/**
+ * Numbered process rail.
+ *
+ * @param array<int, array<string, string>> $steps         Steps.
+ * @param string                             $label         Eyebrow.
+ * @param string                             $title         Heading.
+ * @param string                             $lede          Intro.
+ * @param string                             $video         Optional brand video slug.
+ * @param string                             $section_class Extra section classes.
+ * @param string                             $still         Optional still slug when there is no clean film.
+ */
+function sovassa_process($steps, $label, $title, $lede = '', $video = '', $section_class = '', $still = '') {
+	$class = 'section' . ($section_class ? ' ' . $section_class : '');
+	?>
+	<section class="<?php echo esc_attr($class); ?>">
 		<div class="container">
 			<?php sovassa_section_head($label, $title, $lede); ?>
 			<?php if ($video) : ?>
 				<?php sovassa_brand_video($video, $title); ?>
+			<?php elseif ($still) : ?>
+				<div class="feature-frame">
+					<?php sovassa_page_still($still, $title); ?>
+				</div>
 			<?php endif; ?>
-			<ol class="steps">
-				<?php foreach ($steps as $index => $step) : ?>
-					<li class="step">
-						<span class="step__index"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
-						<h3><?php echo esc_html($step['title']); ?></h3>
-						<p><?php echo esc_html($step['text']); ?></p>
-					</li>
-				<?php endforeach; ?>
-			</ol>
+			<div class="rail" data-rail>
+				<div class="rail__line" aria-hidden="true"><span class="rail__fill"></span></div>
+				<ol class="steps steps--rail" style="--steps: <?php echo esc_attr((string) count($steps)); ?>">
+					<?php foreach ($steps as $index => $step) : ?>
+						<li class="step">
+							<span class="step__index"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
+							<h3><?php echo esc_html($step['title']); ?></h3>
+							<p><?php echo esc_html($step['text']); ?></p>
+						</li>
+					<?php endforeach; ?>
+				</ol>
+			</div>
 		</div>
 	</section>
 	<?php
