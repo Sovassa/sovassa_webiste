@@ -54,6 +54,10 @@ function sovassa_seo_head() {
 	if (is_page('thank-you')) {
 		echo '<meta name="robots" content="noindex, follow">' . "\n";
 	}
+	$verification = isset(sovassa_config()['search_console_verification']) ? sovassa_config()['search_console_verification'] : '';
+	if (is_string($verification) && preg_match('/^[A-Za-z0-9_-]{8,128}$/', $verification)) {
+		echo '<meta name="google-site-verification" content="' . esc_attr($verification) . '">' . "\n";
+	}
 	echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
 	echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
 	echo '<meta property="og:site_name" content="Sovassa Technologies">' . "\n";
@@ -145,9 +149,7 @@ function sovassa_organization_schema() {
 		'logo'      => get_template_directory_uri() . '/assets/images/logo.png',
 		'email'     => $config['email'],
 		'telephone' => $config['phone'],
-		'sameAs'    => array(
-			'https://www.instagram.com/sovassa_technologies/',
-		),
+		'sameAs'    => sovassa_same_as_urls(),
 		'address'   => array(
 			'@type'           => 'PostalAddress',
 			'addressLocality' => 'Zirakpur',
@@ -275,3 +277,95 @@ function sovassa_analytics_script() {
 	</script>\n";
 }
 add_action('wp_footer', 'sovassa_analytics_script', 20);
+
+/**
+ * Public profile URLs for Organization schema.
+ *
+ * @return array<int, string>
+ */
+function sovassa_same_as_urls() {
+	$urls = array();
+	$social = isset(sovassa_config()['social']) ? sovassa_config()['social'] : array();
+	if (!is_array($social)) {
+		return $urls;
+	}
+	foreach ($social as $url) {
+		if (is_string($url) && '' !== $url) {
+			$urls[] = $url;
+		}
+	}
+	return array_values($urls);
+}
+
+/**
+ * Old Elementor addresses that should not stay in the index.
+ *
+ * @return array<string, string>
+ */
+function sovassa_legacy_redirect_map() {
+	return array(
+		'services-2'                         => '/services/',
+		'about-us'                           => '/about/',
+		'contact-2'                          => '/contact/',
+		'blog-2'                             => '/insights/',
+		'portfolio'                          => '/work/',
+		'testimonials'                       => '/work/',
+		'partners'                           => '/about/',
+		'team'                               => '/about/',
+		'resources'                          => '/insights/',
+		'ai-search'                          => '/seo/',
+		'customer-cabinet'                   => '/contact/',
+		'customer-cabinet-2'                 => '/contact/',
+		'sitemap'                            => '/',
+		'cookie-policy'                      => '/cookies/',
+		'terms-conditions'                   => '/terms/',
+		'hello-world'                        => '/insights/',
+		'hello-world-1'                      => '/insights/',
+		'hello-world-2'                      => '/insights/',
+		'hello-world-3'                      => '/insights/',
+		'test-digital-growth-insights'       => '/insights/',
+		'insights/hello-world'               => '/insights/',
+		'insights/hello-world-1'             => '/insights/',
+		'insights/hello-world-2'             => '/insights/',
+		'insights/hello-world-3'             => '/insights/',
+		'insights/test-digital-growth-insights' => '/insights/',
+	);
+}
+
+/**
+ * Destination for a legacy path, when one exists.
+ *
+ * @param string $path Request path without slashes.
+ * @return string
+ */
+function sovassa_legacy_redirect_target($path) {
+	$map = sovassa_legacy_redirect_map();
+	if (isset($map[$path])) {
+		return $map[$path];
+	}
+	if (str_starts_with($path, 'solutions/') && !sovassa_page($path)) {
+		return '/solutions/';
+	}
+	return '';
+}
+
+/**
+ * Send leftover Elementor URLs to the page that replaced them.
+ */
+function sovassa_legacy_redirects() {
+	if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
+		return;
+	}
+	$request = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '';
+	$path    = trim((string) wp_parse_url($request, PHP_URL_PATH), '/');
+	if ('' === $path) {
+		return;
+	}
+	$target = sovassa_legacy_redirect_target($path);
+	if ('' === $target) {
+		return;
+	}
+	wp_safe_redirect(home_url($target), 301);
+	exit;
+}
+add_action('template_redirect', 'sovassa_legacy_redirects', 0);

@@ -16,7 +16,8 @@ function sovassa_pages() {
 		$pages = array_merge(
 			require __DIR__ . '/content/company.php',
 			require __DIR__ . '/content/services.php',
-			require __DIR__ . '/content/markets.php'
+			require __DIR__ . '/content/markets.php',
+			require __DIR__ . '/content/industries.php'
 		);
 	}
 	return $pages;
@@ -45,7 +46,12 @@ function sovassa_current_page() {
 	if (is_page()) {
 		$post = get_queried_object();
 		if ($post instanceof WP_Post) {
-			return sovassa_page($post->post_name);
+			$uri  = get_page_uri($post);
+			$page = sovassa_page($uri);
+			if (!$page) {
+				$page = sovassa_page($post->post_name);
+			}
+			return $page;
 		}
 	}
 	return null;

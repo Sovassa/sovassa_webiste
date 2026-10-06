@@ -22,7 +22,7 @@ sovassa_page_hero($page, 'services', 'Build, Market, and Grow meeting as one pat
 				<a class="bento__card bento__card--<?php echo esc_attr($group['id']); ?>" href="#<?php echo esc_attr($group['id']); ?>">
 					<span class="icon-badge<?php echo 'market' === $group['id'] ? ' icon-badge--teal' : ('grow' === $group['id'] ? ' icon-badge--mint' : ''); ?>"><?php sovassa_icon($group['icon']); ?></span>
 					<p class="link-card__kicker"><?php echo esc_html($group['label']); ?></p>
-					<h2><?php echo esc_html($group['title']); ?></h2>
+					<p class="bento__title"><?php echo esc_html($group['title']); ?></p>
 					<p><?php echo esc_html($group['text']); ?></p>
 					<span class="text-link">Explore <?php sovassa_icon('arrow'); ?></span>
 				</a>
@@ -96,4 +96,14 @@ sovassa_page_hero($page, 'services', 'Build, Market, and Grow meeting as one pat
 		<p><a class="text-link" href="<?php echo esc_url(home_url('/work/')); ?>">View all work types <?php sovassa_icon('arrow'); ?></a></p>
 	</div>
 </section>
+<?php if (!empty($page['overview'])) : ?>
+<section class="section section--tight">
+	<div class="container container--narrow">
+		<?php sovassa_section_head('The set', 'Every service has its own page.', 'Use this hub to choose. Use the service page for the scope.'); ?>
+		<?php foreach ($page['overview'] as $paragraph) : ?>
+			<p><?php echo esc_html($paragraph); ?></p>
+		<?php endforeach; ?>
+	</div>
+</section>
+<?php endif; ?>
 <?php sovassa_faq($page['faq']); ?>

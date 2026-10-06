@@ -27,6 +27,9 @@ sovassa_page_hero($page);
 				<li><strong>WhatsApp</strong> <a href="<?php echo esc_url(sovassa_whatsapp_url()); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($config['phone_display']); ?></a></li>
 				<li><strong>Email</strong> <a href="<?php echo esc_url('mailto:' . $config['email']); ?>"><?php echo esc_html($config['email']); ?></a></li>
 				<li><strong>Office</strong> <?php echo esc_html($config['office']); ?></li>
+				<?php if (!empty($config['maps_url'])) : ?>
+					<li><strong>Map</strong> <a href="<?php echo esc_url($config['maps_url']); ?>" target="_blank" rel="noopener noreferrer">Google Business Profile</a></li>
+				<?php endif; ?>
 				<li><strong>Channels</strong> Phone, WhatsApp, email, and this form are the ways we reply. Social profiles will be linked here when the company accounts are live.</li>
 			</ul>
 		</div>

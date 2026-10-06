@@ -30,23 +30,33 @@ add_action('init', 'sovassa_maybe_seed', 30);
 function sovassa_seed_site() {
 	$ids = array();
 	foreach (sovassa_pages() as $slug => $page) {
-		$existing = get_page_by_path($slug);
+		$parent_slug = '';
+		$post_name   = $slug;
+		if (str_contains($slug, '/')) {
+			$parent_slug = str_replace('\\', '/', dirname($slug));
+			$post_name   = basename($slug);
+		}
+		$parent_id = ($parent_slug && !empty($ids[$parent_slug])) ? (int) $ids[$parent_slug] : 0;
+		$existing  = get_page_by_path($slug);
 		if ($existing instanceof WP_Post) {
 			$ids[$slug] = (int) $existing->ID;
+			$update     = array('ID' => $existing->ID);
 			if ('publish' !== $existing->post_status) {
-				wp_update_post(
-					array(
-						'ID'          => $existing->ID,
-						'post_status' => 'publish',
-					)
-				);
+				$update['post_status'] = 'publish';
+			}
+			if ($parent_id && (int) $existing->post_parent !== $parent_id) {
+				$update['post_parent'] = $parent_id;
+			}
+			if (count($update) > 1) {
+				wp_update_post($update);
 			}
 			continue;
 		}
 		$created = wp_insert_post(
 			array(
 				'post_type'    => 'page',
-				'post_name'    => $slug,
+				'post_name'    => $post_name,
+				'post_parent'  => $parent_id,
 				'post_title'   => isset($page['wp_title']) ? $page['wp_title'] : $page['title'],
 				'post_status'  => 'publish',
 				'post_content' => '',
@@ -77,6 +87,75 @@ function sovassa_seed_site() {
 
 	sovassa_seed_posts();
 	sovassa_seed_menu($ids);
+	sovassa_retire_legacy_content();
+}
+
+/**
+ * Draft leftover Elementor pages and remove test insight posts.
+ */
+function sovassa_retire_legacy_content() {
+	$pages = array(
+		'services-2',
+		'about-us',
+		'contact-2',
+		'blog-2',
+		'portfolio',
+		'testimonials',
+		'partners',
+		'team',
+		'resources',
+		'ai-search',
+		'customer-cabinet',
+		'customer-cabinet-2',
+		'sitemap',
+		'cookie-policy',
+		'terms-conditions',
+	);
+	foreach ($pages as $slug) {
+		$page = get_page_by_path($slug);
+		if ($page instanceof WP_Post && 'draft' !== $page->post_status) {
+			wp_update_post(
+				array(
+					'ID'          => $page->ID,
+					'post_status' => 'draft',
+				)
+			);
+		}
+	}
+
+	$solutions = get_page_by_path('solutions');
+	if ($solutions instanceof WP_Post) {
+		$children = get_pages(
+			array(
+				'child_of'    => $solutions->ID,
+				'post_status' => array('publish', 'private', 'draft'),
+			)
+		);
+		foreach ($children as $child) {
+			if (!sovassa_page(get_page_uri($child))) {
+				wp_update_post(
+					array(
+						'ID'          => $child->ID,
+						'post_status' => 'draft',
+					)
+				);
+			}
+		}
+	}
+
+	$posts = array(
+		'hello-world',
+		'hello-world-1',
+		'hello-world-2',
+		'hello-world-3',
+		'test-digital-growth-insights',
+	);
+	foreach ($posts as $slug) {
+		$post = get_page_by_path($slug, OBJECT, 'post');
+		if ($post instanceof WP_Post) {
+			wp_delete_post($post->ID, true);
+		}
+	}
 }
 
 /**

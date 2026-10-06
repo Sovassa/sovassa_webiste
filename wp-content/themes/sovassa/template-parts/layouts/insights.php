@@ -27,7 +27,7 @@ sovassa_page_hero($page);
 		<?php if ($query->have_posts()) : ?>
 			<?php $query->the_post(); ?>
 			<article class="plain-card featured-insight">
-				<img class="post-card__image" src="<?php echo esc_url(sovassa_insight_image_uri()); ?>" alt="" width="1280" height="720">
+				<img class="post-card__image" src="<?php echo esc_url(sovassa_insight_image_uri()); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="1280" height="720">
 				<p class="link-card__kicker">Featured</p>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 				<p><?php echo esc_html(get_the_excerpt()); ?></p>

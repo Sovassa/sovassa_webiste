@@ -24,12 +24,13 @@ foreach ($tech['groups'] as $group) {
 	<div class="container">
 		<div class="hero__copy">
 			<?php sovassa_eyebrow($page['eyebrow']); ?>
-			<h1>
-				<?php echo esc_html($page['title']); ?>
+			<h1><?php echo esc_html($page['title']); ?></h1>
+			<p class="hero__focus">
+				A technology and marketing partner for
 				<span class="hero__rotate" data-rotate="<?php echo esc_attr(implode('|', $page['rotate'])); ?>">
 					<span class="hero__rotate-word"><?php echo esc_html($page['rotate'][0]); ?></span>
 				</span>
-			</h1>
+			</p>
 			<p class="lede"><?php echo esc_html($page['intro']); ?></p>
 			<?php sovassa_default_actions(); ?>
 			<div class="hero-pills">
@@ -92,6 +93,7 @@ foreach ($tech['groups'] as $group) {
 <section class="section">
 	<div class="container">
 		<?php sovassa_section_head('Services', 'Three groups. One team when the work needs more than one.', 'Pick a service if you already know the brief. Open Solutions if you know the outcome and want a recommended mix.'); ?>
+		<p>The work covers <a href="<?php echo esc_url(home_url('/web-development/')); ?>">web development services</a>, <a href="<?php echo esc_url(home_url('/mobile-app-development/')); ?>">app development</a>, <a href="<?php echo esc_url(home_url('/ui-ux-design/')); ?>">UI and UX design</a>, <a href="<?php echo esc_url(home_url('/ai-automation/')); ?>">AI automation</a>, and <a href="<?php echo esc_url(home_url('/digital-marketing/')); ?>">digital marketing services</a>. <a href="<?php echo esc_url(home_url('/content-marketing/')); ?>">Content strategy services</a> and <a href="<?php echo esc_url(home_url('/seo/')); ?>">SEO</a> sit with the same team.</p>
 		<div class="bento">
 			<a class="bento__card bento__card--build" href="<?php echo esc_url(home_url('/services/#build')); ?>">
 				<span class="icon-badge"><?php sovassa_icon('code'); ?></span>
@@ -142,7 +144,7 @@ foreach ($tech['groups'] as $group) {
 			</div>
 			<div class="card-grid card-grid--3">
 				<?php foreach (sovassa_page('industries')['items'] as $item) : ?>
-					<a class="link-card" data-switch-item="<?php echo esc_attr(sanitize_title($item['title'])); ?>" href="<?php echo esc_url(home_url('/industries/#' . sanitize_title($item['title']))); ?>">
+					<a class="link-card" data-switch-item="<?php echo esc_attr(sanitize_title($item['title'])); ?>" href="<?php echo esc_url(sovassa_url($item['slug'])); ?>">
 						<h3><?php echo esc_html($item['title']); ?></h3>
 						<p><?php echo esc_html($item['challenge']); ?></p>
 					</a>

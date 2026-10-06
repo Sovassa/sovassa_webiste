@@ -12,6 +12,7 @@ sovassa_page_hero($page, 'industries', 'One product interface surrounded by diff
 ?>
 <section class="section">
 	<div class="container" data-switcher>
+		<?php sovassa_section_head('Markets', 'Nine markets, each with its own page.', 'Open a market to see the problem we recognise and the services that usually sit together.'); ?>
 		<div class="switcher__nav" hidden>
 			<?php foreach ($page['items'] as $item) : ?>
 				<button type="button" data-switch="<?php echo esc_attr(sanitize_title($item['title'])); ?>"><?php echo esc_html($item['title']); ?></button>
@@ -19,12 +20,12 @@ sovassa_page_hero($page, 'industries', 'One product interface surrounded by diff
 		</div>
 		<div class="card-grid card-grid--3">
 			<?php foreach ($page['items'] as $item) : ?>
-				<article class="plain-card" id="<?php echo esc_attr(sanitize_title($item['title'])); ?>" data-switch-item="<?php echo esc_attr(sanitize_title($item['title'])); ?>">
+				<a class="link-card" id="<?php echo esc_attr(sanitize_title($item['title'])); ?>" data-switch-item="<?php echo esc_attr(sanitize_title($item['title'])); ?>" href="<?php echo esc_url(sovassa_url($item['slug'])); ?>">
 					<h3><?php echo esc_html($item['title']); ?></h3>
 					<p><strong>Challenge.</strong> <?php echo esc_html($item['challenge']); ?></p>
 					<p><strong>How we help.</strong> <?php echo esc_html($item['support']); ?></p>
 					<p class="link-card__kicker"><?php echo esc_html($item['combination']); ?></p>
-				</article>
+				</a>
 			<?php endforeach; ?>
 		</div>
 	</div>

@@ -143,7 +143,7 @@
 												continue;
 											}
 											?>
-											<a class="mega-link" href="<?php echo esc_url(home_url('/industries/#' . sanitize_title($title))); ?>">
+											<a class="mega-link" href="<?php echo esc_url(sovassa_url($industry_items[ $title ]['slug'])); ?>">
 												<span class="mega-link__mark"><?php sovassa_icon(isset($industry_icons[ $title ]) ? $industry_icons[ $title ] : 'globe'); ?></span>
 												<span class="mega-link__body"><strong><?php echo esc_html($title); ?></strong></span>
 											</a>

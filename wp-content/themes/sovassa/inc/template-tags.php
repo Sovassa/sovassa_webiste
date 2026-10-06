@@ -437,7 +437,7 @@ function sovassa_post_card() {
 	$label      = $categories ? $categories[0]->name : 'Insight';
 	?>
 	<article class="post-card">
-		<a href="<?php the_permalink(); ?>"><img class="post-card__image" src="<?php echo esc_url(sovassa_insight_image_uri()); ?>" alt="" width="1280" height="720"></a>
+		<a href="<?php the_permalink(); ?>"><img class="post-card__image" src="<?php echo esc_url(sovassa_insight_image_uri()); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="1280" height="720"></a>
 		<div class="post-card__body">
 			<p class="link-card__kicker"><?php echo esc_html($label); ?></p>
 			<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>

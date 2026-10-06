@@ -18,6 +18,23 @@ $service_videos = array(
 $film = isset($service_videos[$slug]) ? $service_videos[$slug] : null;
 sovassa_page_hero($page, $film ? $film['file'] : '', $film ? $film['label'] : '');
 ?>
+<?php if (!empty($page['detail']) || !empty($page['industry'])) : ?>
+<section class="section section--tight">
+	<div class="container container--narrow">
+		<?php if (!empty($page['detail'])) : ?>
+			<?php foreach ($page['detail'] as $paragraph) : ?>
+				<p><?php echo esc_html($paragraph); ?></p>
+			<?php endforeach; ?>
+		<?php endif; ?>
+		<?php if (!empty($page['industry'])) : ?>
+			<?php $market = sovassa_page($page['industry']); ?>
+			<?php if ($market) : ?>
+				<p><a class="text-link" href="<?php echo esc_url(sovassa_url($page['industry'])); ?>">How this shows up in <?php echo esc_html($market['nav_label']); ?> <?php sovassa_icon('arrow'); ?></a></p>
+			<?php endif; ?>
+		<?php endif; ?>
+	</div>
+</section>
+<?php endif; ?>
 <section class="section">
 	<div class="container">
 		<?php sovassa_section_head('The problem', $page['challenges_intro'], ''); ?>

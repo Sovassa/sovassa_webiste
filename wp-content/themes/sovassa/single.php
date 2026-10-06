@@ -16,7 +16,7 @@ while (have_posts()) :
 			<p class="eyebrow"><span class="eyebrow__line" aria-hidden="true"></span> <?php echo esc_html($categories ? $categories[0]->name : 'Insight'); ?></p>
 			<h1><?php the_title(); ?></h1>
 			<p class="lede"><?php echo esc_html(get_the_excerpt()); ?></p>
-			<img class="wide-visual" src="<?php echo esc_url(sovassa_insight_image_uri()); ?>" alt="" width="1280" height="720">
+			<img class="wide-visual" src="<?php echo esc_url(sovassa_insight_image_uri()); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="1280" height="720">
 		</div>
 	</article>
 	<div class="section section--tight">

@@ -49,7 +49,7 @@ $quiet  = is_page('thank-you');
 			<?php endif; ?>
 		</div>
 		<div>
-			<h2>Company</h2>
+			<p class="footer-label">Company</p>
 			<ul>
 				<li><a href="<?php echo esc_url(home_url('/about/')); ?>">About Us</a></li>
 				<li><a href="<?php echo esc_url(home_url('/work/')); ?>">Case Studies</a></li>
@@ -59,7 +59,7 @@ $quiet  = is_page('thank-you');
 			</ul>
 		</div>
 		<div>
-			<h2>Build</h2>
+			<p class="footer-label">Build</p>
 			<ul>
 				<li><a href="<?php echo esc_url(home_url('/web-development/')); ?>">Web Development</a></li>
 				<li><a href="<?php echo esc_url(home_url('/mobile-app-development/')); ?>">Mobile Apps</a></li>
@@ -68,7 +68,7 @@ $quiet  = is_page('thank-you');
 			</ul>
 		</div>
 		<div>
-			<h2>Market</h2>
+			<p class="footer-label">Market</p>
 			<ul>
 				<li><a href="<?php echo esc_url(home_url('/seo/')); ?>">SEO</a></li>
 				<li><a href="<?php echo esc_url(home_url('/digital-marketing/')); ?>">Digital Marketing</a></li>
@@ -78,7 +78,7 @@ $quiet  = is_page('thank-you');
 			</ul>
 		</div>
 		<div>
-			<h2>Contact</h2>
+			<p class="footer-label">Contact</p>
 			<ul class="footer-contact">
 				<li><span>Phone</span> <a href="<?php echo esc_url('tel:' . $config['phone']); ?>"><?php echo esc_html($config['phone_display']); ?></a></li>
 				<li><span>WhatsApp</span> <a href="<?php echo esc_url(sovassa_whatsapp_url()); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($config['phone_display']); ?></a></li>
