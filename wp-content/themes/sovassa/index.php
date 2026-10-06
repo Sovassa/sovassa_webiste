@@ -1,9 +1,23 @@
 <?php
 /**
- * Fallback loop.
+ * Posts index and fallback loop.
+ *
+ * The posts index is the Insights page. The front page stays on front-page.php.
  *
  * @package Sovassa
  */
+
+$insights = sovassa_page('insights');
+if (is_home() && !is_front_page() && $insights) {
+	get_header();
+	get_template_part(
+		'template-parts/layouts/insights',
+		null,
+		array('page' => $insights)
+	);
+	get_footer();
+	return;
+}
 
 get_header();
 ?>

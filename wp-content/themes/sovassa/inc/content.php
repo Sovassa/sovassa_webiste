@@ -43,6 +43,9 @@ function sovassa_current_page() {
 	if (is_front_page()) {
 		return sovassa_page('home');
 	}
+	if (is_home()) {
+		return sovassa_page('insights');
+	}
 	if (is_page()) {
 		$post = get_queried_object();
 		if ($post instanceof WP_Post) {

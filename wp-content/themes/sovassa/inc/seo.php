@@ -51,7 +51,7 @@ function sovassa_seo_head() {
 	$title       = wp_get_document_title();
 	$image       = get_template_directory_uri() . '/assets/images/og-share.png';
 
-	if (is_page('thank-you')) {
+	if (sovassa_is_noindex_view()) {
 		echo '<meta name="robots" content="noindex, follow">' . "\n";
 	}
 	$verification = isset(sovassa_config()['search_console_verification']) ? sovassa_config()['search_console_verification'] : '';
@@ -234,7 +234,69 @@ function sovassa_breadcrumb_items() {
 }
 
 /**
+ * Whether this view should stay out of the index.
+ *
+ * Thank-you stays noindex. Author archives and categories with no published
+ * posts are the same. Populated categories and singular pages are unchanged.
+ *
+ * @return bool
+ */
+function sovassa_is_noindex_view() {
+	if (is_page('thank-you') || is_author()) {
+		return true;
+	}
+	if (!is_category()) {
+		return false;
+	}
+	$term = get_queried_object();
+	return $term instanceof WP_Term && (int) $term->count < 1;
+}
+
+/**
+ * Public URL with the site's trailing-slash permalink style.
+ *
+ * Query strings stay on the URL. The path is the part that receives the slash.
+ *
+ * @param string $url Absolute URL.
+ * @return string
+ */
+function sovassa_public_url($url) {
+	if (!is_string($url) || '' === $url) {
+		return home_url('/');
+	}
+	$parts = wp_parse_url($url);
+	if (!is_array($parts)) {
+		return user_trailingslashit($url);
+	}
+	$path    = isset($parts['path']) ? $parts['path'] : '/';
+	$slashed = user_trailingslashit(home_url($path));
+	if (!empty($parts['query'])) {
+		$slashed .= '?' . $parts['query'];
+	}
+	return $slashed;
+}
+
+/**
+ * Canonical for the current page of an archive.
+ *
+ * Page 1 uses the archive root. Later pages use WordPress pagination links.
+ *
+ * @param string $first_page URL of page 1.
+ * @return string
+ */
+function sovassa_paged_public_url($first_page) {
+	$paged = max(1, (int) get_query_var('paged'));
+	if ($paged > 1) {
+		return sovassa_public_url((string) get_pagenum_link($paged));
+	}
+	return sovassa_public_url($first_page);
+}
+
+/**
  * Current canonical URL.
+ *
+ * Singular pages keep get_permalink(), so service pages and parameterized
+ * contact/thank-you URLs still canonicalize to the clean permalink.
  *
  * @return string
  */
@@ -243,10 +305,63 @@ function sovassa_current_url() {
 		return (string) get_permalink();
 	}
 	if (is_front_page()) {
-		return home_url('/');
+		$front_page = max((int) get_query_var('paged'), (int) get_query_var('page'));
+		if ($front_page < 2) {
+			return home_url('/');
+		}
+	}
+	if (is_home()) {
+		$posts_page = (int) get_option('page_for_posts');
+		$link       = $posts_page ? get_permalink($posts_page) : get_post_type_archive_link('post');
+		if (is_string($link) && '' !== $link) {
+			return sovassa_paged_public_url($link);
+		}
+	}
+	if (is_category() || is_tag() || is_tax()) {
+		$term = get_queried_object();
+		$link = ($term instanceof WP_Term) ? get_term_link($term) : '';
+		if (is_string($link) && '' !== $link) {
+			return sovassa_paged_public_url($link);
+		}
+	}
+	if (is_author()) {
+		$author = get_queried_object();
+		if ($author instanceof WP_User) {
+			return sovassa_paged_public_url(get_author_posts_url((int) $author->ID));
+		}
+	}
+	if (is_search()) {
+		$paged = max(1, (int) get_query_var('paged'));
+		if ($paged > 1) {
+			return sovassa_public_url((string) get_pagenum_link($paged));
+		}
+		return sovassa_public_url(get_search_link());
 	}
 	global $wp;
-	return home_url(add_query_arg(array(), $wp->request));
+	$request = isset($wp->request) ? (string) $wp->request : '';
+	if ('' === $request) {
+		return home_url('/');
+	}
+	return sovassa_public_url(home_url('/' . $request));
+}
+
+/**
+ * Event name for a completed form, so Analytics can mark it as a key event.
+ *
+ * page_view still fires for every page, including the confirmation page.
+ * These names are separate, so only a real submission can be a key event.
+ *
+ * @param string $sent Value of the thank-you `sent` query argument.
+ * @return string
+ */
+function sovassa_analytics_event_name($sent) {
+	$events = array(
+		'contact'     => 'thank_you',
+		'quote'       => 'thank_you',
+		'application' => 'career_application',
+		'newsletter'  => 'sign_up',
+	);
+	return isset($events[$sent]) ? $events[$sent] : '';
 }
 
 /**
@@ -258,6 +373,26 @@ function sovassa_analytics_script() {
 		return;
 	}
 	$id = esc_js($id);
+
+	$event_js = '';
+	if (is_page('thank-you')) {
+		$sent = isset($_GET['sent']) ? sanitize_key(wp_unslash($_GET['sent'])) : '';
+		$name = sovassa_analytics_event_name($sent);
+		if ('' !== $name) {
+			$name     = esc_js($name);
+			$type     = esc_js($sent);
+			$event_js = "try {
+			var seen = 'sovassa_event:' + location.pathname + location.search;
+			if (!sessionStorage.getItem(seen)) {
+				sessionStorage.setItem(seen, '1');
+				gtag('event', '" . $name . "', { form_type: '" . $type . "', method: 'website_form' });
+			}
+		} catch (ignore) {
+			gtag('event', '" . $name . "', { form_type: '" . $type . "', method: 'website_form' });
+		}";
+		}
+	}
+
 	echo "<script>
 	window.sovassaLoadAnalytics = function () {
 		if (document.getElementById('sovassa-ga')) return;
@@ -271,6 +406,7 @@ function sovassa_analytics_script() {
 		window.gtag = gtag;
 		gtag('js', new Date());
 		gtag('config', '" . $id . "', { anonymize_ip: true });
+		" . $event_js . "
 	};
 	if (document.cookie.indexOf('sovassa_cookie=all') !== -1) window.sovassaLoadAnalytics();
 	document.addEventListener('sovassa-consent', window.sovassaLoadAnalytics);
@@ -329,6 +465,11 @@ function sovassa_legacy_redirect_map() {
 		'insights/hello-world-2'             => '/insights/',
 		'insights/hello-world-3'             => '/insights/',
 		'insights/test-digital-growth-insights' => '/insights/',
+		'services/web-development'           => '/web-development/',
+		'services/ai-automation'             => '/ai-automation/',
+		'privacy-policy'                     => '/privacy/',
+		'request-quote'                      => '/get-a-quote/',
+		'website-conversion-optimisation-2'  => '/website-conversion-optimisation/',
 	);
 }
 
@@ -369,3 +510,90 @@ function sovassa_legacy_redirects() {
 	exit;
 }
 add_action('template_redirect', 'sovassa_legacy_redirects', 0);
+
+/**
+ * /page/2/ and later are not pages of the static homepage.
+ *
+ * Insights keeps /insights/page/2/ because that request is not the front page.
+ */
+function sovassa_invalid_front_pagination() {
+	if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
+		return;
+	}
+	if ('page' !== get_option('show_on_front')) {
+		return;
+	}
+	$front_id = (int) get_option('page_on_front');
+	if ($front_id < 1 || !is_page($front_id)) {
+		return;
+	}
+	$page = max((int) get_query_var('paged'), (int) get_query_var('page'));
+	if ($page < 2) {
+		return;
+	}
+	global $wp_query;
+	$wp_query->set_404();
+	status_header(404);
+	nocache_headers();
+	remove_action('template_redirect', 'redirect_canonical');
+}
+add_action('template_redirect', 'sovassa_invalid_front_pagination', 1);
+
+/**
+ * Keep confirmation, duplicate, and author URLs out of the sitemap.
+ *
+ * @param array<string, mixed> $args      Query args.
+ * @param string               $post_type Post type.
+ * @return array<string, mixed>
+ */
+function sovassa_sitemap_posts_query_args($args, $post_type) {
+	$exclude = array();
+	if ('page' === $post_type) {
+		$thank_you = get_page_by_path('thank-you');
+		if ($thank_you instanceof WP_Post) {
+			$exclude[] = (int) $thank_you->ID;
+		}
+	}
+	if ('post' === $post_type) {
+		$duplicate = get_page_by_path('website-conversion-optimisation-2', OBJECT, 'post');
+		if ($duplicate instanceof WP_Post) {
+			$exclude[] = (int) $duplicate->ID;
+		}
+	}
+	if ($exclude) {
+		$args['post__not_in'] = isset($args['post__not_in']) ? array_map('intval', (array) $args['post__not_in']) : array();
+		$args['post__not_in'] = array_merge($args['post__not_in'], $exclude);
+	}
+	return $args;
+}
+add_filter('wp_sitemaps_posts_query_args', 'sovassa_sitemap_posts_query_args', 10, 2);
+
+/**
+ * Author archives are not landing pages.
+ *
+ * @param WP_Sitemaps_Provider|false $provider Provider instance.
+ * @param string                     $name     Provider name.
+ * @return WP_Sitemaps_Provider|false
+ */
+function sovassa_sitemap_skip_users($provider, $name) {
+	if ('users' === $name) {
+		return false;
+	}
+	return $provider;
+}
+add_filter('wp_sitemaps_add_provider', 'sovassa_sitemap_skip_users', 10, 2);
+
+/**
+ * Empty categories stay out of the sitemap. Populated categories stay in.
+ *
+ * @param array<string, mixed> $args     Term query args.
+ * @param string               $taxonomy Taxonomy name.
+ * @return array<string, mixed>
+ */
+function sovassa_sitemap_taxonomies_query_args($args, $taxonomy) {
+	if ('category' === $taxonomy) {
+		$args['hide_empty'] = true;
+	}
+	return $args;
+}
+add_filter('wp_sitemaps_taxonomies_query_args', 'sovassa_sitemap_taxonomies_query_args', 10, 2);

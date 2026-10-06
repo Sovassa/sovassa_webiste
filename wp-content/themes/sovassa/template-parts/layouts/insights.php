@@ -7,8 +7,9 @@
  * @var array<string, mixed> $args
  */
 
-$page  = $args['page'];
-$query = sovassa_insights_query(40);
+$page = $args['page'];
+$uses_main_query = is_home() && !is_front_page();
+$query = $uses_main_query ? $GLOBALS['wp_query'] : sovassa_insights_query(40);
 sovassa_page_hero($page);
 ?>
 <section class="section">
@@ -39,7 +40,9 @@ sovassa_page_hero($page);
 					$query->the_post();
 					sovassa_post_card();
 				endwhile;
-				wp_reset_postdata();
+				if (!$uses_main_query) {
+					wp_reset_postdata();
+				}
 				?>
 			</div>
 		<?php else : ?>
