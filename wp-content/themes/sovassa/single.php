@@ -16,15 +16,18 @@ while (have_posts()) :
 			<p class="eyebrow"><span class="eyebrow__line" aria-hidden="true"></span> <?php echo esc_html($categories ? $categories[0]->name : 'Insight'); ?></p>
 			<h1><?php the_title(); ?></h1>
 			<p class="lede"><?php echo esc_html(get_the_excerpt()); ?></p>
+			<?php sovassa_article_byline(); ?>
 			<img class="wide-visual" src="<?php echo esc_url(sovassa_insight_image_uri()); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="1280" height="720">
 		</div>
 	</article>
 	<div class="section section--tight">
 		<div class="container container--narrow article__body">
 			<?php the_content(); ?>
+			<?php sovassa_author_box(); ?>
 			<p><a class="text-link" href="<?php echo esc_url(home_url('/insights/')); ?>">Back to insights <?php sovassa_icon('arrow'); ?></a></p>
 		</div>
 	</div>
 	<?php
+	sovassa_post_next_steps();
 endwhile;
 get_footer();

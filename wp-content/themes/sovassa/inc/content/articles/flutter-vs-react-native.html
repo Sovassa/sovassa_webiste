@@ -1,0 +1,138 @@
+<p>Flutter and React Native are the two most widely used frameworks for building one app that runs on both iOS and Android. Both are mature, both are backed by large companies, and both power apps used by millions of people. The better choice for your product is usually the one your team can build well and keep changing, not the one that wins a benchmark.</p>
+
+<p>This guide compares them on the points that matter for a business app and explains how to choose.</p>
+
+<h2>The short answer</h2>
+
+<p>Choose Flutter when you want a consistent, highly custom interface across platforms and are happy for the team to work in Dart. Choose React Native when your team already works in JavaScript or TypeScript, when you want to share knowledge or code with a React web app, or when you prefer an interface built on each platform’s native components. Both are capable of excellent results. Poor architecture and weak testing cause far more problems than the framework choice.</p>
+
+<p>If you have not yet decided whether to go cross-platform at all, start with <a href="/native-vs-cross-platform/">native vs cross-platform</a>.</p>
+
+<h2>How each framework works</h2>
+
+<h3>Flutter</h3>
+
+<p>Flutter is an open-source framework created by Google. Apps are written in Dart, a language also developed by Google. Instead of using each platform’s interface components, Flutter draws its own widgets with its own rendering engine. That gives designers precise, pixel-level control and makes the app look the same on iOS and Android unless you choose otherwise. Flutter can also target the web and desktop from the same codebase.</p>
+
+<h3>React Native</h3>
+
+<p>React Native is an open-source framework created by Meta. Apps are written in JavaScript or TypeScript using React, the same approach widely used for web interfaces. React Native renders real native interface components on each platform, so controls behave the way users expect on their phone by default. Its newer architecture improves performance and communication between JavaScript and native code.</p>
+
+<h2>Flutter vs React Native, side by side</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Factor</th>
+			<th>Flutter</th>
+			<th>React Native</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>Created by</strong></td>
+			<td>Google</td>
+			<td>Meta</td>
+		</tr>
+		<tr>
+			<td><strong>Language</strong></td>
+			<td>Dart</td>
+			<td>JavaScript or TypeScript</td>
+		</tr>
+		<tr>
+			<td><strong>Interface</strong></td>
+			<td>Draws its own widgets. Same look on both platforms by default.</td>
+			<td>Uses native platform components. Follows each platform by default.</td>
+		</tr>
+		<tr>
+			<td><strong>Custom design</strong></td>
+			<td>Very strong for bespoke, brand-heavy interfaces and animation.</td>
+			<td>Strong, with more work for highly custom visuals.</td>
+		</tr>
+		<tr>
+			<td><strong>Code sharing with web</strong></td>
+			<td>Can target web, though less common for content-heavy sites.</td>
+			<td>Shares skills, patterns, and some code with React web apps.</td>
+		</tr>
+		<tr>
+			<td><strong>Talent pool</strong></td>
+			<td>Growing, but Dart is less common than JavaScript.</td>
+			<td>Large, because JavaScript and React skills are widespread.</td>
+		</tr>
+		<tr>
+			<td><strong>Ecosystem</strong></td>
+			<td>Rich package library, with many official packages.</td>
+			<td>Very large library of community packages, of varying quality.</td>
+		</tr>
+		<tr>
+			<td><strong>Performance</strong></td>
+			<td>Excellent for most apps, with smooth animation.</td>
+			<td>Excellent for most apps, improved by the newer architecture.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>When Flutter is the better fit</h2>
+
+<ul>
+	<li><strong>The interface is part of the brand.</strong> Custom visuals, motion, and identical layouts on both platforms are where Flutter shines.</li>
+	<li><strong>You are starting a team from scratch.</strong> There is no existing JavaScript investment to protect.</li>
+	<li><strong>You want one toolkit for mobile and more.</strong> Flutter can also produce web and desktop builds from the same code, which suits internal tools and dashboards.</li>
+	<li><strong>You value a consistent, well-integrated toolset.</strong> Flutter’s framework, widgets, and tooling come from one source.</li>
+</ul>
+
+<h2>When React Native is the better fit</h2>
+
+<ul>
+	<li><strong>Your team already uses JavaScript or React.</strong> Existing skills shorten the learning curve and make hiring easier.</li>
+	<li><strong>You have a React web app.</strong> Shared patterns, tooling, and business logic reduce duplicated effort.</li>
+	<li><strong>You want platform-native controls.</strong> Interfaces that follow iOS and Android conventions come more naturally.</li>
+	<li><strong>You need to add a mobile layer to an existing native app.</strong> React Native screens can be introduced gradually into native apps.</li>
+</ul>
+
+<h2>What matters more than the framework</h2>
+
+<p>Teams sometimes spend weeks debating frameworks and days planning the product. That is backwards. Whichever you choose, the same work decides whether the app succeeds:</p>
+
+<ul>
+	<li>A clear first release built around one job.</li>
+	<li>Designed and tested journeys before engineering commits.</li>
+	<li>Clean architecture, so the app can change after launch.</li>
+	<li>Testing on real devices and operating system versions.</li>
+	<li>Careful choice of third-party packages, since abandoned libraries become maintenance problems.</li>
+	<li>A plan for store release and the first month of fixes.</li>
+</ul>
+
+<p>Our notes on <a href="/common-app-development-mistakes/">common app development mistakes</a> and <a href="/mvp-vs-full-product/">MVP vs full product</a> go deeper into these.</p>
+
+<h2>Questions to decide with</h2>
+
+<ol>
+	<li>What languages does the team who will maintain this app already know?</li>
+	<li>How custom does the interface need to be?</li>
+	<li>Do we have, or plan, a React web app that could share work with mobile?</li>
+	<li>Which device features and third-party services does the app need, and are there reliable packages for them?</li>
+	<li>Will we need web or desktop versions from the same codebase?</li>
+</ol>
+
+<h2>How Sovassa chooses</h2>
+
+<p>We build with both, so the recommendation follows your product and your team. After discovery we look at the interface the app needs, the services it must integrate, and who will maintain it, then write down the choice with the reasons. If nobody on your side will own the app long term, that decision becomes part of the plan too. Read more about our <a href="/mobile-app-development/">mobile app development</a> work, or <a href="/contact/">ask us which fits your app</a>.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Is Flutter or React Native faster?</h3>
+
+<p>Both perform very well for typical business apps. Differences show up mostly in demanding animation or heavy processing, and implementation quality matters more than the framework in almost every case.</p>
+
+<h3>Which is cheaper to build with?</h3>
+
+<p>Neither is inherently cheaper. Cost depends on the app’s scope and the team’s experience. A team fluent in one framework will usually deliver faster in it. See <a href="/how-much-does-it-cost-to-build-an-app/">how much it costs to build an app</a>.</p>
+
+<h3>Will Flutter or React Native be abandoned?</h3>
+
+<p>Both are open source, heavily used, and backed by large companies and communities. No technology is guaranteed forever, but both are a reasonable long-term bet today.</p>
+
+<h3>Can we switch from one to the other later?</h3>
+
+<p>Switching means rewriting the interface layer and much of the app, so it is a significant project. Choose based on your team and product now, and keep business logic well separated to make future changes easier.</p>

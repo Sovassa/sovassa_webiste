@@ -1,0 +1,87 @@
+<p>“How long will it take?” usually gets asked in the same breath as “how much will it cost?”, and the honest answer has the same shape: it depends on the boundary of the first release. A focused app with one job and one type of user can move quickly. An app with several roles, payments, and integrations into older systems takes longer, and most of the extra time is spent on decisions rather than code.</p>
+
+<p>This guide walks through the stages of app development, what stretches each one, and how to shorten the schedule without shipping something fragile.</p>
+
+<h2>The short answer</h2>
+
+<p>App development time is set by the scope of the first release, how quickly decisions are made, the number of systems the app must connect to, and whether it launches on one platform or two. Store review and the first round of fixes come on top. A date is only real once the first release has a clear boundary. Before that, any timeline is a hope.</p>
+
+<h2>The stages of app development</h2>
+
+<h3>1. Discovery and product definition</h3>
+
+<p>This is where the job, the users, and the first release are agreed. It covers user conversations, a review of competitors and existing systems, and a written scope with what is in and what is deliberately out. Skipping it does not save time. It moves the same questions into the build, where they are slower and more expensive to answer. If you are still testing the idea, see <a href="/how-to-validate-an-app-idea/">how to validate an app idea</a>.</p>
+
+<h3>2. UX and interface design</h3>
+
+<p>Designers map the critical journeys, build a clickable prototype, and test it with real users before engineering commits. Then the visual design and a component library are produced. This stage is quicker when the brand already exists and when feedback comes from one decision-maker rather than a committee.</p>
+
+<h3>3. Development</h3>
+
+<p>Development usually runs in short cycles, often one or two weeks, each ending with working software you can try. The backend, the app itself, and the admin tools are built in parallel. Integrations with payment providers, maps, and messaging are usually quick. Integrations with older internal systems are the most common cause of delay, because their behaviour is often undocumented.</p>
+
+<h3>4. Testing and quality assurance</h3>
+
+<p>Testing happens throughout, but a dedicated phase before release checks the app on real devices, different screen sizes, operating system versions, poor network conditions, and edge cases such as expired sessions or denied permissions. Apps that handle payments or sensitive data need extra security testing.</p>
+
+<h3>5. Store submission and review</h3>
+
+<p>Both stores review apps before publishing them. Apple usually reviews submissions within a day or two, though a rejection adds another round. Google Play reviews are often quick but can take longer for new developer accounts. Personal Google Play developer accounts created after November 2023 must also run a closed test with at least 12 testers for 14 consecutive days before they can publish to production, which needs to be planned into the schedule. Store listings, screenshots, privacy details, and account-deletion requirements all need to be ready before submission.</p>
+
+<h3>6. Launch and the first round of fixes</h3>
+
+<p>Real users find issues that testing did not. Plan for a stabilisation period after launch with the team still in place, crash reporting switched on, and time reserved for fixes. Treating launch day as the end of the project is one of the most common <a href="/common-app-development-mistakes/">app development mistakes</a>.</p>
+
+<h2>What makes app development take longer</h2>
+
+<ul>
+	<li><strong>Unclear scope.</strong> If nobody can name the job of the first release, every feature feels essential and the release keeps growing.</li>
+	<li><strong>Slow decisions.</strong> Waiting days for feedback on each design or build cycle can double a schedule without anyone writing more code.</li>
+	<li><strong>Scope changes mid-build.</strong> New features added during development push everything else back. Park them for the next release.</li>
+	<li><strong>Complex integrations.</strong> Legacy systems, missing APIs, and third parties that are slow to grant access are frequent causes of delay.</li>
+	<li><strong>Several user roles.</strong> Each role brings its own journeys, permissions, and testing.</li>
+	<li><strong>Two native codebases.</strong> Building separately for iOS and Android takes more effort than a shared cross-platform app. See <a href="/native-vs-cross-platform/">native vs cross-platform</a>.</li>
+	<li><strong>Late content.</strong> Onboarding text, legal copy, store descriptions, and images often arrive last and hold up release.</li>
+	<li><strong>Compliance.</strong> Health, finance, and children’s data bring reviews and documentation that take time.</li>
+</ul>
+
+<h2>How to shorten the timeline safely</h2>
+
+<ul>
+	<li><strong>Cut the first release to one job.</strong> The quickest schedule is a smaller first release. Our note on <a href="/mvp-vs-full-product/">MVP vs full product</a> explains where to draw the line.</li>
+	<li><strong>Name one decision-maker.</strong> One person with authority to approve designs and builds keeps cycles short.</li>
+	<li><strong>Prototype before building.</strong> Fixing a journey in a prototype takes hours. Fixing it in code takes days.</li>
+	<li><strong>Use proven services.</strong> Sign-in, payments, notifications, and analytics are solved problems.</li>
+	<li><strong>Start integration work early.</strong> Request API access, credentials, and documentation from third parties in the first week.</li>
+	<li><strong>Prepare store requirements in parallel.</strong> Developer accounts, closed testing, privacy policies, and store listings can be done while the app is being built.</li>
+</ul>
+
+<h2>Why estimates slip</h2>
+
+<p>Most schedules slip for reasons that were visible at the start: a feature list instead of a scoped release, integrations nobody investigated, or no time reserved for review and fixes. A good estimate names its assumptions. If an estimate does not say what is excluded, ask. If it does not include store review and a stabilisation period, it is a build estimate, not a launch date.</p>
+
+<h2>If you have a hard deadline</h2>
+
+<p>If the business needs to learn something or launch by a particular date, work backwards from it. Reserve time for review and fixes, then fit the release into what remains. When the scope does not fit, cut the scope, not the testing. A smaller app that works on launch day is worth more than a larger one that arrives broken. Cost follows the same logic. See <a href="/how-much-does-it-cost-to-build-an-app/">how much it costs to build an app</a>.</p>
+
+<h2>How Sovassa plans an app timeline</h2>
+
+<p>We agree the job and the first release before we commit to a date. Discovery, design of the critical journeys, build cycles with working software, device testing, store submission, and the first month of fixes all sit in one plan, with the assumptions written down. If a date is fixed, we tell you what fits by then and what should wait. Read more about our <a href="/mobile-app-development/">mobile app development</a> process, or <a href="/get-a-quote/">ask for an estimate</a>.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Can an app be built in a few weeks?</h3>
+
+<p>A very small app with one job, simple sign-in, and no complex integrations can be built quickly. Most apps that businesses depend on need more time for design, testing, and store review. Be wary of fast timelines that skip those steps.</p>
+
+<h3>Does a cross-platform app take less time?</h3>
+
+<p>Usually, when launching on both iOS and Android, because most of the code is shared. Native work may still be needed for platform-specific features.</p>
+
+<h3>Why does the app store review matter for the timeline?</h3>
+
+<p>Your app cannot reach users until it passes review. Rejections for missing privacy details, account deletion, or guideline issues add rounds, so it is worth preparing these early.</p>
+
+<h3>How long does it take to add features after launch?</h3>
+
+<p>It depends on the feature and how cleanly the app was built. A well-structured codebase with tests makes later changes faster. This is one reason not to cut corners on the first release.</p>

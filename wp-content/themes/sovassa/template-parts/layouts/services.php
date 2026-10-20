@@ -98,7 +98,7 @@ sovassa_page_hero($page, 'services', 'Build, Market, and Grow meeting as one pat
 </section>
 <?php if (!empty($page['overview'])) : ?>
 <section class="section section--tight">
-	<div class="container container--narrow">
+	<div class="container container--start">
 		<?php sovassa_section_head('The set', 'Every service has its own page.', 'Use this hub to choose. Use the service page for the scope.'); ?>
 		<?php foreach ($page['overview'] as $paragraph) : ?>
 			<p><?php echo esc_html($paragraph); ?></p>

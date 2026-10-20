@@ -21,18 +21,9 @@
 	<header class="site-header">
 		<div class="site-header__inner">
 			<a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
-				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-horizontal.png?ver=' . SOVASSA_VERSION); ?>" alt="Sovassa Technologies" width="960" height="213">
+				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.svg?ver=' . SOVASSA_VERSION); ?>" alt="Sovassa Technologies" width="1098" height="219">
 			</a>
 			<nav id="site-menu" class="primary-nav" aria-label="Primary">
-				<div class="nav-drop">
-					<button type="button" aria-expanded="false" aria-controls="menu-company">Company</button>
-					<div class="nav-panel nav-panel--drop" id="menu-company" hidden>
-						<a href="<?php echo esc_url(home_url('/about/')); ?>">About Us</a>
-						<a href="<?php echo esc_url(home_url('/technologies/')); ?>">Technologies</a>
-						<a href="<?php echo esc_url(home_url('/careers/')); ?>">Careers</a>
-						<a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact Us</a>
-					</div>
-				</div>
 				<div class="nav-drop nav-drop--mega">
 					<button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
 					<div class="nav-panel nav-panel--mega" id="menu-services" hidden>
@@ -87,13 +78,15 @@
 								<div class="mega__aside">
 									<p class="mega__label">Start</p>
 									<p>Tell us the outcome. We will recommend the mix.</p>
-									<a class="btn btn--primary btn--sm" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Get a Free Consultation</a>
+									<a class="btn btn--primary btn--sm" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Start a Project <?php sovassa_icon('arrow'); ?></a>
 									<a class="text-link" href="<?php echo esc_url(home_url('/services/')); ?>">View all services <?php sovassa_icon('arrow'); ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<a class="nav-link" href="<?php echo esc_url(home_url('/solutions/')); ?>"<?php echo sovassa_nav_current('solutions'); ?>>Solutions</a>
+				<a class="nav-link" href="<?php echo esc_url(home_url('/work/')); ?>"<?php echo sovassa_nav_current('work'); ?>>Work</a>
 				<div class="nav-drop nav-drop--mega">
 					<button type="button" aria-expanded="false" aria-controls="menu-industries">Industries</button>
 					<div class="nav-panel nav-panel--mega" id="menu-industries" hidden>
@@ -161,14 +154,15 @@
 						</div>
 					</div>
 				</div>
-				<a class="nav-link" href="<?php echo esc_url(home_url('/work/')); ?>">Case Studies</a>
-				<a class="nav-link" href="<?php echo esc_url(home_url('/insights/')); ?>">Insights</a>
+				<a class="nav-link" href="<?php echo esc_url(home_url('/about/')); ?>"<?php echo sovassa_nav_current('about'); ?>>About</a>
+				<a class="nav-link" href="<?php echo esc_url(home_url('/insights/')); ?>"<?php echo sovassa_nav_current('insights'); ?>>Insights</a>
 				<div class="drawer-actions">
-					<a class="btn btn--ghost btn--sm" href="<?php echo esc_url(home_url('/contact/')); ?>">Contact Us</a>
-					<a class="btn btn--primary btn--sm" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Get a Free Consultation</a>
+					<a class="btn btn--ghost btn--sm" href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
+					<a class="btn btn--primary btn--sm" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Start a Project <?php sovassa_icon('arrow'); ?></a>
 				</div>
 			</nav>
 			<div class="header-actions">
+				<a class="btn btn--primary btn--sm header-cta" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Start a Project <?php sovassa_icon('arrow'); ?></a>
 				<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
 					<span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
 					<span class="menu-toggle__label">Menu</span>

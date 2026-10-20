@@ -28,11 +28,13 @@ $rest = array_slice($page['items'], 1);
 			<?php endforeach; ?>
 		</div>
 		<article class="feature-lead" data-tags="<?php echo esc_attr($lead['service'] . '|' . $lead['industry'] . '|' . $lead['technology']); ?>">
-			<p class="link-card__kicker">Illustrative engagement</p>
+			<p class="link-card__kicker">Engagement type</p>
 			<h2><?php echo esc_html($lead['title']); ?></h2>
 			<p><strong>Challenge.</strong> <?php echo esc_html($lead['challenge']); ?></p>
 			<p><strong>Solution.</strong> <?php echo esc_html($lead['solution']); ?></p>
-			<p><strong>Result.</strong> <?php echo esc_html($lead['result']); ?></p>
+			<?php if (!str_starts_with($lead['result'], 'A measured result will be published')) : ?>
+				<p><strong>Result.</strong> <?php echo esc_html($lead['result']); ?></p>
+			<?php endif; ?>
 			<div class="chips">
 				<span class="chip"><?php echo esc_html($lead['service']); ?></span>
 				<span class="chip"><?php echo esc_html($lead['industry']); ?></span>
@@ -42,11 +44,13 @@ $rest = array_slice($page['items'], 1);
 		<div class="card-grid card-grid--3">
 			<?php foreach ($rest as $item) : ?>
 				<article class="plain-card" data-tags="<?php echo esc_attr($item['service'] . '|' . $item['industry'] . '|' . $item['technology']); ?>">
-					<p class="link-card__kicker">Illustrative engagement</p>
+					<p class="link-card__kicker">Engagement type</p>
 					<h3><?php echo esc_html($item['title']); ?></h3>
 					<p><strong>Challenge.</strong> <?php echo esc_html($item['challenge']); ?></p>
 					<p><strong>Solution.</strong> <?php echo esc_html($item['solution']); ?></p>
-					<p><strong>Result.</strong> <?php echo esc_html($item['result']); ?></p>
+					<?php if (!str_starts_with($item['result'], 'A measured result will be published')) : ?>
+				<p><strong>Result.</strong> <?php echo esc_html($item['result']); ?></p>
+			<?php endif; ?>
 					<div class="chips">
 						<span class="chip"><?php echo esc_html($item['service']); ?></span>
 						<span class="chip"><?php echo esc_html($item['industry']); ?></span>

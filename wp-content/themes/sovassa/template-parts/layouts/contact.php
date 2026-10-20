@@ -11,13 +11,6 @@ $page   = $args['page'];
 $config = sovassa_config();
 sovassa_page_hero($page);
 ?>
-<section class="section section--tight">
-	<div class="container">
-		<div class="feature-frame">
-			<?php sovassa_page_still('contact', 'Two interface panels joined by a single path.'); ?>
-		</div>
-	</div>
-</section>
 <section class="section" id="enquiry">
 	<div class="container split split--contact">
 		<div class="contact-panel">
@@ -26,11 +19,22 @@ sovassa_page_hero($page);
 				<li><strong>Phone</strong> <a href="<?php echo esc_url('tel:' . $config['phone']); ?>"><?php echo esc_html($config['phone_display']); ?></a></li>
 				<li><strong>WhatsApp</strong> <a href="<?php echo esc_url(sovassa_whatsapp_url()); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($config['phone_display']); ?></a></li>
 				<li><strong>Email</strong> <a href="<?php echo esc_url('mailto:' . $config['email']); ?>"><?php echo esc_html($config['email']); ?></a></li>
-				<li><strong>Office</strong> <?php echo esc_html($config['office']); ?></li>
+				<?php if (!empty($config['office'])) : ?>
+					<li><strong>Office</strong> <?php echo esc_html($config['office']); ?></li>
+				<?php endif; ?>
 				<?php if (!empty($config['maps_url'])) : ?>
 					<li><strong>Map</strong> <a href="<?php echo esc_url($config['maps_url']); ?>" target="_blank" rel="noopener noreferrer">Google Business Profile</a></li>
 				<?php endif; ?>
-				<li><strong>Channels</strong> Phone, WhatsApp, email, and this form are the ways we reply. Social profiles will be linked here when the company accounts are live.</li>
+				<?php
+				$social = isset($config['social']) && is_array($config['social']) ? array_filter($config['social']) : array();
+				if ($social) :
+					$links = array();
+					foreach ($social as $label => $url) {
+						$links[] = '<a href="' . esc_url($url) . '" target="_blank" rel="noopener noreferrer">' . esc_html((string) $label) . '</a>';
+					}
+					?>
+					<li><strong>Social</strong> <?php echo wp_kses_post(implode(' · ', $links)); ?></li>
+				<?php endif; ?>
 			</ul>
 		</div>
 		<form class="form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">

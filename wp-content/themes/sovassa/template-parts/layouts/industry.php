@@ -39,7 +39,7 @@ sovassa_page_hero($page, 'industries', 'A product interface surrounded by market
 	<?php $lead = sovassa_page($page['services'][0]); ?>
 	<?php if ($lead) : ?>
 <section class="section section--tight">
-	<div class="container container--narrow">
+	<div class="container container--start">
 		<p><?php echo esc_html($page['bridge']); ?> <a href="<?php echo esc_url(sovassa_url($page['services'][0])); ?>"><?php echo esc_html($lead['nav_label']); ?></a>.</p>
 	</div>
 </section>

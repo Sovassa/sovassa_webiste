@@ -41,7 +41,8 @@ sovassa_page_hero($page);
 		<form class="form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
 			<?php sovassa_form_notice(); ?>
 			<?php sovassa_form_hidden('quote'); ?>
-			<label><span>What do you want to achieve?</span><input type="text" name="objective" required></label>
+			<?php $brief = isset($_GET['brief']) ? sanitize_text_field(wp_unslash($_GET['brief'])) : ''; ?>
+			<label><span>What do you want to achieve?</span><input type="text" name="objective" required value="<?php echo esc_attr($brief); ?>"></label>
 			<fieldset>
 				<legend class="field-label">Services you think you need</legend>
 				<div class="checks">

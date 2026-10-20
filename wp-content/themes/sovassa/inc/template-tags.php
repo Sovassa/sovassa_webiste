@@ -30,6 +30,10 @@ function sovassa_icon($name) {
 		'shield'  => '<path d="M12 3.5 19 6.5v5.2c0 4.2-2.8 7.2-7 8.8-4.2-1.6-7-4.6-7-8.8V6.5L12 3.5Z"/>',
 		'up'      => '<path d="M12 19V5M6 11l6-6 6 6"/>',
 	);
+	if ('linkedin' === $name) {
+		echo '<svg class="icon icon--brand" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#0A66C2"/><path fill="#fff" stroke="none" d="M7.1 9.7h2.3V17H7.1V9.7Zm1.15-3.6a1.33 1.33 0 1 1 0 2.66 1.33 1.33 0 0 1 0-2.66ZM10.9 9.7h2.2v1h.03c.3-.58 1.06-1.2 2.18-1.2 2.33 0 2.76 1.53 2.76 3.53V17h-2.3v-3.5c0-.84-.02-1.91-1.17-1.91-1.17 0-1.35.91-1.35 1.85V17h-2.3V9.7Z"/></svg>';
+		return;
+	}
 	if ('instagram' === $name) {
 		echo '<svg class="icon icon--brand" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><defs><radialGradient id="sovassa-ig" cx="30%" cy="115%" r="140%"><stop offset="0%" stop-color="#feda75"/><stop offset="18%" stop-color="#fa7e1e"/><stop offset="42%" stop-color="#d62976"/><stop offset="70%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></radialGradient></defs><rect width="24" height="24" rx="6" fill="url(#sovassa-ig)"/><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="4" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="3.15" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="16.45" cy="7.55" r="0.9" fill="#fff" stroke="none"/></svg>';
 		return;
@@ -44,6 +48,17 @@ function sovassa_icon($name) {
 	}
 	$path = isset($icons[$name]) ? $icons[$name] : $icons['spark'];
 	echo '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' . $path . '</svg>';
+}
+
+/**
+ * aria-current attribute for a primary navigation link.
+ *
+ * @param string $slug Page slug.
+ * @return string
+ */
+function sovassa_nav_current($slug) {
+	$on = 'insights' === $slug ? (is_home() || is_page('insights')) : is_page($slug);
+	return $on ? ' aria-current="page"' : '';
 }
 
 /**
@@ -445,5 +460,116 @@ function sovassa_post_card() {
 			<a class="text-link" href="<?php the_permalink(); ?>">Read insight <?php sovassa_icon('arrow'); ?></a>
 		</div>
 	</article>
+	<?php
+}
+
+/**
+ * Who an insight is credited to. Falls back to the company.
+ *
+ * @return array<string, string|bool>
+ */
+function sovassa_author() {
+	$config = sovassa_config();
+	$author = isset($config['author']) && is_array($config['author']) ? $config['author'] : array();
+	$name   = isset($author['name']) ? trim((string) $author['name']) : '';
+	if ('' === $name) {
+		return array(
+			'is_person' => false,
+			'name'      => $config['name'],
+			'role'      => 'Product, web, and marketing team',
+			'bio'       => 'Sovassa Technologies builds websites, apps, and AI tools, then markets them. These notes come from the questions clients ask before a project starts.',
+			'url'       => home_url('/about/'),
+			'image'     => '',
+		);
+	}
+	return array(
+		'is_person' => true,
+		'name'      => $name,
+		'role'      => isset($author['role']) ? (string) $author['role'] : '',
+		'bio'       => isset($author['bio']) ? (string) $author['bio'] : '',
+		'url'       => isset($author['url']) ? (string) $author['url'] : '',
+		'image'     => isset($author['image']) ? (string) $author['image'] : '',
+	);
+}
+
+/**
+ * Minutes to read the current post, at 220 words a minute.
+ *
+ * @return int
+ */
+function sovassa_reading_minutes() {
+	$words = str_word_count(wp_strip_all_tags((string) get_post_field('post_content', get_the_ID())));
+	return max(1, (int) round($words / 220));
+}
+
+/**
+ * Byline under an insight title: author, dates, and reading time.
+ */
+function sovassa_article_byline() {
+	$author    = sovassa_author();
+	$published = get_the_date('c');
+	$modified  = get_the_modified_date('c');
+	$updated   = get_the_modified_date('Y-m-d') !== get_the_date('Y-m-d');
+	?>
+	<p class="article-meta">
+		<span>By <a href="<?php echo esc_url($author['url']); ?>"><?php echo esc_html($author['name']); ?></a></span>
+		<span><time datetime="<?php echo esc_attr($published); ?>"><?php echo esc_html(get_the_date('j M Y')); ?></time></span>
+		<?php if ($updated) : ?>
+			<span>Updated <time datetime="<?php echo esc_attr($modified); ?>"><?php echo esc_html(get_the_modified_date('j M Y')); ?></time></span>
+		<?php endif; ?>
+		<span><?php echo esc_html(sovassa_reading_minutes()); ?> min read</span>
+	</p>
+	<?php
+}
+
+/**
+ * Author card at the end of an insight.
+ */
+function sovassa_author_box() {
+	$author = sovassa_author();
+	$image  = $author['image'] ? $author['image'] : get_template_directory_uri() . '/assets/images/apple-touch-icon.png';
+	?>
+	<aside class="author-box" aria-label="About the author">
+		<img class="author-box__image" src="<?php echo esc_url($image); ?>" alt="" width="64" height="64" loading="lazy">
+		<div>
+			<p class="author-box__name"><a href="<?php echo esc_url($author['url']); ?>"><?php echo esc_html($author['name']); ?></a></p>
+			<?php if ($author['role']) : ?>
+				<p class="author-box__role"><?php echo esc_html($author['role']); ?></p>
+			<?php endif; ?>
+			<?php if ($author['bio']) : ?>
+				<p><?php echo esc_html($author['bio']); ?></p>
+			<?php endif; ?>
+		</div>
+	</aside>
+	<?php
+}
+
+/**
+ * URL of a homepage image in assets/images/home/.
+ *
+ * @param string $name File name without extension.
+ * @return string
+ */
+function sovassa_home_image($name) {
+	return get_template_directory_uri() . '/assets/images/home/' . $name . '.webp?ver=' . SOVASSA_VERSION;
+}
+
+/**
+ * Shared homepage section heading: eyebrow pill, title, optional lede.
+ *
+ * @param string $eyebrow Small label above the title.
+ * @param string $title   Section title.
+ * @param string $lede    Optional supporting line.
+ * @param string $id      Optional id for the heading, used by aria-labelledby.
+ */
+function sovassa_home_head($eyebrow, $title, $lede = '', $id = '') {
+	?>
+	<div class="hp-head">
+		<span class="hp-pill"><?php echo esc_html($eyebrow); ?></span>
+		<h2<?php echo $id ? ' id="' . esc_attr($id) . '"' : ''; ?>><?php echo esc_html($title); ?></h2>
+		<?php if ($lede) : ?>
+			<p><?php echo esc_html($lede); ?></p>
+		<?php endif; ?>
+	</div>
 	<?php
 }

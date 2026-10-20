@@ -20,7 +20,7 @@ sovassa_page_hero($page, $film ? $film['file'] : '', $film ? $film['label'] : ''
 ?>
 <?php if (!empty($page['detail']) || !empty($page['industry'])) : ?>
 <section class="section section--tight">
-	<div class="container container--narrow">
+	<div class="container container--start">
 		<?php if (!empty($page['detail'])) : ?>
 			<?php foreach ($page['detail'] as $paragraph) : ?>
 				<p><?php echo esc_html($paragraph); ?></p>
@@ -40,7 +40,7 @@ sovassa_page_hero($page, $film ? $film['file'] : '', $film ? $film['label'] : ''
 		<?php sovassa_section_head('The problem', $page['challenges_intro'], ''); ?>
 		<div class="alt-rows">
 			<?php foreach ($page['challenges'] as $index => $item) : ?>
-				<article class="alt-row<?php echo $index % 2 ? ' alt-row--flip' : ''; ?>">
+				<article class="alt-row">
 					<span class="alt-row__index"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
 					<div>
 						<h3><?php echo esc_html($item['title']); ?></h3>
@@ -56,7 +56,7 @@ sovassa_page_hero($page, $film ? $film['file'] : '', $film ? $film['label'] : ''
 		<?php sovassa_section_head('What we deliver', 'The pieces this service is accountable for.', ''); ?>
 		<div class="alt-rows">
 			<?php foreach ($page['delivers'] as $index => $item) : ?>
-				<article class="alt-row<?php echo $index % 2 ? ' alt-row--flip' : ''; ?>">
+				<article class="alt-row">
 					<span class="alt-row__index"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
 					<div>
 						<h3><?php echo esc_html($item['title']); ?></h3>
@@ -113,44 +113,5 @@ sovassa_page_hero($page, $film ? $film['file'] : '', $film ? $film['label'] : ''
 <?php
 sovassa_process($page['process'], 'Process', 'How an engagement moves.', '');
 sovassa_related($page['related']);
-$work_match = array(
-	'web-development'        => 'Web Development',
-	'mobile-app-development' => 'Mobile Apps',
-	'ai-automation'          => 'AI and automation',
-	'seo'                    => 'SEO',
-	'google-ads'             => 'Google Ads',
-	'content-marketing'      => 'Content Marketing',
-);
-$service_slug = get_post_field('post_name', get_queried_object_id());
-$matched_work = array();
-if (isset($work_match[$service_slug])) {
-	foreach (sovassa_page('work')['items'] as $item) {
-		if ($item['service'] === $work_match[$service_slug]) {
-			$matched_work[] = $item;
-		}
-	}
-}
-?>
-<section class="section section--tint">
-	<div class="container">
-		<?php sovassa_section_head('Case studies', 'Proof for this service, when it exists.', 'We will not attach another company’s numbers to this page. A card appears here when the engagement matches this service.'); ?>
-		<?php if ($matched_work) : ?>
-			<div class="card-grid card-grid--3">
-				<?php foreach ($matched_work as $item) : ?>
-					<article class="plain-card">
-						<p class="link-card__kicker">Illustrative engagement</p>
-						<h3><?php echo esc_html($item['title']); ?></h3>
-						<p><strong>Challenge.</strong> <?php echo esc_html($item['challenge']); ?></p>
-						<p><strong>Solution.</strong> <?php echo esc_html($item['solution']); ?></p>
-						<p><strong>Result.</strong> <?php echo esc_html($item['result']); ?></p>
-					</article>
-				<?php endforeach; ?>
-			</div>
-		<?php else : ?>
-			<p class="note">No illustrative engagement is filed under this service yet. The work page still shows the kinds of projects Sovassa takes on.</p>
-		<?php endif; ?>
-		<p><a class="text-link" href="<?php echo esc_url(home_url('/work/')); ?>">View all work types <?php sovassa_icon('arrow'); ?></a></p>
-	</div>
-</section>
-<?php
+sovassa_service_insights(get_post_field('post_name', get_queried_object_id()));
 sovassa_faq($page['faq']);

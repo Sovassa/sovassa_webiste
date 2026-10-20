@@ -238,7 +238,7 @@
     });
   });
 
-  var revealSelector = ".section .section-head, .section .link-card, .section .plain-card, .section .post-card, .section .role-card, .section .step, .section .checklist li, .section .faq__item, .section .bento__card, .section .alt-row, .section .feature-lead, .section .together-still, .section .split-still";
+  var revealSelector = ".section .section-head, .section .link-card, .section .plain-card, .section .post-card, .section .role-card, .section .step, .section .checklist li, .section .faq__item, .section .bento__card, .section .alt-row, .section .feature-lead, .section .together-still, .section .split-still, [data-reveal]";
   function revealInView() {
     document.querySelectorAll(revealSelector).forEach(function (el) {
       if (el.classList.contains("is-shown")) return;
@@ -275,3 +275,18 @@
     rails.observe(rail);
   });
 })();
+
+// Article tables stack into cards on phones. Copy each column heading onto its
+// cells so every value keeps its label once the header row is hidden.
+document.querySelectorAll(".article__body table").forEach(function (table) {
+  var labels = Array.prototype.map.call(table.querySelectorAll("thead th"), function (th) {
+    return th.textContent.trim();
+  });
+  if (!labels.length) return;
+  table.classList.add("is-labelled");
+  table.querySelectorAll("tbody tr").forEach(function (row) {
+    Array.prototype.forEach.call(row.children, function (cell, i) {
+      if (labels[i]) cell.setAttribute("data-label", labels[i]);
+    });
+  });
+});

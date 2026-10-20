@@ -1,0 +1,135 @@
+<p>One of the first technical decisions in any app project is whether to build native apps for iOS and Android separately, or one cross-platform app that runs on both. It affects cost, timeline, performance, and who can maintain the app later. It should be decided from the product, not from whichever framework is fashionable this year.</p>
+
+<p>This guide explains the difference, the real trade-offs, and how to decide for your app.</p>
+
+<h2>The short answer</h2>
+
+<p>Choose native when the app’s value depends on the platform itself: heavy use of the camera, sensors, background work, demanding graphics, or the newest operating system features. Choose cross-platform when most of the app is shared logic and standard interface, and the device-specific part is small. For many business apps, cross-platform is the faster and more economical way to launch on both stores. For some products, native is the only way to make them feel right.</p>
+
+<h2>What “native” and “cross-platform” mean</h2>
+
+<h3>Native development</h3>
+
+<p>Native apps are built with each platform’s own tools and languages: Swift and SwiftUI for iOS, Kotlin and Jetpack Compose for Android. You get direct access to every platform feature as soon as it is released, and interface behaviour that matches what users expect on their phone. The cost is two codebases, usually built and maintained by two sets of skills.</p>
+
+<h3>Cross-platform development</h3>
+
+<p>Cross-platform frameworks let one codebase produce apps for both iOS and Android. The most widely used are Flutter, from Google, and React Native, from Meta. Most of the code, and often most of the interface, is shared. Platform-specific code is still possible where needed. Kotlin Multiplatform offers a middle path, sharing business logic while keeping native interfaces. Our comparison of <a href="/flutter-vs-react-native/">Flutter vs React Native</a> covers the two leading options.</p>
+
+<h3>And the web?</h3>
+
+<p>Sometimes the right answer is neither. A responsive web app or progressive web app can do a surprising amount without an app store at all. If the job does not need the phone’s hardware, offline use, or regular notifications, see <a href="/when-you-should-not-build-an-app/">when you should not build an app</a>.</p>
+
+<h2>The trade-offs, side by side</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Factor</th>
+			<th>Native</th>
+			<th>Cross-platform</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>Codebases</strong></td>
+			<td>Two, one per platform.</td>
+			<td>One shared, with small platform-specific parts.</td>
+		</tr>
+		<tr>
+			<td><strong>Cost to launch on both stores</strong></td>
+			<td>Higher, because most work is done twice.</td>
+			<td>Usually lower, because most work is shared.</td>
+		</tr>
+		<tr>
+			<td><strong>Performance</strong></td>
+			<td>Best possible, especially for graphics and heavy processing.</td>
+			<td>Very good for most business apps. Can need native work for demanding cases.</td>
+		</tr>
+		<tr>
+			<td><strong>Access to new platform features</strong></td>
+			<td>Immediate.</td>
+			<td>Sometimes delayed until the framework or a plugin supports them.</td>
+		</tr>
+		<tr>
+			<td><strong>Platform look and feel</strong></td>
+			<td>Matches each platform by default.</td>
+			<td>Depends on the framework and design approach.</td>
+		</tr>
+		<tr>
+			<td><strong>Keeping iOS and Android in sync</strong></td>
+			<td>Requires discipline across two teams.</td>
+			<td>Features ship to both at once.</td>
+		</tr>
+		<tr>
+			<td><strong>Hiring and maintenance</strong></td>
+			<td>Needs iOS and Android skills.</td>
+			<td>Needs framework skills, plus some native knowledge.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>When native is the better choice</h2>
+
+<ul>
+	<li><strong>The device is the product.</strong> Camera-led apps, augmented reality, health and fitness tracking, Bluetooth hardware, and audio processing lean on platform APIs.</li>
+	<li><strong>Performance is critical.</strong> Games, real-time graphics, and heavy on-device processing benefit from native code.</li>
+	<li><strong>You need new platform features on day one.</strong> Widgets, watch apps, and the latest operating system capabilities arrive in native tools first.</li>
+	<li><strong>You only need one platform.</strong> If your users are almost all on iOS or Android, a single native app avoids the framework layer altogether.</li>
+	<li><strong>You already have native teams.</strong> Existing skills and codebases can make native the lower-risk path.</li>
+</ul>
+
+<h2>When cross-platform is the better choice</h2>
+
+<ul>
+	<li><strong>You need both stores from launch</strong> and want to keep cost and timeline under control.</li>
+	<li><strong>The app is mostly forms, lists, content, and transactions.</strong> Booking, ordering, account management, field service, and internal tools fit well.</li>
+	<li><strong>You want features to ship to everyone at once.</strong> One codebase keeps iOS and Android aligned.</li>
+	<li><strong>You are building a first release to learn.</strong> Faster delivery on both platforms means faster feedback. See <a href="/mvp-vs-full-product/">MVP vs full product</a>.</li>
+	<li><strong>Your team already works in the ecosystem.</strong> A JavaScript team may suit React Native. A team starting fresh may prefer Flutter.</li>
+</ul>
+
+<h2>Common myths</h2>
+
+<h3>“Cross-platform apps are always slow.”</h3>
+
+<p>Modern frameworks perform well for the vast majority of business apps. Slowness usually comes from poor implementation, not the approach itself. Demanding cases can still drop into native code where needed.</p>
+
+<h3>“Native is always better quality.”</h3>
+
+<p>Native gives the most control, but quality comes from design, testing, and engineering discipline. A well-built cross-platform app beats a poorly built native one.</p>
+
+<h3>“Cross-platform means you never write native code.”</h3>
+
+<p>Most real cross-platform apps include some platform-specific code for payments, notifications, or device features. Plan for it rather than being surprised.</p>
+
+<h2>Questions to decide with</h2>
+
+<ol>
+	<li>Which device features does the first release depend on?</li>
+	<li>Do we need both iOS and Android at launch?</li>
+	<li>How demanding is the app on graphics or processing?</li>
+	<li>Who will maintain the app in a year, and what skills do they have?</li>
+	<li>How quickly do we need new platform features?</li>
+	<li>What is the budget and timeline for the first release?</li>
+</ol>
+
+<p>Write the decision down with the reasons attached. If the product changes later, you will know which assumption moved. Cost and timeline effects are covered in <a href="/how-much-does-it-cost-to-build-an-app/">how much it costs to build an app</a> and <a href="/how-long-does-app-development-take/">how long app development takes</a>.</p>
+
+<h2>How Sovassa decides</h2>
+
+<p>We make the choice after discovery, once we know the job, the users, and the device features the first release needs. We build native iOS and Android apps, and cross-platform apps in Flutter and React Native, so the recommendation follows the product rather than a habit. Either way, the same product work applies: journeys, empty states, permissions, testing on real devices, and a plan for the month after release. Read more about our <a href="/mobile-app-development/">mobile app development</a> work, or <a href="/contact/">talk to us about your app</a>.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Can we start cross-platform and move to native later?</h3>
+
+<p>Yes, and some companies do once a product proves itself and needs deeper platform features. It is a rebuild, so it is worth choosing carefully at the start, but it is not a dead end.</p>
+
+<h3>Do users notice whether an app is native or cross-platform?</h3>
+
+<p>Rarely, when it is designed and built well. Users notice slow screens, confusing journeys, and crashes, whatever the technology.</p>
+
+<h3>Is a cross-platform app accepted by the App Store and Google Play?</h3>
+
+<p>Yes. Cross-platform apps are submitted and reviewed like any other app and must meet the same guidelines.</p>

@@ -10,51 +10,121 @@ return array(
 		'layout'           => 'home',
 		'wp_title'         => 'Home',
 		'nav_label'        => 'Home',
-		'title'            => 'Web, product, and digital marketing from one team.',
-		'rotate'           => array('Websites', 'Mobile products', 'Search growth', 'Automation'),
-		'eyebrow'          => 'Build · Market · Grow',
-		'intro'            => 'Sovassa Technologies is a digital marketing company in Zirakpur. We design and build websites, apps, and AI products, then market them with the same team. The work stays tied to a business outcome instead of a pile of disconnected vendors.',
-		'meta_title'       => 'Digital Marketing Company in Zirakpur | Sovassa Tech',
-		'meta_description' => 'Sovassa Technologies is a digital marketing company in Zirakpur. We build websites and apps, then market them with SEO, content, and paid media as one team.',
-		'trust'            => array(
-			array('icon' => 'layers', 'label' => 'Technology and marketing, one team'),
-			array('icon' => 'check', 'label' => 'Scoped work with a named next step'),
-			array('icon' => 'globe', 'label' => 'Web, mobile, and applied AI'),
-			array('icon' => 'search', 'label' => 'Search, content, and paid growth'),
+		'title'            => 'We build digital products and bring them customers.',
+		'title_highlight'  => 'and bring them customers.',
+		'eyebrow'          => 'Web · Mobile · AI · Digital marketing',
+		'intro'            => 'Sovassa is one team for websites, mobile apps, AI tools, and the SEO and ads that grow them. One plan, one point of contact, and results you can measure.',
+		'meta_title'       => 'Sovassa Technologies | Websites, Apps, AI and Digital Marketing',
+		'meta_description' => 'Sovassa builds websites, mobile apps, and AI tools, then grows them with SEO, ads, and content. One team, one plan, and results you can measure.',
+		'capture'          => array(
+			'placeholder' => 'Your website, or a line about your app idea',
+			'button'      => 'Get a free growth plan',
+			'note'        => 'A short plan from a senior strategist, sent by email.',
 		),
-		'goals'            => array(
-			array('title' => 'A website or web app', 'text' => 'Replace a site the team cannot edit, or ship a product people can actually use.', 'slug' => 'web-development'),
-			array('title' => 'A mobile product', 'text' => 'Plan an iOS, Android, or cross-platform app around a real job to be done.', 'slug' => 'mobile-app-development'),
-			array('title' => 'Qualified leads', 'text' => 'Give sales a clearer path from first visit to a conversation worth having.', 'slug' => 'solutions'),
-			array('title' => 'Search visibility', 'text' => 'Make the services you sell easier to find, and easier to trust.', 'slug' => 'seo'),
-			array('title' => 'Paid acquisition', 'text' => 'Run search and social campaigns that match the page a person lands on.', 'slug' => 'google-ads'),
-			array('title' => 'Automation or AI', 'text' => 'Remove a repeated handoff, or add a practical AI workflow with a human check.', 'slug' => 'ai-automation'),
+
+		/*
+		 * Proof. Every block below stays hidden until it holds real, approved content.
+		 * Add items here when you have them; nothing invented is ever shown.
+		 *
+		 * 'stats'        => array( array( 'value' => '50', 'suffix' => '+', 'label' => 'Projects delivered' ), ... )
+		 * 'clients'      => array( array( 'name' => 'Client name', 'logo' => 'home/logos/client.svg' ), ... )
+		 * 'badges'       => array( array( 'name' => 'Clutch', 'text' => '5.0 rating', 'url' => 'https://...' ), ... )
+		 * 'cases'        => array( array( 'tab' => 'Healthcare app', 'tag' => 'Healthcare · Mobile app', 'title' => '...', 'text' => '...', 'image' => 'home/cases/x.webp', 'metrics' => array( array( '3x', 'online bookings' ) ), 'url' => '' ), ... )
+		 * 'testimonials' => array( array( 'quote' => '...', 'name' => 'Full name', 'role' => 'Role, Company', 'photo' => '' ), ... )
+		 */
+		'proof'            => array(
+			'stats'        => array(),
+			'clients'      => array(),
+			'badges'       => array(),
+			'cases'        => array(),
+			'testimonials' => array(),
+		),
+
+		'services'         => array(
+			'eyebrow' => 'What we do',
+			'title'   => 'Everything you need to build and grow online.',
+			'lede'    => 'Pick one service or the whole path. The same team plans, builds, and markets, so nothing gets lost between agencies.',
+			'items'   => array(
+				array('slug' => 'web-development', 'icon' => 'web', 'image' => 'web', 'name' => 'Web Development', 'sub' => 'Sites, portals, web apps', 'title' => 'Websites that explain what you sell and turn visits into enquiries.', 'text' => 'Marketing sites, portals, dashboards, and web apps your team can keep editing after launch.', 'points' => array('Custom design built around your offer', 'Fast, search-ready pages from day one', 'Forms connected to your inbox or CRM'), 'stack' => array('WordPress', 'Next.js', 'Shopify', 'Webflow')),
+				array('slug' => 'mobile-app-development', 'icon' => 'app', 'image' => 'app', 'name' => 'Mobile Apps', 'sub' => 'iOS, Android, cross-platform', 'title' => 'Mobile apps planned around the one job users need done.', 'text' => 'iOS, Android, and cross-platform apps, from the first release to the updates that follow.', 'points' => array('Product definition and clickable prototype', 'Native or cross-platform, chosen for your product', 'Store release and first month of fixes'), 'stack' => array('Flutter', 'React Native', 'Swift', 'Kotlin')),
+				array('slug' => 'ui-ux-design', 'icon' => 'ux', 'image' => 'ux', 'name' => 'UI/UX Design', 'sub' => 'Research, journeys, interfaces', 'title' => 'Interfaces people understand on the first visit.', 'text' => 'Research, journeys, and design systems for sites and apps, tested before they are built.', 'points' => array('User journeys and wireframes', 'Visual design and component library', 'Usability testing with real users'), 'stack' => array('Figma', 'Prototyping', 'Design systems')),
+				array('slug' => 'ai-automation', 'icon' => 'ai', 'image' => 'ai', 'name' => 'AI & Automation', 'sub' => 'Assistants, workflows, AI tools', 'title' => 'AI tools and automations that remove repeated work.', 'text' => 'Chat assistants, document workflows, and integrations that save your team hours each week.', 'points' => array('Find the tasks worth automating', 'Build and connect to your systems', 'Human review where it matters'), 'stack' => array('LLM APIs', 'Python', 'Workflow automation', 'APIs')),
+				array('slug' => 'seo', 'icon' => 'seo', 'image' => 'seo', 'name' => 'SEO', 'sub' => 'Rankings that bring buyers', 'title' => 'Get found by buyers searching for what you sell.', 'text' => 'Technical SEO, service pages, and content that rank for the searches that lead to enquiries.', 'points' => array('Technical audit and fixes', 'Pages matched to real buyer searches', 'Monthly ranking and lead reports'), 'stack' => array('Search Console', 'GA4', 'Technical SEO')),
+				array('slug' => 'google-ads', 'icon' => 'ads', 'image' => 'ads', 'name' => 'Google Ads', 'sub' => 'Paid search that converts', 'title' => 'Paid campaigns that send buyers to pages built for them.', 'text' => 'Search and performance campaigns, each with a landing page that continues the ad.', 'points' => array('Keyword and competitor research', 'Landing pages for each campaign', 'Weekly optimisation and clear reporting'), 'stack' => array('Google Ads', 'GA4', 'Tag Manager')),
+				array('slug' => 'social-media-marketing', 'icon' => 'social', 'image' => 'social', 'name' => 'Social Media', 'sub' => 'Content and paid social', 'title' => 'Social content that keeps your brand in front of buyers.', 'text' => 'Organic content and paid social campaigns tied to the same offer as your website.', 'points' => array('Content calendar and creative', 'LinkedIn, Instagram, and Facebook', 'Paid social campaigns and reporting'), 'stack' => array('Meta Ads', 'LinkedIn', 'Content calendar')),
+				array('slug' => 'content-marketing', 'icon' => 'content', 'image' => 'content', 'name' => 'Content Marketing', 'sub' => 'Guides, blogs, case studies', 'title' => 'Content that answers buyer questions and builds trust.', 'text' => 'Guides, articles, and case studies that rank in search and help your sales conversations.', 'points' => array('Topic plan from real buyer questions', 'Long-form guides and articles', 'Repurposed for social and email'), 'stack' => array('SEO writing', 'Editorial plan', 'Email')),
+			),
+		),
+		'industries'       => array(
+			'eyebrow' => 'Industries',
+			'title'   => 'Built for the way your industry sells.',
+			'lede'    => 'Each industry has its own buyers, rules, and questions. We plan the site, app, and campaigns around them.',
+			'images'  => array(
+				'industries/professional-services' => 'ind-pro',
+				'industries/ecommerce'             => 'ind-shop',
+				'industries/healthcare'            => 'ind-health',
+				'industries/education'             => 'ind-edu',
+				'industries/real-estate'           => 'ind-home',
+				'industries/software-and-startups' => 'ind-log',
+				'industries/saas'                  => 'ind-saas',
+				'industries/startups'              => 'ind-rocket',
+				'industries/fintech'               => 'ind-fin',
+			),
+		),
+		'process'          => array(
+			'eyebrow' => 'How we work',
+			'title'   => 'Four stages, with something to review at each one.',
+			'steps'   => array(
+				array('title' => 'Discover', 'text' => 'We agree the goal, the audience, and what success looks like in numbers.', 'get' => 'You get a written scope', 'image' => 'discover', 'alt' => 'A discovery workshop mapping goals on sticky notes'),
+				array('title' => 'Design', 'text' => 'We prototype the key screens and test them before anything is built.', 'get' => 'You get a clickable prototype', 'image' => 'design', 'alt' => 'A design review of a clickable app prototype'),
+				array('title' => 'Build', 'text' => 'We build in short cycles, with working software to try at the end of each.', 'get' => 'You get regular demos', 'image' => 'build', 'alt' => 'Developers building and testing the product'),
+				array('title' => 'Grow', 'text' => 'We launch, then run the SEO and campaigns that bring people in.', 'get' => 'You get monthly reports', 'image' => 'grow', 'alt' => 'A growth review of traffic and lead charts'),
+			),
 		),
 		'why'              => array(
-			array('title' => 'One thread from product to promotion', 'text' => 'The people who shape the offer also shape the site, the campaign, and the follow-up.'),
-			array('title' => 'Decisions you can see', 'text' => 'Scope, milestones, and the measure of progress are written down before production starts.'),
-			array('title' => 'Handover that stays usable', 'text' => 'You leave with a system your team can edit, not a file only we can open.'),
-			array('title' => 'Growth after launch', 'text' => 'Reporting looks at enquiries, product use, and the next improvement, not a dashboard for its own sake.'),
+			'eyebrow' => 'Why Sovassa',
+			'title'   => 'Why businesses choose one team.',
+			'lead'    => array(
+				'label' => 'Build and market together',
+				'title' => 'The people who build your site also run your marketing.',
+				'text'  => 'No briefs lost between agencies. Pages are built for search and ads from day one.',
+				'flow'  => array('Website', 'SEO and ads', 'Enquiries', 'Improve'),
+			),
+			'items'   => array(
+				array('style' => 'teal', 'label' => 'Search-ready', 'title' => 'Built for search from the first page.', 'text' => ''),
+				array('style' => 'light', 'label' => 'Visibility', 'title' => 'Working demos every cycle', 'text' => 'You see real progress, not status reports.'),
+				array('style' => 'dark', 'label' => 'Clear numbers', 'title' => 'One report', 'text' => 'From first visit to enquiry, in one place.'),
+				array('style' => 'light', 'label' => 'Support', 'title' => 'Here after launch', 'text' => 'Fixes, updates, and improvements after you go live.'),
+			),
 		),
-		'delivery'         => array(
-			array('title' => 'Discover', 'text' => 'Understand the business, the audience, the current systems, and the constraint that actually matters.'),
-			array('title' => 'Strategize', 'text' => 'Choose the offer, the pages or product scope, and the measure that will tell us the work is working.'),
-			array('title' => 'Build', 'text' => 'Design, develop, write, or configure the approved work and review it in the open.'),
-			array('title' => 'Grow', 'text' => 'Launch, support, and improve the parts that move enquiries, usage, or revenue.'),
+		'models'           => array(
+			'eyebrow' => 'Ways to work with us',
+			'title'   => 'Choose how you want to start.',
+			'lede'    => 'Every engagement starts with a free consultation and a written scope.',
+			'items'   => array(
+				array('title' => 'Fixed-scope project', 'for' => 'For a new website, app, or redesign with a clear goal.', 'points' => array('Agreed scope and timeline', 'Design, build, and launch', 'First month of fixes included'), 'cta' => 'Discuss a project', 'featured' => false),
+				array('title' => 'Monthly growth partner', 'for' => 'For businesses that want steady leads from search and ads.', 'points' => array('SEO, content, and paid campaigns', 'Site improvements every month', 'Monthly report and review call'), 'cta' => 'Start growing', 'featured' => true),
+				array('title' => 'Dedicated team', 'for' => 'For products that need ongoing design and engineering.', 'points' => array('Designers and developers on your roadmap', 'Weekly planning and demos', 'Scale the team up or down'), 'cta' => 'Plan a team', 'featured' => false),
+			),
 		),
-		'marketing'        => array(
-			array('title' => 'Research', 'text' => 'Read the market, the current site, and the questions sales already hears.'),
-			array('title' => 'Strategy', 'text' => 'Pick channels and messages that match how the company actually wins work.'),
-			array('title' => 'Execute', 'text' => 'Publish, launch, and connect the work to the pages and forms that receive it.'),
-			array('title' => 'Optimize', 'text' => 'Change the pieces that the numbers and the sales team both notice.'),
-			array('title' => 'Report', 'text' => 'Share what changed, what did not, and the next decision in plain language.'),
+		'tech'             => array('React', 'Next.js', 'WordPress', 'Shopify', 'Webflow', 'Flutter', 'React Native', 'Swift', 'Kotlin', 'Node.js', 'Laravel', 'Google Ads', 'GA4', 'Search Console'),
+		'insights'         => array(
+			'eyebrow' => 'Insights',
+			'title'   => 'Straight answers to the questions buyers ask.',
+			'slugs'   => array('how-much-does-it-cost-to-build-an-app', 'how-much-does-a-business-website-cost', 'seo-vs-paid-advertising'),
 		),
 		'faq'              => array(
-			array('q' => 'What does Sovassa Technologies do?', 'a' => 'We build websites, web apps, mobile products, and practical AI workflows, and we market them through SEO, content, social, and paid media. The point is to keep product and marketing in one plan.'),
-			array('q' => 'Are you a digital marketing company in Zirakpur?', 'a' => 'Yes. The office is in Zirakpur, India, and we also work remotely. Digital marketing services sit with web development, app development, UI and UX design, and AI automation, so the page and the campaign can be planned together.'),
-			array('q' => 'Can we hire Sovassa for a single service?', 'a' => 'Yes. A website, a design engagement, an SEO program, or a paid media account can stand alone. We will say when a neighbouring service would change the result.'),
-			array('q' => 'How does a project start?', 'a' => 'With a short consultation. We confirm the goal, the constraints, and whether we are the right team. If we are, you get a proposed scope and a way to begin.'),
-			array('q' => 'Do you publish client metrics on this site?', 'a' => 'Only when they come from a completed engagement and the client is comfortable sharing them. Until then, the work page describes the kinds of problems we take on.'),
+			array('q' => 'What does Sovassa do?', 'a' => 'We design and build websites, mobile apps, and AI tools, and run the SEO, content, social, and paid campaigns that bring customers to them. You can hire us for one service or the whole path.'),
+			array('q' => 'How much does a project cost?', 'a' => 'It depends on scope. After a short consultation we give you a range and explain what is included. Our guides on app and website costs explain what moves the price.'),
+			array('q' => 'How long does it take to build a website or app?', 'a' => 'Once the scope is clear, we give you a timeline in the written scope before work starts. A focused first release moves faster than a large one, so we often suggest starting smaller.'),
+			array('q' => 'Do you work with clients outside India?', 'a' => 'Yes. We work with businesses worldwide, with calls in your time zone and regular demos.'),
+			array('q' => 'What happens after launch?', 'a' => 'We stay on for fixes and improvements, and can run your SEO and campaigns as a monthly growth partner.'),
+		),
+		'contact'          => array(
+			'eyebrow' => 'Start a project',
+			'title'   => 'Have something worth building? Let’s talk.',
+			'text'    => 'Tell us what you want to change. We reply with whether we can help, a rough range, and the next step.',
+			'form'    => 'Get a free consultation',
 		),
 	),
 	'about' => array(
@@ -65,10 +135,10 @@ return array(
 		'eyebrow'          => 'About Sovassa',
 		'intro'            => 'Sovassa Technologies exists for companies whose website, product, and marketing were built as separate projects and no longer describe the same business.',
 		'meta_title'       => 'About Our Web and Marketing Team | Sovassa Technologies',
-		'meta_description' => 'Sovassa Technologies is a digital marketing company in Zirakpur. One team builds products and markets them under a shared Build, Market, Grow model too.',
+		'meta_description' => 'Sovassa Technologies is a digital product and marketing company for clients worldwide. One team builds products and markets them under one Build, Market, Grow model.',
 		'story'            => array(
 			'Sovassa is a new company, and we would rather say that plainly than invent a long history. The problem we are organised around is familiar: a business hires one team to build and another to promote, then spends the year translating between them.',
-			'The office is in Zirakpur. We also work remotely. As a digital marketing company in Zirakpur, the practical difference is that the people who plan search, content, and campaigns can also build the site or product those campaigns depend on.',
+			'We work with businesses around the world, and most of the work is delivered remotely across time zones. The practical difference is that the people who plan search, content, and campaigns can also build the site or product those campaigns depend on.',
 			'We bring those conversations into the same room. Strategy, design, engineering, and marketing share the offer, the audience, and the result the work is supposed to change.',
 		),
 		'vision'           => 'Companies should be able to explain what they do, ship the product that proves it, and reach the people who need it without starting over every quarter.',
@@ -96,7 +166,7 @@ return array(
 			array('title' => 'A handover the team can use', 'text' => 'Editing, reporting, and the next improvement are part of the delivery, not a later surprise.'),
 		),
 		'faq'              => array(
-			array('q' => 'Where is Sovassa based?', 'a' => 'The office is in Zirakpur, India. We also work with clients remotely, and a proposal will say if a visit is useful.'),
+			array('q' => 'Where do you work?', 'a' => 'Worldwide. We work remotely with clients in different countries and time zones, and a proposal will say if an in-person visit is useful.'),
 			array('q' => 'Who will we work with?', 'a' => 'Team profiles will be introduced as people are ready to be named. Until then, every engagement still has a named owner and the specialists the scope requires.'),
 		),
 	),
@@ -142,7 +212,7 @@ return array(
 		'benefits'         => array(
 			array('title' => 'Range across the work', 'text' => 'Early teammates see how a product and its marketing fit together, not only one queue of tickets.'),
 			array('title' => 'Feedback with a reason', 'text' => 'Reviews are about the work, from a person who can explain the decision.'),
-			array('title' => 'Zirakpur, and remote when the role allows', 'text' => 'The office is in Zirakpur, India. A real offer will say whether the role is on site, remote, or a mix. We will not imply benefits we have not defined.'),
+			array('title' => 'Remote-friendly, with clients worldwide', 'text' => 'Much of the work happens remotely, with clients in different time zones. A real offer will say whether the role is on site, remote, or a mix. We will not imply benefits we have not defined.'),
 		),
 		'process'          => array(
 			array('title' => 'Introduction', 'text' => 'Send a short note about the work you want to do and an example you are proud of.'),
@@ -152,7 +222,7 @@ return array(
 		),
 		'faq'              => array(
 			array('q' => 'Are there open roles right now?', 'a' => 'No specific roles are listed yet. You can still introduce yourself if your work fits design, engineering, marketing, or delivery. We will keep the note and reply if there is a match.'),
-			array('q' => 'Do you hire remotely?', 'a' => 'We expect much of the work to happen remotely. The office is in Zirakpur, India, and location is part of any real offer.'),
+			array('q' => 'Do you hire remotely?', 'a' => 'We expect much of the work to happen remotely, with clients in different countries. Location is part of any real offer.'),
 			array('q' => 'What should I send?', 'a' => 'Your name, email, the kind of work you want, and a link or short description of something you made. A long attachment is optional.'),
 		),
 	),
@@ -162,9 +232,9 @@ return array(
 		'nav_label'        => 'Contact Us',
 		'title'            => 'Tell us what you are trying to change.',
 		'eyebrow'          => 'Contact',
-		'intro'            => 'Sovassa Technologies is a digital marketing company in Zirakpur. Share a short brief and we will reply with whether we can help, and what the first conversation should cover.',
-		'meta_title'       => 'Contact the Marketing Company in Zirakpur | Sovassa',
-		'meta_description' => 'Contact Sovassa, a digital marketing company in Zirakpur. Send a website, product, SEO, or marketing brief and we will reply with a clear next step today.',
+		'intro'            => 'Sovassa Technologies is a digital product and marketing company working with clients worldwide. Share a short brief and we will reply with whether we can help, and what the first conversation should cover.',
+		'meta_title'       => 'Contact Sovassa Technologies | Product & Marketing Team',
+		'meta_description' => 'Contact Sovassa, a digital product and marketing team serving clients worldwide. Send a website, app, SEO, or marketing brief and get a clear next step.',
 		'primary_cta'      => array('label' => 'Use the form', 'url' => '/contact/#enquiry'),
 		'secondary_cta'    => array('label' => 'Get a quote instead', 'url' => 'get-a-quote'),
 		'services'         => array(
@@ -236,7 +306,7 @@ return array(
 		'meta_title'       => 'Privacy Policy for Sovassa.com | Sovassa Technologies',
 		'meta_description' => 'How Sovassa Technologies collects, uses, and stores information submitted through forms, analytics cookies, and email on the sovassa.com website pages.',
 		'sections'         => array(
-			array('title' => 'Who we are', 'text' => 'Sovassa Technologies publishes this website. The office is in Zirakpur, India. Questions about this policy go to admin@sovassa.com.'),
+			array('title' => 'Who we are', 'text' => 'Sovassa Technologies publishes this website. Questions about this policy go to admin@sovassa.com.'),
 			array('title' => 'What we collect', 'text' => 'If you submit a form, we store the fields you completed: typically your name, email, company, and the project note. Consultation forms may also include timeline, budget range, and website address. Careers notes and insight subscriptions use the same kind of form record. The site also receives routine technical data from your browser, such as the address of the page you requested, so the server can respond.'),
 			array('title' => 'Why we use it', 'text' => 'We use form details to reply to you. Careers notes are kept so we can respond if a role matches. Newsletter addresses are kept so we can send occasional insights, and only if you asked for that. Technical data is used to run and protect the site.'),
 			array('title' => 'Cookies', 'text' => 'Essential cookies keep the site working, including a cookie that remembers a choice you make in the cookie banner. Optional cookies, such as analytics or marketing cookies, stay off until you accept them. The Cookie Policy explains the categories and how to change your choice.'),
@@ -256,7 +326,7 @@ return array(
 		'meta_title'       => 'Website Terms and Conditions | Sovassa Technologies',
 		'meta_description' => 'Terms for using the Sovassa Technologies website. Project scope, fees, and delivery are agreed in a separate proposal, not by these website terms alone.',
 		'sections'         => array(
-			array('title' => 'Who publishes the site', 'text' => 'Sovassa Technologies publishes sovassa.com. The office is in Zirakpur, India. You can write to admin@sovassa.com.'),
+			array('title' => 'Who publishes the site', 'text' => 'Sovassa Technologies publishes sovassa.com. You can write to admin@sovassa.com.'),
 			array('title' => 'Using the site', 'text' => 'You may read the pages, send a form, and share links to public pages. Do not misuse the site, attempt to break it, or send a form with details you know are false.'),
 			array('title' => 'Project work', 'text' => 'Reading a service page, requesting a consultation, or sending a message does not hire us and does not create a price or a deadline. Scope, fees, and timing are set only in a proposal or agreement that both sides accept.'),
 			array('title' => 'Your messages', 'text' => 'What you send through a form is covered by the Privacy Policy. Please do not send confidential material until we have agreed how it should be handled.'),

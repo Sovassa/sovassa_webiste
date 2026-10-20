@@ -21,7 +21,8 @@ function sovassa_document_title($title) {
 	}
 	return $title;
 }
-add_filter('pre_get_document_title', 'sovassa_document_title');
+// Rank Math filters the title at 15. The page registry is the source of truth, so run after it.
+add_filter('pre_get_document_title', 'sovassa_document_title', 20);
 
 /**
  * Meta description for the current view.
@@ -53,6 +54,10 @@ function sovassa_seo_head() {
 
 	if (sovassa_is_noindex_view()) {
 		echo '<meta name="robots" content="noindex, follow">' . "\n";
+	} elseif (sovassa_plugin_active('seo-by-rank-math')) {
+		// Rank Math clears the core wp_robots filters, so the theme prints the full directive itself.
+		$robots = get_option('blog_public') ? 'index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large' : 'noindex, nofollow';
+		echo '<meta name="robots" content="' . esc_attr($robots) . '">' . "\n";
 	}
 	$verification = isset(sovassa_config()['search_console_verification']) ? sovassa_config()['search_console_verification'] : '';
 	if (is_string($verification) && preg_match('/^[A-Za-z0-9_-]{8,128}$/', $verification)) {
@@ -65,6 +70,10 @@ function sovassa_seo_head() {
 	echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
 	echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
 	echo '<meta property="og:type" content="' . (is_singular('post') ? 'article' : 'website') . '">' . "\n";
+	if (is_singular('post')) {
+		echo '<meta property="article:published_time" content="' . esc_attr(get_the_date('c')) . '">' . "\n";
+		echo '<meta property="article:modified_time" content="' . esc_attr(get_the_modified_date('c')) . '">' . "\n";
+	}
 	echo '<meta property="og:image" content="' . esc_url($image) . '">' . "\n";
 	echo '<meta property="og:image:width" content="1200">' . "\n";
 	echo '<meta property="og:image:height" content="630">' . "\n";
@@ -114,18 +123,37 @@ function sovassa_seo_head() {
 	}
 
 	if (is_singular('post')) {
-		$graph['@graph'][] = array(
-			'@type'         => 'Article',
-			'headline'      => get_the_title(),
-			'description'   => $description,
-			'datePublished' => get_the_date('c'),
-			'dateModified'  => get_the_modified_date('c'),
-			'author'        => array(
-				'@type' => 'Organization',
-				'name'  => 'Sovassa Technologies',
-			),
-			'publisher'     => array('@id' => home_url('/#organization')),
-			'mainEntityOfPage' => $url,
+		$author = sovassa_author();
+		if ($author['is_person']) {
+			$author_node = array_filter(
+				array(
+					'@type'    => 'Person',
+					'name'     => $author['name'],
+					'jobTitle' => $author['role'],
+					'url'      => $author['url'],
+					'image'    => $author['image'],
+					'worksFor' => array('@id' => home_url('/#organization')),
+				)
+			);
+		} else {
+			$author_node = array('@id' => home_url('/#organization'));
+		}
+		$categories = get_the_category();
+		$graph['@graph'][] = array_filter(
+			array(
+				'@type'            => 'Article',
+				'headline'         => get_the_title(),
+				'description'      => $description,
+				'image'            => sovassa_insight_image_uri(),
+				'datePublished'    => get_the_date('c'),
+				'dateModified'     => get_the_modified_date('c'),
+				'author'           => $author_node,
+				'publisher'        => array('@id' => home_url('/#organization')),
+				'articleSection'   => $categories ? $categories[0]->name : '',
+				'wordCount'        => str_word_count(wp_strip_all_tags((string) get_post_field('post_content', get_the_ID()))),
+				'inLanguage'       => get_bloginfo('language'),
+				'mainEntityOfPage' => $url,
+			)
 		);
 	}
 
@@ -133,6 +161,31 @@ function sovassa_seo_head() {
 }
 remove_action('wp_head', 'rel_canonical');
 add_action('wp_head', 'sovassa_seo_head', 5);
+
+/**
+ * Keep Rank Math's sitemap and admin tools, but stop its head output.
+ *
+ * Without this the page carries two descriptions, two canonicals, two robots tags,
+ * two sets of Open Graph tags, and two JSON-LD graphs. Rank Math's title tag and
+ * webmaster verification are kept; everything else comes from sovassa_seo_head().
+ */
+function sovassa_quiet_rank_math_head() {
+	global $wp_filter;
+	if (empty($wp_filter['rank_math/head'])) {
+		return;
+	}
+	foreach ($wp_filter['rank_math/head']->callbacks as $priority => $callbacks) {
+		foreach ($callbacks as $callback) {
+			$function = $callback['function'];
+			$keep     = '_wp_render_title_tag' === $function
+				|| (is_array($function) && isset($function[1]) && 'webmaster_tools_authentication' === $function[1]);
+			if (!$keep) {
+				remove_action('rank_math/head', $function, $priority);
+			}
+		}
+	}
+}
+add_action('wp_head', 'sovassa_quiet_rank_math_head', 0);
 
 /**
  * Organization node.
@@ -150,12 +203,8 @@ function sovassa_organization_schema() {
 		'email'     => $config['email'],
 		'telephone' => $config['phone'],
 		'sameAs'    => sovassa_same_as_urls(),
-		'address'   => array(
-			'@type'           => 'PostalAddress',
-			'addressLocality' => 'Zirakpur',
-			'addressCountry'  => 'IN',
-		),
-		'description' => 'Sovassa Technologies is a technology and digital marketing company. We build products, market them, and help companies grow.',
+		'areaServed'  => 'Worldwide',
+		'description' => 'Sovassa Technologies is a digital product and marketing company serving clients worldwide. We build websites, apps, and AI solutions, then help businesses grow.',
 	);
 }
 
@@ -368,12 +417,6 @@ function sovassa_analytics_event_name($sent) {
  * Load analytics only after the visitor accepts, and only when a measurement ID is set.
  */
 function sovassa_analytics_script() {
-	$id = sovassa_config()['analytics_id'];
-	if (!is_string($id) || !preg_match('/^G-[A-Z0-9]+$/', $id)) {
-		return;
-	}
-	$id = esc_js($id);
-
 	$event_js = '';
 	if (is_page('thank-you')) {
 		$sent = isset($_GET['sent']) ? sanitize_key(wp_unslash($_GET['sent'])) : '';
@@ -392,6 +435,25 @@ function sovassa_analytics_script() {
 		}";
 		}
 	}
+
+	// Site Kit already prints the Google tag (and SureCookie gates it). A second tag would
+	// count every visit twice, so only send the form event through Site Kit's gtag.
+	if (sovassa_plugin_active('google-site-kit')) {
+		if ('' !== $event_js) {
+			echo "<script>
+		if (typeof window.gtag === 'function') {
+			" . $event_js . "
+		}
+		</script>\n";
+		}
+		return;
+	}
+
+	$id = sovassa_config()['analytics_id'];
+	if (!is_string($id) || !preg_match('/^G-[A-Z0-9]+$/', $id)) {
+		return;
+	}
+	$id = esc_js($id);
 
 	echo "<script>
 	window.sovassaLoadAnalytics = function () {
@@ -567,6 +629,30 @@ function sovassa_sitemap_posts_query_args($args, $post_type) {
 	return $args;
 }
 add_filter('wp_sitemaps_posts_query_args', 'sovassa_sitemap_posts_query_args', 10, 2);
+
+/**
+ * The same exclusions for the Rank Math sitemap, which replaces the core one.
+ *
+ * @param array<string, mixed>|false $url    Sitemap entry.
+ * @param string                     $type   Entry type.
+ * @param mixed                      $object Post or term behind the entry.
+ * @return array<string, mixed>|false
+ */
+function sovassa_rank_math_sitemap_entry($url, $type, $object) {
+	// Rank Math passes raw database rows here, not WP_Post objects.
+	if (!is_object($object) || !isset($object->post_type, $object->post_name)) {
+		return $url;
+	}
+	$excluded = array(
+		'page' => array('thank-you'),
+		'post' => array('website-conversion-optimisation-2'),
+	);
+	if (isset($excluded[$object->post_type]) && in_array($object->post_name, $excluded[$object->post_type], true)) {
+		return false;
+	}
+	return $url;
+}
+add_filter('rank_math/sitemap/entry', 'sovassa_rank_math_sitemap_entry', 10, 3);
 
 /**
  * Author archives are not landing pages.

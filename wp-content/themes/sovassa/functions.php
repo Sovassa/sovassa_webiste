@@ -5,7 +5,7 @@
  * @package Sovassa
  */
 
-define('SOVASSA_VERSION', '1.8.16');
+define('SOVASSA_VERSION', '2.0.4');
 define('SOVASSA_SEED_VERSION', '4');
 
 require get_template_directory() . '/inc/config.php';
@@ -15,6 +15,33 @@ require get_template_directory() . '/inc/content/insights-posts.php';
 require get_template_directory() . '/inc/setup.php';
 require get_template_directory() . '/inc/enquiries.php';
 require get_template_directory() . '/inc/seo.php';
+require get_template_directory() . '/inc/privacy.php';
+require get_template_directory() . '/inc/performance.php';
+require get_template_directory() . '/inc/linking.php';
+require get_template_directory() . '/inc/articles.php';
+
+/**
+ * Whether a plugin in this folder is active. The theme steps aside for
+ * Rank Math, Site Kit, and SureCookie so the page never prints two of a thing.
+ *
+ * @param string $folder Plugin folder, for example 'seo-by-rank-math'.
+ * @return bool
+ */
+function sovassa_plugin_active($folder) {
+	static $active = null;
+	if (null === $active) {
+		$active = (array) get_option('active_plugins', array());
+		if (is_multisite()) {
+			$active = array_merge($active, array_keys((array) get_site_option('active_sitewide_plugins', array())));
+		}
+	}
+	foreach ($active as $plugin) {
+		if (is_string($plugin) && str_starts_with($plugin, $folder . '/')) {
+			return true;
+		}
+	}
+	return false;
+}
 
 /**
  * Theme supports and menus.
@@ -47,6 +74,24 @@ function sovassa_enqueue_assets() {
 		array(),
 		SOVASSA_VERSION
 	);
+	if (is_front_page()) {
+		wp_enqueue_style(
+			'sovassa-home',
+			get_template_directory_uri() . '/assets/css/home.css',
+			array('sovassa-main'),
+			SOVASSA_VERSION
+		);
+		wp_enqueue_script(
+			'sovassa-home',
+			get_template_directory_uri() . '/assets/js/home.js',
+			array(),
+			SOVASSA_VERSION,
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
+		);
+	}
 	wp_enqueue_script(
 		'sovassa-main',
 		get_template_directory_uri() . '/assets/js/main.js',

@@ -1,0 +1,138 @@
+<p>There is no honest single price for an app. A first release that lets one type of user finish one job is a different product from an app with accounts, payments, offline use, and a team running it behind the scenes. Two quotes for “an app” can differ by ten times and both be fair, because they describe different products.</p>
+
+<p>This guide explains what actually moves the cost, the shapes most first releases fall into, the costs that usually get left out, and how to get an estimate you can trust.</p>
+
+<h2>The short answer</h2>
+
+<p>The cost of building an app is set by four things: how many jobs the first release must do, how many kinds of users it serves, which systems it has to talk to, and whether it ships on one platform or two. Design quality, testing, and the months after launch come on top. A narrow first release with one user type and no payments is the cheapest honest version. Every role, integration, and platform you add moves the number up.</p>
+
+<p>If you want a number before those questions are answered, any figure you receive is a guess.</p>
+
+<h2>What actually drives the cost</h2>
+
+<h3>1. The scope of the first release</h3>
+
+<p>This is the largest factor by far. “Book an appointment” is one job. “Book, pay, reschedule, chat with the provider, and leave a review” is five. Each job brings its own screens, edge cases, error states, and tests. The most useful thing you can do before asking for a quote is write down the one job the first version must do well, and the jobs that can wait. Our note on <a href="/mvp-vs-full-product/">MVP vs full product</a> explains how to draw that line.</p>
+
+<h3>2. User roles and accounts</h3>
+
+<p>An app used by one kind of person is simpler than one with customers, staff, and administrators who all see different things. Sign-in, permissions, password recovery, and account deletion (which the app stores now expect) are real work. A marketplace with buyers and sellers is effectively two products sharing a backend.</p>
+
+<h3>3. Platforms: iOS, Android, or both</h3>
+
+<p>Building natively for iOS and Android means two codebases. Cross-platform frameworks such as Flutter and React Native let most of the app be shared, which usually lowers the cost of launching on both stores. The right choice depends on the product, not on the price alone. Native is worth it when the app leans heavily on the camera, sensors, background work, or platform conventions. See <a href="/native-vs-cross-platform/">native vs cross-platform</a> and <a href="/flutter-vs-react-native/">Flutter vs React Native</a> for how we decide.</p>
+
+<h3>4. Integrations</h3>
+
+<p>Every system the app must reach adds cost: payment gateways, maps, SMS and email, a CRM, an ERP, a booking system, or your existing website’s database. Well-documented services are quick to connect. Older internal systems without a proper API can take longer than the app itself.</p>
+
+<h3>5. The backend and admin tools</h3>
+
+<p>Most apps need a server that stores data and a dashboard where your team can manage users, content, and orders. This part is invisible to customers, so it is often missing from early budgets. If your staff will need to approve, refund, edit, or report on anything, that tooling belongs in the estimate.</p>
+
+<h3>6. Design depth</h3>
+
+<p>A clean interface built on standard platform components costs less than a fully custom visual language with bespoke animation. Both can be right. What should never be cut is the design of the critical journeys: the few paths a user must complete without help. Testing those with a clickable prototype before engineering starts is cheaper than rebuilding them later.</p>
+
+<h3>7. Data, security, and compliance</h3>
+
+<p>Apps that handle health information, payments, children’s data, or personal data from regulated markets need extra care: encryption, audit trails, consent flows, and sometimes a third-party review. Offline use adds work too, because the app must store data locally and reconcile it later.</p>
+
+<h2>Three common shapes of a first release</h2>
+
+<p>Most first versions fall into one of these shapes. Each step down the table adds roles, integrations, and testing, so it adds time and cost. Use it to locate your idea before you ask for a quote.</p>
+
+<table>
+	<thead>
+		<tr>
+			<th>Shape</th>
+			<th>What it usually includes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>Focused tool</strong></td>
+			<td>One user type, one core job, simple sign-in, a basic admin view, one platform or cross-platform.</td>
+		</tr>
+		<tr>
+			<td><strong>Customer product</strong></td>
+			<td>Accounts and profiles, payments or subscriptions, notifications, two or three integrations, a proper admin dashboard, both stores.</td>
+		</tr>
+		<tr>
+			<td><strong>Platform</strong></td>
+			<td>Several user roles (for example buyers, sellers, and staff), real-time features, complex permissions, reporting, and integrations with existing business systems.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>If your idea sits between two rows, the cheaper path is almost always to ship the smaller shape first and earn the larger one with real use.</p>
+
+<h2>Costs that are easy to forget</h2>
+
+<p>The build is the largest cost, but it is not the only one. Plan for these from the start:</p>
+
+<ul>
+	<li><strong>Store accounts.</strong> Apple’s developer program is an annual fee and Google Play charges a one-time registration fee. Small, but they need an owner in your company.</li>
+	<li><strong>Store commission.</strong> If you sell digital goods or subscriptions inside the app, Apple and Google take a share of each sale. Physical goods and services are handled differently. This shapes your pricing model, so decide it early.</li>
+	<li><strong>Hosting and services.</strong> Servers, databases, file storage, push notifications, maps, SMS, and email all carry monthly costs that grow with your users.</li>
+	<li><strong>Maintenance.</strong> Apple and Google release new operating system versions every year. Libraries go out of date. An app nobody updates will eventually break or be removed from the store. Budget for ongoing updates as a yearly line, not a surprise.</li>
+	<li><strong>The month after launch.</strong> Real users find problems that testing did not. A plan and a team for the first round of fixes should be part of the original scope.</li>
+	<li><strong>Store listing and assets.</strong> Screenshots, descriptions, privacy details, and review responses take time, and a rejected submission delays launch.</li>
+</ul>
+
+<h2>How to lower the cost without breaking the product</h2>
+
+<ul>
+	<li><strong>Cut to one job.</strong> The fastest saving is a smaller first release. Ship the core job, learn from it, then add features people actually ask for.</li>
+	<li><strong>Validate before you build.</strong> A week of conversations and a clickable prototype can stop you paying for the wrong app. See <a href="/how-to-validate-an-app-idea/">how to validate an app idea</a>.</li>
+	<li><strong>Consider the web first.</strong> If the job does not need the phone’s camera, location, notifications, or offline use, a well-built web app may do it for less. Our note on <a href="/when-you-should-not-build-an-app/">when you should not build an app</a> covers the signs.</li>
+	<li><strong>Use proven services.</strong> Sign-in, payments, chat, and analytics are solved problems. Paying to rebuild them rarely makes sense for a first release.</li>
+	<li><strong>Launch on one platform if your users allow it.</strong> If nearly all your customers use one platform, starting there is a legitimate way to learn sooner.</li>
+	<li><strong>Keep decisions moving.</strong> Delayed feedback and changing direction mid-build are hidden costs. A single decision-maker on your side saves real money.</li>
+</ul>
+
+<h2>Fixed price or time and materials?</h2>
+
+<p>A fixed price works when the scope is small and well defined, such as a focused first release with agreed journeys. It gives you budget certainty, but every change becomes a negotiation. Time and materials suits products that will evolve as you learn, because you pay for the work actually done and can change priorities between sprints. Many teams combine them: a fixed-price discovery and design phase, then a build estimated in phases once the journeys are agreed.</p>
+
+<h2>How to get an estimate you can trust</h2>
+
+<p>You will get closer, more comparable quotes if you bring the same information to every company you speak to:</p>
+
+<ol>
+	<li>The one job the first release must do, in a single sentence.</li>
+	<li>Who uses the app, and whether there is more than one kind of user.</li>
+	<li>The platforms you need at launch, and why.</li>
+	<li>The systems the app must connect to.</li>
+	<li>What your team will need to manage behind the scenes.</li>
+	<li>Any deadline that is real, and what it is tied to.</li>
+	<li>Your budget range, even a rough one. It lets a good partner suggest what fits rather than guess.</li>
+</ol>
+
+<p>Be cautious of any quote that arrives without questions about these points, and of any company that will not tell you what is excluded. A low number that leaves out the backend, the admin tools, or the month after launch becomes a larger invoice later. Our guide on <a href="/how-to-choose-an-app-development-company/">how to choose an app development company</a> has more on what to ask.</p>
+
+<h2>How Sovassa estimates an app</h2>
+
+<p>We do not publish a calculator, because the honest answer depends on the questions above. In a first conversation we name the job, the users, and the smallest release that can teach you something. After that we can give a range, explain what is in it and what is not, and suggest where to cut if the number is too high. Discovery, design of the critical journeys, the build, device testing, store release, and the first month of fixes are all part of the same plan. You can read more about our <a href="/mobile-app-development/">mobile app development</a> work, or <a href="/get-a-quote/">ask for an estimate</a>.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Is it cheaper to build for Android or iOS first?</h3>
+
+<p>The build effort for one platform is broadly similar on either. The better question is where your users are. Launch first where most of them already are, or use a cross-platform framework if you need both from day one.</p>
+
+<h3>Does a cross-platform app always cost less?</h3>
+
+<p>Usually less to launch on both stores, because most of the code is shared. It can cost more later if the product grows into features the shared layer handles poorly. Choose it for the product, not only for the launch budget.</p>
+
+<h3>How much does it cost to maintain an app each year?</h3>
+
+<p>It depends on how much the app changes. At a minimum, plan for operating system updates, library upgrades, hosting, and fixes. Apps that keep adding features need an ongoing development budget rather than only maintenance.</p>
+
+<h3>Can I get an exact price before development starts?</h3>
+
+<p>For a small, well-defined first release, yes, once the journeys are agreed. For anything larger, a phased estimate is more honest: a firm price for discovery and design, then a range for the build that narrows as decisions are made.</p>
+
+<h3>How long does it take to build an app?</h3>
+
+<p>Time follows scope in the same way cost does. Our note on <a href="/how-long-does-app-development-take/">how long app development takes</a> breaks down the stages.</p>
