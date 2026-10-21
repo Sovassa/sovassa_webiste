@@ -21,7 +21,7 @@
 	<header class="site-header">
 		<div class="site-header__inner">
 			<a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
-				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.svg?ver=' . SOVASSA_VERSION); ?>" alt="Sovassa Technologies" width="1098" height="219">
+				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-horizontal.png?ver=' . SOVASSA_VERSION); ?>" alt="Sovassa Technologies" width="960" height="213">
 			</a>
 			<nav id="site-menu" class="primary-nav" aria-label="Primary">
 				<div class="nav-drop nav-drop--mega">

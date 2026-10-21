@@ -116,10 +116,9 @@ add_action('wp_enqueue_scripts', 'sovassa_enqueue_assets');
  * Favicon.
  */
 function sovassa_favicon() {
-	$icon = get_template_directory_uri() . '/assets/images/favicon-32.png?ver=' . SOVASSA_VERSION;
-	$touch = get_template_directory_uri() . '/assets/images/apple-touch-icon.png?ver=' . SOVASSA_VERSION;
-	echo '<link rel="icon" href="' . esc_url($icon) . '" type="image/png" sizes="32x32">' . "\n";
-	echo '<link rel="apple-touch-icon" href="' . esc_url($touch) . '">' . "\n";
+	$icon = get_template_directory_uri() . '/assets/images/favicon.svg?ver=' . SOVASSA_VERSION;
+	echo '<link rel="icon" href="' . esc_url($icon) . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url($icon) . '">' . "\n";
 }
 add_action('wp_head', 'sovassa_favicon', 1);
 
