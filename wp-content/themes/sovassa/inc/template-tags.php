@@ -29,6 +29,8 @@ function sovassa_icon($name) {
 		'users'   => '<path d="M8 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM16.5 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM3.5 19c.4-2.2 2.2-3.5 4.5-3.5s4.1 1.3 4.5 3.5M14 15.6c1.6-.2 3 .6 3.8 2.4"/>',
 		'shield'  => '<path d="M12 3.5 19 6.5v5.2c0 4.2-2.8 7.2-7 8.8-4.2-1.6-7-4.6-7-8.8V6.5L12 3.5Z"/>',
 		'up'      => '<path d="M12 19V5M6 11l6-6 6 6"/>',
+		'mail'    => '<rect width="18" height="14" x="3" y="5" rx="2"/><path d="m3 7 9 6 9-6"/>',
+		'pin'     => '<path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.5"/>',
 	);
 	if ('linkedin' === $name) {
 		echo '<svg class="icon icon--brand" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#0A66C2"/><path fill="#fff" stroke="none" d="M7.1 9.7h2.3V17H7.1V9.7Zm1.15-3.6a1.33 1.33 0 1 1 0 2.66 1.33 1.33 0 0 1 0-2.66ZM10.9 9.7h2.2v1h.03c.3-.58 1.06-1.2 2.18-1.2 2.33 0 2.76 1.53 2.76 3.53V17h-2.3v-3.5c0-.84-.02-1.91-1.17-1.91-1.17 0-1.35.91-1.35 1.85V17h-2.3V9.7Z"/></svg>';

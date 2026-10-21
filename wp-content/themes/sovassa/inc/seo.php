@@ -54,8 +54,7 @@ function sovassa_seo_head() {
 
 	if (sovassa_is_noindex_view()) {
 		echo '<meta name="robots" content="noindex, follow">' . "\n";
-	} elseif (sovassa_plugin_active('seo-by-rank-math')) {
-		// Rank Math clears the core wp_robots filters, so the theme prints the full directive itself.
+	} else {
 		$robots = get_option('blog_public') ? 'index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large' : 'noindex, nofollow';
 		echo '<meta name="robots" content="' . esc_attr($robots) . '">' . "\n";
 	}
@@ -194,18 +193,25 @@ add_action('wp_head', 'sovassa_quiet_rank_math_head', 0);
  */
 function sovassa_organization_schema() {
 	$config = sovassa_config();
-	return array(
-		'@type' => 'Organization',
-		'@id'   => home_url('/#organization'),
-		'name'      => $config['name'],
-		'url'       => home_url('/'),
-		'logo'      => get_template_directory_uri() . '/assets/images/logo.png',
-		'email'     => $config['email'],
-		'telephone' => $config['phone'],
-		'sameAs'    => sovassa_same_as_urls(),
+	$schema = array(
+		'@type'       => 'Organization',
+		'@id'         => home_url('/#organization'),
+		'name'        => $config['name'],
+		'url'         => home_url('/'),
+		'logo'        => get_template_directory_uri() . '/assets/images/logo.png',
+		'email'       => $config['email'],
+		'telephone'   => $config['phone'],
+		'sameAs'      => sovassa_same_as_urls(),
 		'areaServed'  => 'Worldwide',
 		'description' => 'Sovassa Technologies is a digital product and marketing company serving clients worldwide. We build websites, apps, and AI solutions, then help businesses grow.',
 	);
+	if (!empty($config['office'])) {
+		$schema['address'] = array(
+			'@type'         => 'PostalAddress',
+			'streetAddress' => $config['office'],
+		);
+	}
+	return $schema;
 }
 
 /**
@@ -482,17 +488,26 @@ add_action('wp_footer', 'sovassa_analytics_script', 20);
  * @return array<int, string>
  */
 function sovassa_same_as_urls() {
-	$urls = array();
-	$social = isset(sovassa_config()['social']) ? sovassa_config()['social'] : array();
-	if (!is_array($social)) {
-		return $urls;
-	}
-	foreach ($social as $url) {
-		if (is_string($url) && '' !== $url) {
-			$urls[] = $url;
+	$urls   = array();
+	$config = sovassa_config();
+	$social = isset($config['social']) ? $config['social'] : array();
+	if (is_array($social)) {
+		foreach ($social as $url) {
+			if (is_string($url) && '' !== $url) {
+				$urls[] = $url;
+			}
 		}
 	}
-	return array_values($urls);
+	if (!empty($config['clutch_url'])) {
+		$urls[] = $config['clutch_url'];
+	}
+	if (!empty($config['goodfirms_url'])) {
+		$urls[] = $config['goodfirms_url'];
+	}
+	if (!empty($config['maps_url'])) {
+		$urls[] = $config['maps_url'];
+	}
+	return array_values(array_unique($urls));
 }
 
 /**

@@ -19,8 +19,9 @@ function sovassa_config() {
 		'phone'         => '+917002862687',
 		'phone_display' => '+91 7002862687',
 		'email'         => 'admin@sovassa.com',
-		'office'        => '',
-		'maps_url'      => '',
+		'office'        => 'Hermitage Centralis, SCO 5, VIP Rd, Zirakpur, Punjab 140603',
+		'maps_url'      => 'https://www.google.com/maps/place/Sovassa+Technologies/data=!4m2!3m1!1s0x0:0x7d8217d45bfc667d?sa=X&ved=1t:2428&ictx=111',
+		'maps_embed_url'=> 'https://maps.google.com/maps?cid=9043817202557150845&output=embed',
 		'contact_note'  => 'Call, WhatsApp, or email us, or send the form and we will reply to the address you share. We work with clients worldwide.',
 		'analytics_id'                 => 'G-3WB7FRC1LR',
 		'search_console_verification'  => '',
@@ -38,5 +39,7 @@ function sovassa_config() {
 			'Instagram' => 'https://www.instagram.com/sovassa_technologies/',
 			'Facebook'  => 'https://www.facebook.com/sovassa.technologies',
 		),
+		'clutch_url'    => 'https://clutch.co/profile/sovassa-technologies',
+		'goodfirms_url' => 'https://www.goodfirms.co/company/sovassa-technologies',
 	);
 }

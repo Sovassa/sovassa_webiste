@@ -53,6 +53,26 @@ function sovassa_articles() {
 			'version' => 1,
 			'excerpt' => 'A website redesign checklist covering goals, URL mapping and redirects, SEO, tracking, launch-day checks, and monitoring after go-live.',
 		),
+		'why-websites-do-not-generate-leads' => array(
+			'version' => 1,
+			'excerpt' => 'Why business websites struggle to turn traffic into qualified pipeline, and the structural, psychological, and technical fixes that generate real leads.',
+		),
+		'landing-page-vs-website' => array(
+			'version' => 1,
+			'excerpt' => 'Landing pages vs full websites compared: conversion mechanics, paid search efficiency, SEO implications, and how to choose the right destination for your traffic.',
+		),
+		'website-speed-and-conversion' => array(
+			'version' => 1,
+			'excerpt' => 'How page speed impacts pipeline, conversion rates, and SEO ranking: Core Web Vitals thresholds, the latency tax on revenue, technical bottlenecks, and how to fix them.',
+		),
+		'b2b-lead-generation' => array(
+			'version' => 1,
+			'excerpt' => 'A practical framework for B2B inbound lead generation: defining qualified opportunities, aligning search intent with service pages, eliminating conversion leaks, and marketing-to-sales handoffs.',
+		),
+		'how-to-build-a-b2b-website' => array(
+			'version' => 1,
+			'excerpt' => 'The step-by-step blueprint for building a high-converting B2B website: buyer persona navigation, service page architecture, objection handling, tech stack selection, and conversion paths.',
+		),
 	);
 }
 
