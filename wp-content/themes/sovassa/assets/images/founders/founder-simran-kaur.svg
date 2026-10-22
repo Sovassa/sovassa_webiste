@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900">
+  <defs>
+    <linearGradient id="bg-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a2540" />
+      <stop offset="50%" stop-color="#061a30" />
+      <stop offset="100%" stop-color="#020e1a" />
+    </linearGradient>
+    <radialGradient id="glow-grad-1" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#00a896" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#0d5edb" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#061a30" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="border-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#00a896" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#0d5edb" stop-opacity="0.5" />
+    </linearGradient>
+    <linearGradient id="badge-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00a896" />
+      <stop offset="100%" stop-color="#0d5edb" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="900" fill="url(#bg-grad-1)" />
+  <circle cx="400" cy="340" r="320" fill="url(#glow-grad-1)" />
+
+  <!-- Geometric Ambient Rings -->
+  <circle cx="400" cy="340" r="220" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-dasharray="6 6" />
+  <circle cx="400" cy="340" r="170" fill="none" stroke="rgba(0,168,150,0.15)" stroke-width="1.5" />
+  <circle cx="400" cy="340" r="120" fill="none" stroke="rgba(13,94,219,0.2)" stroke-width="1" />
+
+  <!-- Executive Silhouette Graphic -->
+  <g transform="translate(400, 340)">
+    <!-- Head / Torso Silhouette -->
+    <path d="M-90,260 C-90,160 -60,110 -35,95 C-20,86 -15,70 -15,55 L-15,40 C-10,42 -5,43 0,43 C5,43 10,42 15,40 L15,55 C15,70 20,86 35,95 C60,110 90,160 90,260 Z" 
+          fill="rgba(255,255,255,0.07)" stroke="url(#border-grad-1)" stroke-width="2" />
+    <!-- Head / Hairline -->
+    <circle cx="0" cy="-25" r="58" fill="rgba(255,255,255,0.09)" stroke="url(#border-grad-1)" stroke-width="2" />
+    
+    <!-- Monogram Circle -->
+    <circle cx="0" cy="-25" r="44" fill="#061a30" stroke="rgba(0,168,150,0.5)" stroke-width="2" />
+    <text x="0" y="-12" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">SK</text>
+  </g>
+
+  <!-- Card Overlay Accent -->
+  <rect x="50" y="660" width="700" height="180" rx="20" fill="rgba(6, 26, 48, 0.75)" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+  
+  <!-- Badge -->
+  <rect x="80" y="695" width="130" height="30" rx="15" fill="url(#badge-grad-1)" />
+  <text x="145" y="715" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1.5">CO-FOUNDER</text>
+
+  <!-- Founder Name -->
+  <text x="80" y="770" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="700" fill="#ffffff" letter-spacing="-0.5">Simran Kaur</text>
+  
+  <!-- Organization & Subtitle -->
+  <text x="80" y="805" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="500" fill="#94a3b8">Sovassa Technologies · Leadership</text>
+</svg>

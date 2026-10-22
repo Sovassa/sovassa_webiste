@@ -114,11 +114,41 @@ return array(
 			'slugs'   => array('how-much-does-it-cost-to-build-an-app', 'how-much-does-a-business-website-cost', 'seo-vs-paid-advertising'),
 		),
 		'faq'              => array(
-			array('q' => 'What does Sovassa do?', 'a' => 'We design and build websites, mobile apps, and AI tools, and run the SEO, content, social, and paid campaigns that bring customers to them. You can hire us for one service or the whole path.'),
-			array('q' => 'How much does a project cost?', 'a' => 'It depends on scope. After a short consultation we give you a range and explain what is included. Our guides on app and website costs explain what moves the price.'),
-			array('q' => 'How long does it take to build a website or app?', 'a' => 'Once the scope is clear, we give you a timeline in the written scope before work starts. A focused first release moves faster than a large one, so we often suggest starting smaller.'),
-			array('q' => 'Do you work with clients outside India?', 'a' => 'Yes. We work with businesses worldwide, with calls in your time zone and regular demos.'),
-			array('q' => 'What happens after launch?', 'a' => 'We stay on for fixes and improvements, and can run your SEO and campaigns as a monthly growth partner.'),
+			array(
+				'cat' => 'Services & Scope',
+				'q'   => 'What does Sovassa do?',
+				'a'   => 'We design and build websites, mobile apps, and AI automation solutions, and run the SEO, content, social media, and paid ad campaigns that bring customers to them. You can hire us for a single focused deliverable or as an integrated end-to-end growth team.',
+			),
+			array(
+				'cat' => 'Cost & Pricing',
+				'q'   => 'How much does a custom project cost?',
+				'a'   => 'Pricing depends strictly on your project boundary, user roles, integrations, and performance requirements. Following an initial consultation, we provide a transparent, fixed-scope estimate with milestones. We never publish arbitrary rate cards or surprise you with hidden fees.',
+			),
+			array(
+				'cat' => 'Timeline & Delivery',
+				'q'   => 'How long does it take to build a website or mobile app?',
+				'a'   => 'A focused marketing website or MVP app typically takes 4 to 8 weeks from discovery to launch. Larger web applications and cross-platform mobile apps take 8 to 14 weeks. We provide a milestone-based timeline in your written scope before code begins.',
+			),
+			array(
+				'cat' => 'Ownership & IP',
+				'q'   => 'Who owns the code, design, and intellectual property?',
+				'a'   => 'You do. 100%. Upon final milestone completion, all source code, Figma design systems, domain configurations, and assets belong entirely to your company. Zero vendor lock-in and zero proprietary licensing restrictions.',
+			),
+			array(
+				'cat' => 'Global & Communication',
+				'q'   => 'Do you work with clients outside India?',
+				'a'   => 'Yes. We work with clients across North America, Europe, the Middle East, and Asia. We organize regular video calls and demos aligned with your time zone, maintaining shared project boards and transparent weekly progress updates.',
+			),
+			array(
+				'cat' => 'Services & Scope',
+				'q'   => 'Can you redesign or take over an existing website or codebase?',
+				'a'   => 'Yes. We frequently modernize legacy websites, migrate clunky systems to clean modern architectures, and optimize underperforming applications. We perform a preliminary technical and UX audit before recommending next steps.',
+			),
+			array(
+				'cat' => 'Post-Launch & Support',
+				'q'   => 'What happens after the website or app goes live?',
+				'a'   => 'Every release includes 30 days of warranty support for bug fixes and stability checks. Afterward, we offer ongoing maintenance, server monitoring, and monthly SEO and growth retainers to continuously expand your organic reach.',
+			),
 		),
 		'contact'          => array(
 			'eyebrow' => 'Start a project',
@@ -143,6 +173,34 @@ return array(
 		),
 		'vision'           => 'Companies should be able to explain what they do, ship the product that proves it, and reach the people who need it without starting over every quarter.',
 		'mission'          => 'Help ambitious teams build useful digital products and market them with a plan that sales, marketing, and delivery can all recognise.',
+		'founders'         => array(
+			array(
+				'name'       => 'Simran Kaur',
+				'role'       => 'Founder & CEO',
+				'focus'      => 'Operations & Strategic Growth',
+				'quote'      => 'We established Sovassa to eliminate the gap between what companies build and how they market. When engineering precision and growth strategy collaborate from day one, ambitious brands scale without compromise.',
+				'bio'        => 'Simran Kaur directs Sovassa Technologies’ executive vision, operations, and global client partnerships. With a disciplined focus on engineering longevity and commercial viability, she oversees unified cross-disciplinary delivery across web, mobile, and digital growth initiatives worldwide.',
+				'pillars'    => array(
+					'Global Client Partnerships',
+					'Cross-Disciplinary Governance',
+					'Commercial Scalability',
+				),
+				'image'      => 'founder-simran-kaur',
+			),
+			array(
+				'name'       => 'Sukhwinder Kaur',
+				'role'       => 'Founder & Managing Director',
+				'focus'      => 'Technology & Product Architecture',
+				'quote'      => 'Great digital products are built on uncompromised architecture. We design robust, blazing-fast systems engineered to endure hyper-scale, strict security demands, and long-term business evolution.',
+				'bio'        => 'Sukhwinder Kaur directs technological architecture, engineering excellence, and technical innovation at Sovassa Technologies. She ensures every software platform, custom API, and mobile application meets world-class benchmarks in performance, security, and scalability.',
+				'pillars'    => array(
+					'High-Performance Architecture',
+					'Engineering Quality Standards',
+					'Enterprise Scalability & Security',
+				),
+				'image'      => 'founder-sukhwinder-kaur',
+			),
+		),
 		'values'           => array(
 			array('title' => 'Clarity before decoration', 'text' => 'A page, a screen, or a campaign earns its place when a person can tell what to do next.'),
 			array('title' => 'Honest scope', 'text' => 'We name what is included, what is not, and what we still need to learn.'),
@@ -167,7 +225,7 @@ return array(
 		),
 		'faq'              => array(
 			array('q' => 'Where do you work?', 'a' => 'Worldwide. We work remotely with clients in different countries and time zones, and a proposal will say if an in-person visit is useful.'),
-			array('q' => 'Who will we work with?', 'a' => 'Team profiles will be introduced as people are ready to be named. Until then, every engagement still has a named owner and the specialists the scope requires.'),
+			array('q' => 'Who will we work with?', 'a' => 'Our company is led by founders Simran Kaur and Sukhwinder Kaur. Every engagement is assigned a dedicated delivery lead and the specialized engineers and strategists your scope requires.'),
 		),
 	),
 	'insights' => array(

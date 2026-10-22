@@ -12,7 +12,7 @@
 
 $page = $args['page'];
 
-$sections = array('hero', 'clients', 'stats', 'services', 'industries', 'cases', 'process', 'why', 'models', 'testimonials', 'tech', 'insights', 'faq', 'contact');
+$sections = array('hero', 'clients', 'stats', 'services', 'industries', 'cases', 'process', 'why', 'compare', 'models', 'testimonials', 'tech', 'insights', 'faq', 'contact');
 foreach ($sections as $section) {
 	get_template_part('template-parts/home/' . $section, null, array('page' => $page));
 }

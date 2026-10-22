@@ -30,7 +30,141 @@
       });
     });
   }
-  document.querySelectorAll('[role="tablist"]').forEach(initTabs);
+  document.querySelectorAll('[role="tablist"]:not(.hp-faq-filters)').forEach(initTabs);
+
+  // FAQ: Live search and category filtering
+  function initFaq() {
+    var searchInput = document.getElementById("hp-faq-search-input");
+    var searchClear = document.getElementById("hp-faq-search-clear");
+    var filterPills = Array.prototype.slice.call(document.querySelectorAll(".hp-faq-pill"));
+    var faqList = document.getElementById("hp-faq-list");
+    var emptyState = document.getElementById("hp-faq-empty");
+    var queryDisplay = document.getElementById("hp-faq-search-query");
+
+    if (!faqList) return;
+
+    var items = Array.prototype.slice.call(faqList.querySelectorAll(".hp-faq__item"));
+    var activeCategory = "all";
+
+    function applyFilter() {
+      var query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+      var matchCount = 0;
+
+      if (searchClear) {
+        searchClear.hidden = query.length === 0;
+      }
+
+      items.forEach(function (item) {
+        var category = item.getAttribute("data-category") || "";
+        var question = (item.querySelector(".hp-faq__question") || {}).textContent || "";
+        var answer = (item.querySelector(".hp-faq__content") || {}).textContent || "";
+
+        var matchesCategory = activeCategory === "all" || category.toLowerCase() === activeCategory.toLowerCase();
+        var matchesQuery = query === "" ||
+          question.toLowerCase().indexOf(query) !== -1 ||
+          answer.toLowerCase().indexOf(query) !== -1 ||
+          category.toLowerCase().indexOf(query) !== -1;
+
+        var isVisible = matchesCategory && matchesQuery;
+        item.hidden = !isVisible;
+
+        if (isVisible) {
+          matchCount++;
+          // If searching, auto-expand matching questions for instant readability
+          if (query.length > 1) {
+            item.open = true;
+          }
+        }
+      });
+
+      if (emptyState) {
+        emptyState.hidden = matchCount > 0;
+        if (queryDisplay) {
+          queryDisplay.textContent = query || activeCategory;
+        }
+      }
+    }
+
+    filterPills.forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        filterPills.forEach(function (p) {
+          p.classList.remove("is-active");
+          p.setAttribute("aria-selected", "false");
+        });
+        pill.classList.add("is-active");
+        pill.setAttribute("aria-selected", "true");
+        activeCategory = pill.getAttribute("data-filter") || "all";
+        applyFilter();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener("input", applyFilter);
+    }
+
+    if (searchClear) {
+      searchClear.addEventListener("click", function () {
+        if (searchInput) {
+          searchInput.value = "";
+          searchInput.focus();
+        }
+        applyFilter();
+      });
+    }
+  }
+  initFaq();
+
+  // Comparison slider: Legacy vs. Sovassa engineered architecture
+  function initCompare() {
+    var widget = document.querySelector("[data-compare-widget]");
+    if (!widget) return;
+
+    var screen = document.getElementById("hp-compare-screen");
+    var range = document.getElementById("hp-compare-range");
+    var after = document.getElementById("hp-compare-after");
+    var divider = document.getElementById("hp-compare-divider");
+    var presets = Array.prototype.slice.call(document.querySelectorAll(".hp-compare-preset-btn"));
+
+    function setPosition(val) {
+      val = Math.max(0, Math.min(100, parseFloat(val)));
+      if (screen) {
+        screen.style.setProperty("--pos", val + "%");
+      }
+      if (after) {
+        after.style.clipPath = "inset(0 0 0 " + val + "%)";
+      }
+      if (divider) {
+        divider.style.left = val + "%";
+      }
+      if (range) {
+        range.value = String(val);
+      }
+
+      presets.forEach(function (btn) {
+        var presetVal = parseFloat(btn.getAttribute("data-compare-set"));
+        btn.classList.toggle("is-active", Math.abs(presetVal - val) < 12);
+      });
+    }
+
+    if (range) {
+      range.addEventListener("input", function () {
+        setPosition(this.value);
+      });
+    }
+
+    presets.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var targetVal = parseFloat(btn.getAttribute("data-compare-set"));
+        if (!isNaN(targetVal)) {
+          setPosition(targetVal);
+        }
+      });
+    });
+
+    // Initialize at 50%
+    setPosition(50);
+  }
+  initCompare();
 
   // Process: each stage card shows its photo. It advances on its own until someone picks a stage.
   var process = document.querySelector("[data-process]");
