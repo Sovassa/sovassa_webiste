@@ -62,11 +62,11 @@ sovassa_page_hero($page, 'about', 'Discover, Strategize, Build, and Grow in orde
 									<picture>
 										<?php if ($has_webp): ?>
 											<source
-												srcset="<?php echo esc_url($theme_uri . '/assets/images/founders/' . $img_slug . '.webp'); ?>"
+												srcset="<?php echo esc_url($theme_uri . '/assets/images/founders/' . $img_slug . '.webp?v=' . SOVASSA_VERSION); ?>"
 												type="image/webp">
 										<?php endif; ?>
 										<?php
-										$fallback_img = $has_jpg ? ($theme_uri . '/assets/images/founders/' . $img_slug . '.jpg') : ($theme_uri . '/assets/images/founders/' . $img_slug . '.png');
+										$fallback_img = $has_jpg ? ($theme_uri . '/assets/images/founders/' . $img_slug . '.jpg?v=' . SOVASSA_VERSION) : ($theme_uri . '/assets/images/founders/' . $img_slug . '.png?v=' . SOVASSA_VERSION);
 										?>
 										<img src="<?php echo esc_url($fallback_img); ?>"
 											alt="<?php echo esc_attr($founder['name'] . ' – ' . $founder['role'] . ' at Sovassa Technologies'); ?>"
@@ -80,7 +80,7 @@ sovassa_page_hero($page, 'about', 'Discover, Strategize, Build, and Grow in orde
 
 								<div class="founder-profile__badge">
 									<span class="founder-profile__badge-dot"></span>
-									<?php echo esc_html($founder['role']); ?>
+									<?php echo esc_html(!empty($founder['badge']) ? $founder['badge'] : $founder['role']); ?>
 								</div>
 							</div>
 						</div>

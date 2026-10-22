@@ -177,6 +177,7 @@ return array(
 			array(
 				'name'       => 'Simran Kaur',
 				'role'       => 'Founder & CEO',
+				'badge'      => 'Founder & CEO',
 				'focus'      => 'Operations & Strategic Growth',
 				'quote'      => 'We established Sovassa to eliminate the gap between what companies build and how they market. When engineering precision and growth strategy collaborate from day one, ambitious brands scale without compromise.',
 				'bio'        => 'Simran Kaur directs Sovassa Technologies’ executive vision, operations, and global client partnerships. With a disciplined focus on engineering longevity and commercial viability, she oversees unified cross-disciplinary delivery across web, mobile, and digital growth initiatives worldwide.',
@@ -190,6 +191,7 @@ return array(
 			array(
 				'name'       => 'Sukhwinder Kaur',
 				'role'       => 'Founder & Managing Director',
+				'badge'      => 'Founder & MD',
 				'focus'      => 'Technology & Product Architecture',
 				'quote'      => 'Great digital products are built on uncompromised architecture. We design robust, blazing-fast systems engineered to endure hyper-scale, strict security demands, and long-term business evolution.',
 				'bio'        => 'Sukhwinder Kaur directs technological architecture, engineering excellence, and technical innovation at Sovassa Technologies. She ensures every software platform, custom API, and mobile application meets world-class benchmarks in performance, security, and scalability.',
