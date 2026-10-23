@@ -470,11 +470,24 @@ function sovassa_post_card() {
  *
  * @return array<string, string|bool>
  */
-function sovassa_author() {
-	$config = sovassa_config();
-	$author = isset($config['author']) && is_array($config['author']) ? $config['author'] : array();
-	$name   = isset($author['name']) ? trim((string) $author['name']) : '';
-	if ('' === $name) {
+function sovassa_author($post_id = null) {
+	$config  = sovassa_config();
+	$post_id = $post_id ?: get_the_ID();
+	$person  = null;
+
+	if ($post_id) {
+		$slug     = get_post_field('post_name', $post_id);
+		$articles = function_exists('sovassa_articles') ? sovassa_articles() : array();
+		if (isset($articles[$slug]['author']) && isset($config['authors'][$articles[$slug]['author']])) {
+			$person = $config['authors'][$articles[$slug]['author']];
+		}
+	}
+
+	if (!$person && isset($config['author']) && is_array($config['author']) && !empty($config['author']['name'])) {
+		$person = $config['author'];
+	}
+
+	if (!$person || empty($person['name'])) {
 		return array(
 			'is_person' => false,
 			'name'      => $config['name'],
@@ -484,13 +497,24 @@ function sovassa_author() {
 			'image'     => '',
 		);
 	}
+
+	$image = isset($person['image']) ? (string) $person['image'] : '';
+	if ('' !== $image && !str_starts_with($image, 'http')) {
+		$image = get_template_directory_uri() . '/' . ltrim($image, '/');
+	}
+
+	$url = isset($person['url']) ? (string) $person['url'] : '';
+	if ('' !== $url && !str_starts_with($url, 'http')) {
+		$url = home_url('/' . ltrim($url, '/'));
+	}
+
 	return array(
 		'is_person' => true,
-		'name'      => $name,
-		'role'      => isset($author['role']) ? (string) $author['role'] : '',
-		'bio'       => isset($author['bio']) ? (string) $author['bio'] : '',
-		'url'       => isset($author['url']) ? (string) $author['url'] : '',
-		'image'     => isset($author['image']) ? (string) $author['image'] : '',
+		'name'      => $person['name'],
+		'role'      => isset($person['role']) ? (string) $person['role'] : '',
+		'bio'       => isset($person['bio']) ? (string) $person['bio'] : '',
+		'url'       => $url,
+		'image'     => $image,
 	);
 }
 

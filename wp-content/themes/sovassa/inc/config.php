@@ -25,14 +25,29 @@ function sovassa_config() {
 		'contact_note'  => 'Call, WhatsApp, or email us, or send the form and we will reply to the address you share. We work with clients worldwide.',
 		'analytics_id'                 => 'G-2K9QLM7XWQ',
 		'search_console_verification'  => 'bMmGjPGOuZCYU0GoqSlQcmqXIcp95-0g776NaifPAcU',
-		// Byline on insights. Leave 'name' empty to credit the company. With a real
-		// person, add a profile URL so search engines can connect the author.
+		// Byline on insights. Configured with executive founder profiles for Google E-E-A-T.
 		'author'        => array(
-			'name'  => '',
-			'role'  => '',
-			'bio'   => '',
-			'url'   => '',
-			'image' => '',
+			'name'  => 'Simran Kaur',
+			'role'  => 'Founder & CEO',
+			'bio'   => 'Simran Kaur directs Sovassa Technologies’ executive vision, operations, and global client partnerships, helping ambitious companies scale with unified product development and digital marketing.',
+			'url'   => '/about/#founders',
+			'image' => 'assets/images/founders/founder-simran-kaur.jpg',
+		),
+		'authors'       => array(
+			'simran'     => array(
+				'name'  => 'Simran Kaur',
+				'role'  => 'Founder & CEO',
+				'bio'   => 'Simran Kaur directs Sovassa Technologies’ executive vision, operations, and global client partnerships, helping ambitious companies scale with unified product development and digital marketing.',
+				'url'   => '/about/#founders',
+				'image' => 'assets/images/founders/founder-simran-kaur.jpg',
+			),
+			'sukhwinder' => array(
+				'name'  => 'Sukhwinder Kaur',
+				'role'  => 'Founder & Managing Director',
+				'bio'   => 'Sukhwinder Kaur directs technological architecture, engineering excellence, and technical innovation at Sovassa Technologies, designing scalable, high-performance web systems and native/cross-platform mobile applications.',
+				'url'   => '/about/#founders',
+				'image' => 'assets/images/founders/founder-sukhwinder-kaur.jpg',
+			),
 		),
 		'social'        => array(
 			'LinkedIn'  => 'https://www.linkedin.com/company/sovassa-technologies',

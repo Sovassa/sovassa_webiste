@@ -36,7 +36,47 @@ return array(
 			'stats'        => array(),
 			'clients'      => array(),
 			'badges'       => array(),
-			'cases'        => array(),
+			'cases'        => array(
+				array(
+					'tab'     => 'Healthcare Platform',
+					'tag'     => 'Telehealth & Clinical Care Architecture',
+					'title'   => 'HIPAA-Ready Telehealth & Patient Booking Platform',
+					'text'    => 'Engineered an end-to-end digital health platform featuring encrypted video consultations, automated calendar appointment booking, practitioner directories, and EHR records synchronization.',
+					'image'   => 'home/cases/case-healthcare.webp',
+					'metrics' => array(
+						array('3.2x', 'Online Consultations'),
+						array('-45%', 'Appointment No-Shows'),
+						array('99.9%', 'Platform Availability'),
+					),
+					'url'     => '/work/#healthcare',
+				),
+				array(
+					'tab'     => 'Taxi Booking Platform',
+					'tag'     => 'On-Demand Mobility & Geolocation',
+					'title'   => 'High-Concurrency Ride-Hailing & Fleet Dispatch System',
+					'text'    => 'Architected a real-time cross-platform mobile ecosystem (Passenger and Driver iOS/Android apps) with live GPS vehicle telemetry, intelligent driver dispatch algorithms, and instant payment settlement.',
+					'image'   => 'home/cases/case-taxi.webp',
+					'metrics' => array(
+						array('< 3s', 'Driver Dispatch Latency'),
+						array('100k+', 'Completed Rides'),
+						array('4.9★', 'App Store Rating'),
+					),
+					'url'     => '/work/#taxi',
+				),
+				array(
+					'tab'     => 'Marketplace Platform',
+					'tag'     => 'Multi-Vendor Commerce & Escrow',
+					'title'   => 'Scalable B2B & B2C Multi-Vendor Marketplace',
+					'text'    => 'Built a unified commerce marketplace supporting frictionless vendor onboarding, automated escrow split payouts, dynamic product catalogues, inventory syncing, and real-time shipping tracking.',
+					'image'   => 'home/cases/case-marketplace.webp',
+					'metrics' => array(
+						array('+140%', 'Merchant GMV Growth'),
+						array('< 1.2s', 'Catalogue Load Speed'),
+						array('0%', 'Payment Reconciliation Errors'),
+					),
+					'url'     => '/work/#marketplace',
+				),
+			),
 			'testimonials' => array(),
 		),
 

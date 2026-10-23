@@ -19,58 +19,72 @@ function sovassa_articles() {
 	return array(
 		'how-much-does-it-cost-to-build-an-app' => array(
 			'version' => 1,
+			'author'  => 'sukhwinder',
 			'excerpt' => 'What actually sets the cost of an app: scope, user roles, platforms, integrations, and the costs teams forget. Plus how to get an estimate you can trust.',
 		),
 		'how-much-does-a-business-website-cost' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'What sets the cost of a business website: scope, design, content, CMS, and integrations. Plus the costs outside the build and how to compare quotes.',
 		),
 		'how-to-choose-an-app-development-company' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'How to choose an app development company: what to look for, questions to ask, warning signs, and the contract terms that protect you.',
 		),
 		'how-long-does-app-development-take' => array(
 			'version' => 1,
+			'author'  => 'sukhwinder',
 			'excerpt' => 'The stages of app development, what makes each take longer, store review rules, and how to shorten the timeline without shipping something fragile.',
 		),
 		'seo-vs-paid-advertising' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'SEO vs paid advertising compared: speed, cost, control, and long-term value. When each one fits, and why most businesses need both.',
 		),
 		'how-long-seo-takes' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'How long SEO takes, what happens in what order, what speeds it up or slows it down, and how to tell it is working before traffic grows.',
 		),
 		'native-vs-cross-platform' => array(
 			'version' => 1,
+			'author'  => 'sukhwinder',
 			'excerpt' => 'Native vs cross-platform app development: the real trade-offs in cost, performance, and maintenance, and how to choose for your product.',
 		),
 		'flutter-vs-react-native' => array(
 			'version' => 1,
+			'author'  => 'sukhwinder',
 			'excerpt' => 'Flutter vs React Native compared for business apps: language, interface, talent, ecosystem, and performance, and how to choose for your team.',
 		),
 		'website-redesign-checklist' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'A website redesign checklist covering goals, URL mapping and redirects, SEO, tracking, launch-day checks, and monitoring after go-live.',
 		),
 		'why-websites-do-not-generate-leads' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'Why business websites struggle to turn traffic into qualified pipeline, and the structural, psychological, and technical fixes that generate real leads.',
 		),
 		'landing-page-vs-website' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'Landing pages vs full websites compared: conversion mechanics, paid search efficiency, SEO implications, and how to choose the right destination for your traffic.',
 		),
 		'website-speed-and-conversion' => array(
 			'version' => 1,
+			'author'  => 'sukhwinder',
 			'excerpt' => 'How page speed impacts pipeline, conversion rates, and SEO ranking: Core Web Vitals thresholds, the latency tax on revenue, technical bottlenecks, and how to fix them.',
 		),
 		'b2b-lead-generation' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'A practical framework for B2B inbound lead generation: defining qualified opportunities, aligning search intent with service pages, eliminating conversion leaks, and marketing-to-sales handoffs.',
 		),
 		'how-to-build-a-b2b-website' => array(
 			'version' => 1,
+			'author'  => 'simran',
 			'excerpt' => 'The step-by-step blueprint for building a high-converting B2B website: buyer persona navigation, service page architecture, objection handling, tech stack selection, and conversion paths.',
 		),
 	);
