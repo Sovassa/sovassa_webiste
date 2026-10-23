@@ -112,13 +112,64 @@ return array(
 			),
 		),
 		'process'          => array(
-			'eyebrow' => 'How we work',
-			'title'   => 'Four stages, with something to review at each one.',
+			'eyebrow' => 'The Sovassa Delivery Blueprint',
+			'title'   => 'Four disciplined stages. Zero guesswork. Transparent delivery.',
 			'steps'   => array(
-				array('title' => 'Discover', 'text' => 'We agree the goal, the audience, and what success looks like in numbers.', 'get' => 'You get a written scope', 'image' => 'discover', 'alt' => 'A discovery workshop mapping goals on sticky notes'),
-				array('title' => 'Design', 'text' => 'We prototype the key screens and test them before anything is built.', 'get' => 'You get a clickable prototype', 'image' => 'design', 'alt' => 'A design review of a clickable app prototype'),
-				array('title' => 'Build', 'text' => 'We build in short cycles, with working software to try at the end of each.', 'get' => 'You get regular demos', 'image' => 'build', 'alt' => 'Developers building and testing the product'),
-				array('title' => 'Grow', 'text' => 'We launch, then run the SEO and campaigns that bring people in.', 'get' => 'You get monthly reports', 'image' => 'grow', 'alt' => 'A growth review of traffic and lead charts'),
+				array(
+					'title' => 'Discovery & Tech Architecture',
+					'text'  => 'We translate your business objectives into a precise technical blueprint, system architecture diagram, user flow wireframes, and milestone roadmaps.',
+					'get'   => 'Deliverable: Written SRS & Architecture Spec',
+					'image' => 'discover',
+					'alt'   => 'Architectural discovery blueprint and milestone planning session',
+				),
+				array(
+					'title' => 'Interactive UI/UX Prototyping',
+					'text'  => 'We engineer responsive design systems and clickable Figma prototypes, pressure-testing user journeys and interface patterns before coding a single line.',
+					'get'   => 'Deliverable: Clickable Interactive Prototype',
+					'image' => 'design',
+					'alt'   => 'Clickable UI/UX prototyping and user experience testing',
+				),
+				array(
+					'title' => 'Agile Sprints & Staging Demos',
+					'text'  => 'Engineered in bi-weekly sprints with clean, modular code. You receive private staging environments and live testable builds at every single cycle.',
+					'get'   => 'Deliverable: Bi-Weekly Working Demo Builds',
+					'image' => 'build',
+					'alt'   => 'Full-stack software engineers shipping bi-weekly sprint builds',
+				),
+				array(
+					'title' => 'Launch, Security QA & 30-Day SLA',
+					'text'  => 'Production deployment with automated CI/CD pipelines, OWASP security validation, 100% IP ownership transfer, and 30 days of comprehensive post-launch warranty.',
+					'get'   => 'Deliverable: 100% Code Ownership & 30-Day Warranty',
+					'image' => 'grow',
+					'alt'   => 'Production deployment, analytics integration, and SLA warranty',
+				),
+			),
+		),
+		'guarantees'       => array(
+			'eyebrow' => 'Our Commitments',
+			'title'   => 'Engineering Guarantees Built Into Every Engagement',
+			'lede'    => 'We eliminate agency risk through contractually binding engineering, IP protection, and operational safeguards.',
+			'items'   => array(
+				array(
+					'icon'  => 'shield',
+					'title' => '100% IP & Code Ownership',
+					'text'  => 'Full rights and code transfer from Day 1. Complete Git repository access, cloud credentials, and technical documentation with zero vendor lock-in.',
+				),
+				array(
+					'icon'  => 'lock',
+					'title' => 'Day-One NDA Protection',
+					'text'  => 'We execute a mutual Non-Disclosure Agreement before discussing proprietary business logic, trade secrets, or project requirements.',
+				),
+				array(
+					'icon'  => 'layers',
+					'title' => 'Agile Milestone Escrow',
+					'text'  => 'Engagements are structured into clear verifiable milestones. Invoices and releases are tied strictly to demonstrated progress and client sign-off.',
+				),
+				array(
+					'icon'  => 'spark',
+					'title' => '30-Day Post-Launch Warranty',
+					'text'  => 'Every project includes 30 days of complimentary bug-fixing, cloud infrastructure monitoring, and performance stability warranty post-launch.',
+				),
 			),
 		),
 		'why'              => array(

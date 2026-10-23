@@ -170,6 +170,14 @@
 			btn.setAttribute('aria-checked', 'true');
 			state.track = btn.dataset.track;
 			recalculate();
+			if (typeof window.sovassaTrack === 'function') {
+				var currentTrack = tracks[state.track] || tracks.web;
+				window.sovassaTrack('estimator_track_selected', {
+					event_category: 'Estimator',
+					track_id: state.track,
+					track_name: currentTrack.name
+				});
+			}
 		});
 	});
 
@@ -178,16 +186,28 @@
 		btn.addEventListener('click', function () {
 			var feature = btn.dataset.feature;
 			var idx = state.features.indexOf(feature);
+			var action = 'add';
 			if (idx === -1) {
 				state.features.push(feature);
 				btn.classList.add('is-active');
 				btn.setAttribute('aria-pressed', 'true');
+				action = 'add';
 			} else {
 				state.features.splice(idx, 1);
 				btn.classList.remove('is-active');
 				btn.setAttribute('aria-pressed', 'false');
+				action = 'remove';
 			}
 			recalculate();
+			if (typeof window.sovassaTrack === 'function') {
+				window.sovassaTrack('estimator_module_toggled', {
+					event_category: 'Estimator',
+					module_id: feature,
+					module_name: featureNames[feature] || feature,
+					action: action,
+					total_selected: state.features.length
+				});
+			}
 		});
 	});
 
@@ -202,10 +222,16 @@
 			btn.setAttribute('aria-checked', 'true');
 			state.horizon = btn.dataset.horizon;
 			recalculate();
+			if (typeof window.sovassaTrack === 'function') {
+				window.sovassaTrack('estimator_horizon_selected', {
+					event_category: 'Estimator',
+					horizon: state.horizon
+				});
+			}
 		});
 	});
 
-	// Enforce objective clarity on submit
+	// Enforce objective clarity & track lead generation attempt on submit
 	if (form && inputObjective) {
 		form.addEventListener('submit', function () {
 			var currentTrack = tracks[state.track] || tracks.web;
@@ -218,6 +244,16 @@
 
 			if (customText.indexOf('[Selected:') === -1) {
 				inputObjective.value = (customText ? customText + ' —' : currentTrack.name + ' scoping request —') + calculatedNote;
+			}
+
+			if (typeof window.sovassaTrack === 'function') {
+				window.sovassaTrack('generate_lead_attempt', {
+					event_category: 'Lead Generation',
+					track_id: state.track,
+					track_name: currentTrack.name,
+					modules_count: state.features.length,
+					horizon: state.horizon
+				});
 			}
 		});
 	}

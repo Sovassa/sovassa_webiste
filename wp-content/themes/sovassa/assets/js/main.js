@@ -1,4 +1,33 @@
 (function () {
+  'use strict';
+
+  // Global GA4 micro-conversion helper compatible with Site Kit, GTM, and standalone gtag.js
+  window.dataLayer = window.dataLayer || [];
+  if (typeof window.gtag !== 'function') {
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+  }
+
+  window.sovassaTrack = function (eventName, params) {
+    try {
+      params = params || {};
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, params);
+      } else if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+        var eventObj = { event: eventName };
+        for (var key in params) {
+          if (Object.prototype.hasOwnProperty.call(params, key)) {
+            eventObj[key] = params[key];
+          }
+        }
+        window.dataLayer.push(eventObj);
+      }
+    } catch (err) {
+      // Graceful fallback
+    }
+  };
+
   var toggle = document.querySelector(".menu-toggle");
   var menu = document.getElementById("site-menu");
   var desktop = window.matchMedia("(min-width: 1181px)");
@@ -213,7 +242,15 @@
     }
     buttons.forEach(function (button) {
       button.addEventListener("click", function () {
-        select(button.getAttribute("data-switch"));
+        var id = button.getAttribute("data-switch");
+        select(id);
+        if (typeof window.sovassaTrack === "function") {
+          window.sovassaTrack("tab_switched", {
+            event_category: "Engagement",
+            tab_id: id,
+            page_path: window.location.pathname
+          });
+        }
       });
     });
     root.classList.add("is-ready");
@@ -225,6 +262,7 @@
   document.querySelectorAll("[data-filter-group]").forEach(function (group) {
     var buttons = group.querySelectorAll("[data-filter]");
     var cards = document.querySelectorAll("[data-tags]");
+    var groupName = group.getAttribute("data-filter-group") || "tech_stack";
     buttons.forEach(function (button) {
       button.addEventListener("click", function () {
         var filter = button.getAttribute("data-filter");
@@ -234,8 +272,63 @@
           var tags = (card.getAttribute("data-tags") || "").split("|");
           card.hidden = filter !== "all" && tags.indexOf(filter) === -1;
         });
+        if (typeof window.sovassaTrack === "function") {
+          window.sovassaTrack("filter_applied", {
+            event_category: "Navigation",
+            filter_group: groupName,
+            filter_value: filter,
+            page_path: window.location.pathname
+          });
+        }
       });
     });
+  });
+
+  // Direct Contact & Lead Generation Micro-Conversions
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest('a[href^="tel:"], a[href*="wa.me"], a[href*="whatsapp.com"], a[href^="mailto:"]');
+    if (link) {
+      var href = link.getAttribute("href") || "";
+      var method = "link";
+      var destination = href;
+      if (href.indexOf("tel:") === 0) {
+        method = "phone";
+        destination = href.replace("tel:", "");
+      } else if (href.indexOf("wa.me") !== -1 || href.indexOf("whatsapp.com") !== -1) {
+        method = "whatsapp";
+      } else if (href.indexOf("mailto:") === 0) {
+        method = "email";
+        destination = href.replace("mailto:", "");
+      }
+      var locationTag = link.closest(".mobile-cta-bar") ? "mobile_dock" :
+                        link.closest(".edge-dock") ? "edge_dock" :
+                        link.closest(".site-header") ? "header" :
+                        link.closest(".site-footer") ? "footer" : "content";
+      if (typeof window.sovassaTrack === "function") {
+        window.sovassaTrack("contact_click", {
+          event_category: "Lead Generation",
+          contact_method: method,
+          contact_location: locationTag,
+          destination: destination
+        });
+      }
+      return;
+    }
+
+    // Key CTA clicks (Book Consultation, Scope Project, etc.)
+    var cta = event.target.closest("a.btn, a.estimator-whatsapp, a.post-cta__btn");
+    if (cta) {
+      var ctaHref = cta.getAttribute("href") || "";
+      var ctaText = (cta.textContent || "").trim().slice(0, 50);
+      if (typeof window.sovassaTrack === "function") {
+        window.sovassaTrack("cta_click", {
+          event_category: "Engagement",
+          cta_text: ctaText,
+          cta_url: ctaHref,
+          page_path: window.location.pathname
+        });
+      }
+    }
   });
 
   var revealSelector = ".section .section-head, .section .link-card, .section .plain-card, .section .post-card, .section .role-card, .section .step, .section .checklist li, .section .faq__item, .section .bento__card, .section .alt-row, .section .feature-lead, .section .together-still, .section .split-still, [data-reveal]";

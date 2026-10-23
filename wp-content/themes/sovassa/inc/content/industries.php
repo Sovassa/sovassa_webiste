@@ -45,6 +45,7 @@ return array(
 		'meta_description' => 'Storefront, collection structure, and acquisition work for ecommerce teams whose catalogue and campaigns were planned apart and no longer match the shelves.',
 		'crumb_parent'     => $industry_parent,
 		'secondary_cta'    => array('label' => 'All industries', 'url' => 'industries'),
+		'featured_case_id' => 'marketplace',
 		'challenge'        => 'Merchandising, content, and acquisition were never planned together. Ads promise an offer the collection page does not show, and the catalogue is hard to shop for the products that can actually sell.',
 		'support'          => 'We improve the shopping paths that matter, tidy the collection structure, and point SEO or paid media at pages that can convert. Campaigns are not planned against a catalogue nobody owns.',
 		'points'           => array(
@@ -70,6 +71,7 @@ return array(
 		'meta_description' => 'Journey design, plain-language pages, and careful forms for healthcare teams. Patients and referrers get a next step. Clinical claims are not invented.',
 		'crumb_parent'     => $industry_parent,
 		'secondary_cta'    => array('label' => 'All industries', 'url' => 'industries'),
+		'featured_case_id' => 'healthcare',
 		'challenge'        => 'Services are described in language a clinician understands and a patient does not. Referrers cannot see how to send someone, and the form lands in a shared inbox with no owner.',
 		'support'          => 'We design the journey, write plain-language pages, and route forms to the desk that should receive them. We do not invent clinical claims, outcomes, or credentials.',
 		'points'           => array(
@@ -145,6 +147,7 @@ return array(
 		'meta_description' => 'Launch sites, product UX, and a small content or paid program for software companies whose marketing site is missing, thin, or already out of date now.',
 		'crumb_parent'     => $industry_parent,
 		'secondary_cta'    => array('label' => 'All industries', 'url' => 'industries'),
+		'featured_case_id' => 'taxi',
 		'challenge'        => 'The product changes faster than the website. Screenshots, pricing, and the description of the job disagree. Sometimes there is no site at all, only a deck.',
 		'support'          => 'We ship a launch site in the same language as the product, design the path a new user takes, and add only the content or paid work that helps the team learn from early users.',
 		'points'           => array(
@@ -195,6 +198,7 @@ return array(
 		'meta_description' => 'An MVP or launch site, a plain offer, and a way to learn from first enquiries, for startups that cannot wait until the brand feels finished enough to launch.',
 		'crumb_parent'     => $industry_parent,
 		'secondary_cta'    => array('label' => 'All industries', 'url' => 'industries'),
+		'featured_case_id' => 'taxi',
 		'challenge'        => 'The idea is larger than the first release, and the company is waiting to look finished before it talks to buyers. The site, when it exists, describes a vision instead of a job someone can try.',
 		'support'          => 'We cut the first version to one job, ship a launch site that explains it, and leave a way to hear from the first enquiries. The brand can stay plain until the offer is real.',
 		'points'           => array(

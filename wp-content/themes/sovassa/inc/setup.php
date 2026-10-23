@@ -191,6 +191,27 @@ function sovassa_seed_posts() {
 			'excerpt'  => 'Content works harder when each piece has a page to support, a person to help, and a next step that matches the sales conversation.',
 			'content'  => '<p>Company content drifts when it is planned as a calendar instead of a system. Posts go out, the website stays vague, and sales still writes the same explanation in every proposal.</p><p>Tie topics to the service pages you need people to understand. A piece of writing should make one of those pages clearer, answer a buying objection, or give the team something useful to send.</p><p>Repurposing is then straightforward. The same point can become a page section, a short social post, and a follow-up in a proposal. Measurement looks at assisted enquiries and sales usefulness, not only likes.</p><p>That is the content practice Sovassa sets up inside a broader marketing engagement: fewer orphaned assets, and a site that keeps getting easier to trust.</p>',
 		),
+		array(
+			'slug'     => 'telemedicine-app-development-guide',
+			'title'    => 'Telemedicine App Development: Architecture, HIPAA Compliance, and Cost Breakdown',
+			'category' => 'Technology',
+			'excerpt'  => 'A comprehensive technical and commercial guide to building a telehealth platform: WebRTC video streaming, EHR/FHIR integrations, HIPAA compliance, milestone timelines, and cost drivers.',
+			'content'  => '',
+		),
+		array(
+			'slug'     => 'how-to-build-a-taxi-booking-app',
+			'title'    => 'How to Build an On-Demand Taxi Booking & Driver Dispatch App: Architecture, Telemetry, and Costs',
+			'category' => 'Technology',
+			'excerpt'  => 'The complete engineering blueprint for building a high-concurrency ride-hailing and fleet dispatch ecosystem: real-time GPS telemetry, WebSocket dispatch, surge pricing algorithms, and tech stack trade-offs.',
+			'content'  => '',
+		),
+		array(
+			'slug'     => 'multi-vendor-marketplace-development-guide',
+			'title'    => 'Custom Multi-Vendor Marketplace Development: Architecture, Vendor Onboarding, and Escrow Payments',
+			'category' => 'Business',
+			'excerpt'  => 'How to build a scalable multi-vendor B2B or B2C eCommerce marketplace: automated merchant KYC onboarding, split escrow payments via Stripe Connect, inventory sync, and SEO catalogue architecture.',
+			'content'  => '',
+		),
 	);
 
 	$posts = array_merge($posts, sovassa_pillar_posts());

@@ -30,5 +30,28 @@ $section = $args['page']['process'];
 				<span class="hp-dots" aria-hidden="true"><?php foreach ($section['steps'] as $i => $step) : ?><i<?php echo 0 === $i ? ' class="is-on"' : ''; ?>></i><?php endforeach; ?></span>
 			</div>
 		</div>
+
+		<?php if (!empty($args['page']['guarantees'])) : $guar = $args['page']['guarantees']; ?>
+			<div class="hp-guarantees">
+				<div class="hp-guarantees__head">
+					<span class="chip chip--accent"><?php echo esc_html($guar['eyebrow']); ?></span>
+					<h3 class="hp-guarantees__title"><?php echo esc_html($guar['title']); ?></h3>
+					<p class="hp-guarantees__lede"><?php echo esc_html($guar['lede']); ?></p>
+				</div>
+				<div class="hp-guarantees__grid">
+					<?php foreach ($guar['items'] as $item) : ?>
+						<div class="hp-guarantee-card">
+							<div class="hp-guarantee-card__mark">
+								<?php sovassa_icon($item['icon']); ?>
+							</div>
+							<div class="hp-guarantee-card__body">
+								<h4><?php echo esc_html($item['title']); ?></h4>
+								<p><?php echo esc_html($item['text']); ?></p>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		<?php endif; ?>
 	</div>
 </section>

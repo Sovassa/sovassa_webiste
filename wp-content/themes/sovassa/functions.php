@@ -5,8 +5,8 @@
  * @package Sovassa
  */
 
-define('SOVASSA_VERSION', '2.1.9');
-define('SOVASSA_SEED_VERSION', '4');
+define('SOVASSA_VERSION', '2.2.2');
+define('SOVASSA_SEED_VERSION', '5');
 
 require get_template_directory() . '/inc/config.php';
 require get_template_directory() . '/inc/content.php';

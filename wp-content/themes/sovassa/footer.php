@@ -223,6 +223,18 @@ if (!sovassa_plugin_active('surecookie')):
 	</a>
 </div>
 <a class="back-top" href="#main" aria-label="Back to top"><?php sovassa_icon('up'); ?></a>
+<?php if (!is_page('get-a-quote') && !is_page('thank-you')) : ?>
+<aside class="mobile-cta-bar" aria-label="Mobile quick actions">
+	<a class="mobile-cta-bar__btn mobile-cta-bar__btn--whatsapp" href="<?php echo esc_url(sovassa_whatsapp_url()); ?>" target="_blank" rel="noopener noreferrer">
+		<?php sovassa_icon('whatsapp'); ?>
+		<span>WhatsApp</span>
+	</a>
+	<a class="mobile-cta-bar__btn mobile-cta-bar__btn--quote" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">
+		<?php sovassa_icon('spark'); ?>
+		<span>Scope Project</span>
+	</a>
+</aside>
+<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 

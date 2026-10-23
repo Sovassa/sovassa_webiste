@@ -33,8 +33,11 @@ sovassa_page_hero($page, 'industries', 'One product interface surrounded by diff
 <section class="section section--tint">
 	<div class="container split split--together">
 		<div>
-			<?php sovassa_section_head('Proof', 'Industry stories will be specific when the work is.', 'Until a client engagement in one of these markets is ready to share, the work page describes the shape of a project rather than a result.'); ?>
-			<a class="btn btn--ghost" href="<?php echo esc_url(home_url('/work/')); ?>">See engagement types</a>
+			<?php sovassa_section_head('Vertical Showcases', 'Engineered platform architectures across active markets.', 'Explore our flagship implementations in Telehealth & Patient Booking, High-Concurrency Ride-Hailing, and Multi-Vendor eCommerce Marketplaces.'); ?>
+			<div class="btn-group">
+				<a class="btn btn--primary" href="<?php echo esc_url(home_url('/work/')); ?>">Explore Flagship Case Studies <?php sovassa_icon('arrow'); ?></a>
+				<a class="btn btn--ghost" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Estimate Your Project</a>
+			</div>
 		</div>
 		<?php sovassa_page_still('industries', 'A product interface surrounded by market clusters for commerce, care, learning, and finance.'); ?>
 	</div>

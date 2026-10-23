@@ -87,6 +87,21 @@ function sovassa_articles() {
 			'author'  => 'simran',
 			'excerpt' => 'The step-by-step blueprint for building a high-converting B2B website: buyer persona navigation, service page architecture, objection handling, tech stack selection, and conversion paths.',
 		),
+		'telemedicine-app-development-guide' => array(
+			'version' => 1,
+			'author'  => 'sukhwinder',
+			'excerpt' => 'A comprehensive technical and commercial guide to building a telehealth platform: WebRTC video streaming, EHR/FHIR integrations, HIPAA compliance, milestone timelines, and cost drivers.',
+		),
+		'how-to-build-a-taxi-booking-app' => array(
+			'version' => 1,
+			'author'  => 'sukhwinder',
+			'excerpt' => 'The complete engineering blueprint for building a high-concurrency ride-hailing and fleet dispatch ecosystem: real-time GPS telemetry, WebSocket dispatch, surge pricing algorithms, and tech stack trade-offs.',
+		),
+		'multi-vendor-marketplace-development-guide' => array(
+			'version' => 1,
+			'author'  => 'simran',
+			'excerpt' => 'How to build a scalable multi-vendor B2B or B2C eCommerce marketplace: automated merchant KYC onboarding, split escrow payments via Stripe Connect, inventory sync, and SEO catalogue architecture.',
+		),
 	);
 }
 

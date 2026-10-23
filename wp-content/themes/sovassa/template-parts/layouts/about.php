@@ -128,7 +128,56 @@ sovassa_page_hero($page, 'about', 'Discover, Strategize, Build, and Grow in orde
 		</div>
 	</section>
 <?php endif; ?>
-<section class="section section--tint">
+
+<?php
+$home_data       = sovassa_page('home');
+$blueprint_steps = !empty($home_data['process']['steps']) ? $home_data['process']['steps'] : array();
+$guarantees_data = !empty($home_data['guarantees']) ? $home_data['guarantees'] : null;
+?>
+<?php if (!empty($blueprint_steps)) : ?>
+<section class="section section--tint" id="blueprint">
+	<div class="container">
+		<?php sovassa_section_head('The Delivery Blueprint', 'Four disciplined engineering stages from architecture to SLA.', 'How every product, mobile application, and digital engagement is delivered under our founders\' direct oversight.'); ?>
+		<div class="blueprint-grid">
+			<?php foreach ($blueprint_steps as $idx => $step) : ?>
+				<article class="blueprint-card">
+					<div class="blueprint-card__head">
+						<span class="blueprint-card__step">Stage 0<?php echo (int) ($idx + 1); ?></span>
+						<span class="blueprint-card__deliverable"><?php echo esc_html($step['get']); ?></span>
+					</div>
+					<h3><?php echo esc_html($step['title']); ?></h3>
+					<p><?php echo esc_html($step['text']); ?></p>
+				</article>
+			<?php endforeach; ?>
+		</div>
+
+		<?php if ($guarantees_data && !empty($guarantees_data['items'])) : ?>
+			<div class="hp-guarantees hp-guarantees--compact">
+				<div class="hp-guarantees__head">
+					<span class="chip chip--accent"><?php echo esc_html($guarantees_data['eyebrow']); ?></span>
+					<h3 class="hp-guarantees__title"><?php echo esc_html($guarantees_data['title']); ?></h3>
+					<p class="hp-guarantees__lede"><?php echo esc_html($guarantees_data['lede']); ?></p>
+				</div>
+				<div class="hp-guarantees__grid">
+					<?php foreach ($guarantees_data['items'] as $item) : ?>
+						<div class="hp-guarantee-card">
+							<div class="hp-guarantee-card__mark">
+								<?php sovassa_icon($item['icon']); ?>
+							</div>
+							<div class="hp-guarantee-card__body">
+								<h4><?php echo esc_html($item['title']); ?></h4>
+								<p><?php echo esc_html($item['text']); ?></p>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		<?php endif; ?>
+	</div>
+</section>
+<?php endif; ?>
+
+<section class="section">
 	<div class="container">
 		<?php sovassa_section_head('Build, Market, Grow', 'The idea we repeat, because the work depends on it.', 'Build is the product. Market is how the right people find it. Grow is the operating rhythm after launch.'); ?>
 		<div class="card-grid card-grid--3">
