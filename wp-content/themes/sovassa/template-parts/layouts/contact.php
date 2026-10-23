@@ -104,9 +104,21 @@ sovassa_page_hero($page);
 				</div>
 			<?php endif; ?>
 		</div>
-		<form class="form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-			<?php sovassa_form_notice(); ?>
-			<?php sovassa_form_hidden('contact'); ?>
+		<div class="contact-form-wrap">
+			<div class="contact-booking-callout">
+				<div class="contact-booking-callout__text">
+					<span class="contact-booking-callout__badge"><?php sovassa_icon('spark'); ?> Fast Track</span>
+					<h3>Prefer a 15-minute direct engineering call?</h3>
+					<p>Book a slot directly with our senior solutions engineering team.</p>
+				</div>
+				<button type="button" class="btn btn--secondary btn--sm" data-open-modal="booking">
+					<span>Schedule Discovery Call</span>
+					<?php sovassa_icon('arrow'); ?>
+				</button>
+			</div>
+			<form class="form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+				<?php sovassa_form_notice(); ?>
+				<?php sovassa_form_hidden('contact'); ?>
 			<div class="form-grid">
 				<label><span>Name</span><input type="text" name="name" required autocomplete="name"></label>
 				<label><span>Email</span><input type="email" name="email" required autocomplete="email"></label>
@@ -130,5 +142,6 @@ sovassa_page_hero($page);
 			<?php sovassa_consent_field(); ?>
 			<button class="btn btn--primary" type="submit">Send message</button>
 		</form>
+	</div>
 	</div>
 </section>

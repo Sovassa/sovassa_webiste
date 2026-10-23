@@ -15,6 +15,8 @@ $mark    = isset($page['title_highlight']) ? $page['title_highlight'] : '';
 $lead    = $mark && str_ends_with($title, $mark) ? substr($title, 0, -strlen($mark)) : $title;
 ?>
 <section class="hp-hero" aria-labelledby="hp-hero-title">
+	<canvas id="hero-neural-canvas" class="hp-hero__canvas" aria-hidden="true"></canvas>
+	<div class="hp-hero__glow" aria-hidden="true"></div>
 	<div class="hp-wrap hp-hero__grid">
 		<div class="hp-hero__copy">
 			<span class="hp-pill hp-pill--dark"><?php echo esc_html($page['eyebrow']); ?></span>
@@ -36,6 +38,10 @@ $lead    = $mark && str_ends_with($title, $mark) ? substr($title, 0, -strlen($ma
 		</div>
 		<div class="hp-hero__visual">
 			<div class="hp-hero__photo">
+				<div class="hp-hero__telemetry" aria-hidden="true">
+					<span class="telemetry-ping"></span>
+					<span>Production Architecture · 99.9% Uptime</span>
+				</div>
 				<img src="<?php echo esc_url(sovassa_home_image('hero')); ?>" alt="A business website, its mobile app, and a dashboard of rising leads on one desk" width="1200" height="897" fetchpriority="high">
 			</div>
 			<?php foreach (array_slice($stats, 0, 2) as $i => $stat) : ?>

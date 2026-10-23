@@ -236,6 +236,9 @@ if (!sovassa_plugin_active('surecookie')):
 </aside>
 <?php endif; ?>
 <?php get_template_part('template-parts/components/audit-modal'); ?>
+<?php get_template_part('template-parts/components/ai-copilot'); ?>
+<?php get_template_part('template-parts/components/booking-modal'); ?>
+<?php get_template_part('template-parts/components/command-palette'); ?>
 <?php wp_footer(); ?>
 </body>
 

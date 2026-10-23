@@ -162,6 +162,13 @@
 				</div>
 			</nav>
 			<div class="header-actions">
+				<button type="button" class="cmd-k-trigger" id="cmd-k-trigger" aria-label="Open search and command palette" title="Press ⌘K to search">
+					<svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15">
+						<circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+						<path d="m20 20-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+					</svg>
+					<span class="cmd-k-trigger__shortcut"><kbd>⌘</kbd><kbd>K</kbd></span>
+				</button>
 				<a class="btn btn--primary btn--sm header-cta" href="<?php echo esc_url(home_url('/get-a-quote/')); ?>">Start a Project <?php sovassa_icon('arrow'); ?></a>
 				<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
 					<span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>

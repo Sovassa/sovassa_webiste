@@ -116,9 +116,13 @@ sovassa_page_hero($page, 'about', 'Discover, Strategize, Build, and Grow in orde
 							<?php endif; ?>
 
 							<div class="founder-profile__footer">
+								<button type="button" class="btn btn--sm btn--primary founder-booking-btn" data-open-modal="booking">
+									<span>Book 15-Min Discovery</span>
+									<?php sovassa_icon('arrow'); ?>
+								</button>
 								<a class="founder-profile__cta text-link"
 									href="<?php echo esc_url(home_url('/contact/#enquiry')); ?>">
-									Connect with Leadership <?php sovassa_icon('arrow'); ?>
+									Send Message
 								</a>
 							</div>
 						</div>

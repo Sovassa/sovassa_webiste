@@ -3,6 +3,114 @@
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Interactive Neural Particle Canvas in Hero
+  function initHeroCanvas() {
+    var canvas = document.getElementById("hero-neural-canvas");
+    if (!canvas || reduce) return;
+    var ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    var width, height;
+    var particles = [];
+    var count = 35;
+    var mouse = { x: -9999, y: -9999 };
+    var active = true;
+
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      width = canvas.width = rect.width;
+      height = canvas.height = rect.height;
+    }
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+
+    window.addEventListener("mousemove", function (e) {
+      var rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    }, { passive: true });
+
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * (width || 800),
+        y: Math.random() * (height || 500),
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: Math.random() * 1.8 + 1.2,
+      });
+    }
+
+    function render() {
+      if (!active) return;
+      ctx.clearRect(0, 0, width, height);
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        // Subtle reaction to mouse
+        var dx = mouse.x - p.x;
+        var dy = mouse.y - p.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 130 && dist > 0) {
+          p.x -= (dx / dist) * 0.6;
+          p.y -= (dy / dist) * 0.6;
+        }
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(20, 212, 212, 0.75)";
+        ctx.fill();
+
+        // Connect nearby particles
+        for (var j = i + 1; j < particles.length; j++) {
+          var p2 = particles[j];
+          var d2 = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (d2 < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            var alpha = (1 - d2 / 120) * 0.28;
+            ctx.strokeStyle = "rgba(127, 180, 255, " + alpha + ")";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(render);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var heroObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          active = entry.isIntersecting;
+          if (active) requestAnimationFrame(render);
+        });
+      }, { threshold: 0.1 });
+      heroObs.observe(canvas);
+    } else {
+      requestAnimationFrame(render);
+    }
+  }
+  initHeroCanvas();
+
+  // Cursor-Following Glow for Interactive Cards
+  document.addEventListener("mousemove", function (e) {
+    var cards = document.querySelectorAll(".hp-counter, .hp-badge, .tech-pill, .hp-post");
+    cards.forEach(function (card) {
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", x + "px");
+      card.style.setProperty("--mouse-y", y + "px");
+    });
+  }, { passive: true });
+
   // Tabs: services explorer and case studies share one pattern.
   function initTabs(list) {
     var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
