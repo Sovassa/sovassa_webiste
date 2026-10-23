@@ -3857,6 +3857,311 @@ body.nav-open .site-header { background: #fff; }
   }
 }
 
+/* ==========================================================================
+   Technical Architecture Audit Callout Card & Modal Dialog
+   ========================================================================== */
+
+/* Callout Banner on Service Pages */
+.audit-callout-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px 40px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(10, 163, 173, 0.05) 0%, rgba(11, 47, 86, 0.04) 100%);
+  border: 1.5px solid rgba(11, 47, 86, 0.12);
+  border-left: 5px solid var(--teal);
+  box-shadow: 0 16px 40px rgba(11, 47, 86, 0.04);
+}
+
+.audit-callout-card__body {
+  max-width: 680px;
+}
+
+.audit-callout-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(10, 163, 173, 0.12);
+  color: var(--teal-deep);
+  margin-bottom: 12px;
+}
+
+.audit-callout-card__badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+.audit-callout-card__title {
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.3;
+  margin: 0 0 10px;
+}
+
+.audit-callout-card__desc {
+  font-size: 0.98rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.audit-callout-card__action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.audit-callout-card__action .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.audit-callout-card__note {
+  font-size: 0.8rem;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .audit-callout-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+    gap: 20px;
+  }
+  .audit-callout-card__action {
+    align-items: flex-start;
+    width: 100%;
+  }
+  .audit-callout-card__action .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Modal Dialog */
+.audit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.audit-modal.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.audit-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 25, 44, 0.76);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.audit-modal__dialog {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 36px 40px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  border: 1.5px solid rgba(11, 47, 86, 0.12);
+  transform: scale(0.95) translateY(16px);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.audit-modal.is-active .audit-modal__dialog {
+  transform: scale(1) translateY(0);
+}
+
+.audit-modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(11, 47, 86, 0.12);
+  background: #f8fafc;
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.audit-modal__close:hover {
+  background: #e2e8f0;
+  transform: rotate(90deg);
+}
+
+.audit-modal__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(10, 163, 173, 0.1);
+  color: var(--teal-deep);
+  margin-bottom: 12px;
+}
+
+.audit-modal__pill svg {
+  width: 14px;
+  height: 14px;
+}
+
+.audit-modal__header h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+.audit-modal__header p {
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0 0 24px;
+}
+
+.audit-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.audit-form__grid .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.audit-form__grid .form-field--full {
+  grid-column: 1 / -1;
+}
+
+.audit-form__grid label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.audit-form__grid label abbr {
+  color: #ef4444;
+  text-decoration: none;
+}
+
+.audit-form__grid label small {
+  color: #64748b;
+  font-weight: 400;
+}
+
+.audit-form__grid input,
+.audit-form__grid select,
+.audit-form__grid textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(11, 47, 86, 0.16);
+  background: #f8fafc;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.94rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.audit-form__grid input:focus,
+.audit-form__grid select:focus,
+.audit-form__grid textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(10, 163, 173, 0.15);
+}
+
+.audit-form__consent {
+  margin-top: 6px;
+}
+
+.audit-form__consent .check {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.audit-modal__footer {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.audit-submit-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  border-radius: 12px;
+}
+
+.audit-modal__guarantee {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .audit-modal__dialog {
+    padding: 28px 20px;
+  }
+  .audit-form__grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
 
 
 

@@ -413,6 +413,7 @@ function sovassa_analytics_event_name($sent) {
 	$events = array(
 		'contact'     => 'thank_you',
 		'quote'       => 'thank_you',
+		'audit'       => 'thank_you',
 		'application' => 'career_application',
 		'newsletter'  => 'sign_up',
 	);

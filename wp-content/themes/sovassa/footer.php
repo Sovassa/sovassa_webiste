@@ -235,6 +235,7 @@ if (!sovassa_plugin_active('surecookie')):
 	</a>
 </aside>
 <?php endif; ?>
+<?php get_template_part('template-parts/components/audit-modal'); ?>
 <?php wp_footer(); ?>
 </body>
 

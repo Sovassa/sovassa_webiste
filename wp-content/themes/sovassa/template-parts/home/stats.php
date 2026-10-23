@@ -15,7 +15,7 @@ if (!$stats && !$badges) {
 ?>
 <section class="hp-band hp-band--dark" aria-labelledby="hp-stats-title">
 	<div class="hp-wrap">
-		<?php sovassa_home_head('Results so far', 'Small team. Measurable work.', '', 'hp-stats-title'); ?>
+		<?php sovassa_home_head('Proven Track Record', 'Disciplined engineering. Measurable business impact.', 'We architect high-availability software, custom AI pipelines, and commercial web platforms with zero technical debt.', 'hp-stats-title'); ?>
 		<?php if ($stats) : ?>
 			<div class="hp-counters hp-rise">
 				<?php foreach ($stats as $stat) : ?>

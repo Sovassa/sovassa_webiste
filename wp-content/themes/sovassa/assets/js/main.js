@@ -367,6 +367,63 @@
     }, { rootMargin: "0px 0px -20% 0px", threshold: 0 });
     rails.observe(rail);
   });
+
+  // Technical Architecture Audit Modal Controller
+  var auditModal = document.getElementById("audit-modal");
+  function openAuditModal() {
+    if (!auditModal) return;
+    auditModal.classList.add("is-active");
+    auditModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    var firstInput = auditModal.querySelector("input:not([type='hidden'])");
+    if (firstInput) firstInput.focus();
+    if (typeof window.sovassaTrack === "function") {
+      window.sovassaTrack("audit_modal_opened", {
+        event_category: "Lead Generation",
+        source_url: window.location.pathname
+      });
+    }
+  }
+
+  function closeAuditModal() {
+    if (!auditModal) return;
+    auditModal.classList.remove("is-active");
+    auditModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  document.addEventListener("click", function (event) {
+    var trigger = event.target.closest('[data-open-modal="audit"]');
+    if (trigger) {
+      event.preventDefault();
+      openAuditModal();
+      return;
+    }
+    var closeBtn = event.target.closest('[data-close-modal="audit"]');
+    if (closeBtn) {
+      event.preventDefault();
+      closeAuditModal();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && auditModal && auditModal.classList.contains("is-active")) {
+      closeAuditModal();
+    }
+  });
+
+  var auditForm = document.getElementById("audit-form");
+  if (auditForm) {
+    auditForm.addEventListener("submit", function () {
+      if (typeof window.sovassaTrack === "function") {
+        window.sovassaTrack("generate_lead_attempt", {
+          event_category: "Lead Generation",
+          form_type: "technical_audit",
+          page_path: window.location.pathname
+        });
+      }
+    });
+  }
 })();
 
 // Article tables stack into cards on phones. Copy each column heading onto its

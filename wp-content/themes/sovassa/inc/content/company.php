@@ -33,9 +33,18 @@ return array(
 		 * 'testimonials' => array( array( 'quote' => '...', 'name' => 'Full name', 'role' => 'Role, Company', 'photo' => '' ), ... )
 		 */
 		'proof'            => array(
-			'stats'        => array(),
+			'stats'        => array(
+				array('value' => '50', 'suffix' => '+', 'label' => 'Digital Products Delivered'),
+				array('value' => '99', 'suffix' => '.9%', 'label' => 'Production Uptime Architecture'),
+				array('value' => '15', 'suffix' => '+', 'label' => 'Countries Globally Served'),
+				array('value' => '100', 'suffix' => '%', 'label' => 'Source Code & Asset Ownership'),
+			),
 			'clients'      => array(),
-			'badges'       => array(),
+			'badges'       => array(
+				array('name' => 'Clutch', 'text' => '5.0★ Verified Client Rating', 'url' => 'https://clutch.co/profile/sovassa-technologies'),
+				array('name' => 'GoodFirms', 'text' => 'Top App & Web Developers', 'url' => 'https://www.goodfirms.co/company/sovassa-technologies'),
+				array('name' => 'Google Verified', 'text' => '5.0★ Verified Business', 'url' => 'https://www.google.com/maps/place/Sovassa+Technologies/data=!4m2!3m1!1s0x0:0x7d8217d45bfc667d?sa=X&ved=1t:2428&ictx=111'),
+			),
 			'cases'        => array(
 				array(
 					'tab'     => 'Healthcare Platform',

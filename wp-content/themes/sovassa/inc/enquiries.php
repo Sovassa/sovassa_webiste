@@ -52,7 +52,7 @@ function sovassa_handle_enquiry() {
 	}
 
 	$type = isset($_POST['enquiry_type']) ? sanitize_key(wp_unslash($_POST['enquiry_type'])) : 'contact';
-	$allowed = array('contact', 'quote', 'application', 'newsletter');
+	$allowed = array('contact', 'quote', 'application', 'newsletter', 'audit');
 	if (!in_array($type, $allowed, true)) {
 		$type = 'contact';
 	}
@@ -87,7 +87,7 @@ function sovassa_handle_enquiry() {
 		}
 	}
 
-	if ('contact' === $type && '' === $message) {
+	if (('contact' === $type || 'audit' === $type) && '' === $message) {
 		sovassa_enquiry_redirect('message');
 	}
 	if ('quote' === $type && '' === $objective) {
@@ -99,6 +99,7 @@ function sovassa_handle_enquiry() {
 		'quote'       => 'Quote',
 		'application' => 'Application',
 		'newsletter'  => 'Newsletter',
+		'audit'       => 'Technical Architecture Audit',
 	);
 	$who    = '' !== $name ? $name : $email;
 	$title  = $labels[$type] . ' from ' . $who;

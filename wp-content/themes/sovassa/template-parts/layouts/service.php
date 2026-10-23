@@ -110,6 +110,26 @@ sovassa_page_hero($page, $film ? $film['file'] : '', $film ? $film['label'] : ''
 		</div>
 	</div>
 </section>
+
+<!-- Technical Architecture Audit Callout Banner -->
+<section class="section section--tight">
+	<div class="container">
+		<div class="audit-callout-card">
+			<div class="audit-callout-card__body">
+				<span class="audit-callout-card__badge"><?php sovassa_icon('spark'); ?> Free 15-Minute Technical Review</span>
+				<h3 class="audit-callout-card__title">Not ready for a full project brief? Request a 15-Minute Architecture Audit.</h3>
+				<p class="audit-callout-card__desc">Have an independent senior engineer review your current stack, database bottlenecks, code quality, or new MVP roadmap with zero sales pitch.</p>
+			</div>
+			<div class="audit-callout-card__action">
+				<button type="button" class="btn btn--primary" data-open-modal="audit">
+					<span>Request Free Audit</span>
+					<?php sovassa_icon('arrow'); ?>
+				</button>
+				<span class="audit-callout-card__note">1 business day reply · NDA guaranteed</span>
+			</div>
+		</div>
+	</div>
+</section>
 <?php
 sovassa_process($page['process'], 'Process', 'How an engagement moves.', '');
 sovassa_related($page['related']);
