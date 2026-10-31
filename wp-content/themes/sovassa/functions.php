@@ -19,6 +19,7 @@ require get_template_directory() . '/inc/privacy.php';
 require get_template_directory() . '/inc/performance.php';
 require get_template_directory() . '/inc/linking.php';
 require get_template_directory() . '/inc/articles.php';
+require get_template_directory() . '/inc/ai-visibility.php';
 
 /**
  * Whether a plugin in this folder is active. The theme steps aside for
